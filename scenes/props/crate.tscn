@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/props/breakable.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="Rectangle_prop"]
+size = Vector2(60, 54)
+
+[node name="Crate" type="Area2D" groups=["breakables"]]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1")
+max_hp = 18
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Box" type="Polygon2D" parent="Visuals"]
+polygon = PackedVector2Array(-31, -55, 31, -55, 31, 0, -31, 0)
+color = Color(0.48, 0.22, 0.08, 1)
+
+[node name="Border" type="Line2D" parent="Visuals"]
+points = PackedVector2Array(-29, -53, 29, -53, 29, -2, -29, -2, -29, -53, 29, -2, -29, -2, 29, -53)
+width = 5.0
+default_color = Color(0.82, 0.48, 0.16, 1)
+joint_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -27)
+shape = SubResource("Rectangle_prop")

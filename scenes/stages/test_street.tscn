@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/stages/stage.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/test_street/street.png" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3"]
+[ext_resource type="Texture2D" path="res://assets/props/barrel.png" id="4"]
+[ext_resource type="Script" path="res://scripts/stages/camera_director.gd" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/punk.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="7"]
+
+[node name="TestStreet" type="Node2D"]
+script = ExtResource("1")
+walk_min_x = 24.0
+walk_max_x = 2336.0
+walk_min_y = 204.0
+walk_max_y = 264.0
+
+[node name="Street" type="Sprite2D" parent="."]
+centered = false
+scale = Vector2(2, 2)
+texture = ExtResource("2")
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Entities" instance=ExtResource("3")]
+position = Vector2(400, 240)
+
+[node name="Punk1" parent="Entities" instance=ExtResource("6")]
+position = Vector2(850, 220)
+
+[node name="Punk2" parent="Entities" instance=ExtResource("6")]
+position = Vector2(950, 255)
+
+[node name="Punk3" parent="Entities" instance=ExtResource("6")]
+position = Vector2(1100, 240)
+
+[node name="Barrel" type="Sprite2D" parent="Entities"]
+position = Vector2(700, 235)
+scale = Vector2(2, 2)
+offset = Vector2(0, -22)
+texture = ExtResource("4")
+region_enabled = true
+region_rect = Rect2(0, 0, 28, 48)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 200)
+limit_left = 0
+limit_top = 0
+limit_right = 2360
+limit_bottom = 480
+script = ExtResource("5")
+
+[node name="HUD" parent="." instance=ExtResource("7")]

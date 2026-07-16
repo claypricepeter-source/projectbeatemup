@@ -1,0 +1,113 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/slick_rick.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/enemies/slick_rick.tres" id="2"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/punk_frames.tres" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/shadow.png" id="4"]
+[ext_resource type="Script" path="res://scripts/characters/state_machine.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/characters/states/boss_idle.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/characters/states/boss_approach.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/characters/states/boss_flurry.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/characters/states/boss_dash.gd" id="9"]
+[ext_resource type="Script" path="res://scripts/characters/states/boss_counter.gd" id="10"]
+[ext_resource type="Script" path="res://scripts/characters/states/boss_recover.gd" id="11"]
+[ext_resource type="Script" path="res://scripts/characters/states/hurt.gd" id="12"]
+[ext_resource type="Script" path="res://scripts/characters/states/knockdown.gd" id="13"]
+[ext_resource type="Script" path="res://scripts/characters/states/death.gd" id="14"]
+[ext_resource type="Script" path="res://scripts/combat/hurtbox.gd" id="15"]
+[ext_resource type="Script" path="res://scripts/combat/hitbox.gd" id="16"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_feet"]
+radius = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(50, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(90, 42)
+
+[node name="SlickRick" type="CharacterBody2D" groups=["bosses", "enemies", "fighters"]]
+motion_mode = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1")
+stats = ExtResource("2")
+sprite_faces_right = false
+separation_radius = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_feet")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Shadow" type="Sprite2D" parent="Visuals"]
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("4")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, -68)
+scale = Vector2(2.2, 2.2)
+sprite_frames = ExtResource("3")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("15")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -58)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="HitboxPivot" type="Node2D" parent="."]
+
+[node name="Tie" type="Polygon2D" parent="HitboxPivot"]
+polygon = PackedVector2Array(-2, -83, 5, -83, 8, -52, 1, -43, -5, -52)
+color = Color(0.72, 0.04, 0.08, 1)
+
+[node name="Blade" type="Polygon2D" parent="HitboxPivot"]
+polygon = PackedVector2Array(30, -70, 62, -76, 67, -71, 35, -63)
+color = Color(0.88, 0.96, 1, 1)
+
+[node name="Hitbox" type="Area2D" parent="HitboxPivot"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("16")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/Hitbox"]
+position = Vector2(67, -61)
+shape = SubResource("RectangleShape2D_hit")
+disabled = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6")
+
+[node name="Approach" type="Node" parent="StateMachine"]
+script = ExtResource("7")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("8")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("9")
+
+[node name="Counter" type="Node" parent="StateMachine"]
+script = ExtResource("10")
+
+[node name="Recover" type="Node" parent="StateMachine"]
+script = ExtResource("11")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("12")
+
+[node name="Knockdown" type="Node" parent="StateMachine"]
+script = ExtResource("13")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("14")

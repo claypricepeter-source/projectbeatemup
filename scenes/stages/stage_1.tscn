@@ -1,0 +1,483 @@
+[gd_scene load_steps=31 format=3]
+
+[ext_resource type="Script" path="res://scripts/stages/stage.gd" id="1_stage"]
+[ext_resource type="Texture2D" path="res://assets/_source_packs/streets-of-fight/Stage Layers/tileset.png" id="2_tiles"]
+[ext_resource type="Texture2D" path="res://assets/_source_packs/streets-of-fight/Stage Layers/back.png" id="3_back"]
+[ext_resource type="Texture2D" path="res://assets/_source_packs/streets-of-fight/Stage Layers/fore.png" id="4_fore"]
+[ext_resource type="Texture2D" path="res://assets/_source_packs/streets-of-fight/Stage Layers/props/car.png" id="5_car"]
+[ext_resource type="Texture2D" path="res://assets/_source_packs/streets-of-fight/Stage Layers/props/hydrant.png" id="6_hydrant"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="7_player"]
+[ext_resource type="Script" path="res://scripts/stages/camera_director.gd" id="8_camera"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="9_hud"]
+[ext_resource type="Script" path="res://scripts/stages/wave_trigger.gd" id="10_wave_trigger"]
+[ext_resource type="Resource" path="res://resources/waves/stage_1_wave_1.tres" id="11_wave_1"]
+[ext_resource type="Resource" path="res://resources/waves/stage_1_wave_2.tres" id="12_wave_2"]
+[ext_resource type="Resource" path="res://resources/waves/stage_1_wave_3.tres" id="13_wave_3"]
+[ext_resource type="Resource" path="res://resources/waves/stage_1_wave_4.tres" id="14_wave_4"]
+[ext_resource type="PackedScene" path="res://scenes/props/trash_can.tscn" id="15_trash"]
+[ext_resource type="PackedScene" path="res://scenes/props/crate.tscn" id="16_crate"]
+[ext_resource type="PackedScene" path="res://scenes/props/coffee_pickup.tscn" id="17_coffee"]
+[ext_resource type="PackedScene" path="res://scenes/props/cash_pickup.tscn" id="18_cash"]
+[ext_resource type="PackedScene" path="res://scenes/props/loonie_pickup.tscn" id="19_loonie"]
+[ext_resource type="Script" path="res://scripts/stages/boss_trigger.gd" id="20_boss_trigger"]
+[ext_resource type="PackedScene" path="res://scenes/characters/bosses/slick_rick.tscn" id="21_slick_rick"]
+
+[sub_resource type="AtlasTexture" id="Atlas_store_a"]
+atlas = ExtResource("2_tiles")
+region = Rect2(0, 0, 256, 96)
+
+[sub_resource type="AtlasTexture" id="Atlas_store_b"]
+atlas = ExtResource("2_tiles")
+region = Rect2(288, 0, 256, 96)
+
+[sub_resource type="AtlasTexture" id="Atlas_alley_a"]
+atlas = ExtResource("2_tiles")
+region = Rect2(0, 112, 384, 96)
+
+[sub_resource type="AtlasTexture" id="Atlas_alley_b"]
+atlas = ExtResource("2_tiles")
+region = Rect2(400, 112, 144, 96)
+
+[sub_resource type="AtlasTexture" id="Atlas_street"]
+atlas = ExtResource("2_tiles")
+region = Rect2(0, 224, 160, 160)
+
+[sub_resource type="StyleBoxFlat" id="Style_sign_teal"]
+bg_color = Color(0.035, 0.18, 0.2, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.15, 0.95, 0.85, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_sign_red"]
+bg_color = Color(0.22, 0.035, 0.055, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.45, 0.25, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="RectangleShape2D" id="Rectangle_wave_trigger"]
+size = Vector2(48, 120)
+
+[sub_resource type="RectangleShape2D" id="Rectangle_boss_trigger"]
+size = Vector2(48, 120)
+
+[node name="Stage1" type="Node2D"]
+script = ExtResource("1_stage")
+walk_min_x = 24.0
+walk_max_x = 4456.0
+walk_min_y = 204.0
+walk_max_y = 264.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="FarSky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Night" type="ColorRect" parent="ParallaxBackground/FarSky"]
+offset_left = -320.0
+offset_top = -200.0
+offset_right = 960.0
+offset_bottom = 520.0
+color = Color(0.015, 0.025, 0.075, 1)
+
+[node name="Stars" type="Label" parent="ParallaxBackground/FarSky"]
+offset_left = -250.0
+offset_top = -170.0
+offset_right = 850.0
+offset_bottom = -60.0
+theme_override_colors/font_color = Color(0.55, 0.72, 0.9, 0.75)
+theme_override_font_sizes/font_size = 18
+text = "·       ✦          ·      ·          ✦       ·             ·       ✦          ·"
+
+[node name="Skyline" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.22, 0.1)
+motion_mirroring = Vector2(576, 0)
+
+[node name="City1" type="Sprite2D" parent="ParallaxBackground/Skyline"]
+position = Vector2(96, 126)
+scale = Vector2(2, 2)
+texture = ExtResource("3_back")
+
+[node name="City2" type="Sprite2D" parent="ParallaxBackground/Skyline"]
+position = Vector2(288, 126)
+scale = Vector2(2, 2)
+texture = ExtResource("3_back")
+flip_h = true
+
+[node name="City3" type="Sprite2D" parent="ParallaxBackground/Skyline"]
+position = Vector2(480, 126)
+scale = Vector2(2, 2)
+texture = ExtResource("3_back")
+
+[node name="NearRoofs" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.25)
+motion_mirroring = Vector2(768, 0)
+
+[node name="RoofBand" type="Polygon2D" parent="ParallaxBackground/NearRoofs"]
+polygon = PackedVector2Array(-128, 122, 32, 82, 180, 110, 338, 70, 508, 104, 672, 76, 832, 116, 832, 194, -128, 194)
+color = Color(0.025, 0.055, 0.09, 1)
+
+[node name="Maple1" type="Sprite2D" parent="ParallaxBackground/NearRoofs"]
+position = Vector2(140, 140)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("4_fore")
+region_enabled = true
+region_rect = Rect2(72, 40, 120, 104)
+self_modulate = Color(0.22, 0.32, 0.3, 0.45)
+
+[node name="Maple2" type="Sprite2D" parent="ParallaxBackground/NearRoofs"]
+position = Vector2(620, 140)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("4_fore")
+region_enabled = true
+region_rect = Rect2(72, 40, 120, 104)
+self_modulate = Color(0.18, 0.3, 0.28, 0.4)
+
+[node name="Storefronts" type="Node2D" parent="."]
+
+[node name="Shop01" type="Sprite2D" parent="Storefronts"]
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_store_a")
+
+[node name="Shop02" type="Sprite2D" parent="Storefronts"]
+position = Vector2(512, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_store_b")
+
+[node name="Shop03" type="Sprite2D" parent="Storefronts"]
+position = Vector2(1024, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_store_a")
+
+[node name="Alley01" type="Sprite2D" parent="Storefronts"]
+position = Vector2(1536, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_alley_a")
+
+[node name="Shop04" type="Sprite2D" parent="Storefronts"]
+position = Vector2(2304, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_store_b")
+
+[node name="Shop05" type="Sprite2D" parent="Storefronts"]
+position = Vector2(2816, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_store_a")
+
+[node name="Alley02" type="Sprite2D" parent="Storefronts"]
+position = Vector2(3328, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_alley_b")
+
+[node name="Shop06" type="Sprite2D" parent="Storefronts"]
+position = Vector2(3616, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_store_b")
+
+[node name="BossCafe" type="Sprite2D" parent="Storefronts"]
+position = Vector2(4128, 0)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_store_a")
+
+[node name="Street" type="Node2D" parent="."]
+
+[node name="AsphaltUnderlay" type="ColorRect" parent="Street"]
+offset_top = 192.0
+offset_right = 4480.0
+offset_bottom = 512.0
+color = Color(0.075, 0.18, 0.24, 1)
+mouse_filter = 2
+
+[node name="Road01" type="Sprite2D" parent="Street"]
+position = Vector2(0, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road02" type="Sprite2D" parent="Street"]
+position = Vector2(320, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road03" type="Sprite2D" parent="Street"]
+position = Vector2(640, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road04" type="Sprite2D" parent="Street"]
+position = Vector2(960, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road05" type="Sprite2D" parent="Street"]
+position = Vector2(1280, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road06" type="Sprite2D" parent="Street"]
+position = Vector2(1600, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road07" type="Sprite2D" parent="Street"]
+position = Vector2(1920, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road08" type="Sprite2D" parent="Street"]
+position = Vector2(2240, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road09" type="Sprite2D" parent="Street"]
+position = Vector2(2560, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road10" type="Sprite2D" parent="Street"]
+position = Vector2(2880, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road11" type="Sprite2D" parent="Street"]
+position = Vector2(3200, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road12" type="Sprite2D" parent="Street"]
+position = Vector2(3520, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road13" type="Sprite2D" parent="Street"]
+position = Vector2(3840, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road14" type="Sprite2D" parent="Street"]
+position = Vector2(4160, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Signage" type="Node2D" parent="."]
+
+[node name="BakeryPanel" type="PanelContainer" parent="Signage"]
+offset_left = 154.0
+offset_top = 30.0
+offset_right = 322.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("Style_sign_red")
+
+[node name="Text" type="Label" parent="Signage/BakeryPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.42, 1)
+theme_override_font_sizes/font_size = 20
+text = "2ND AVE BAKERY"
+horizontal_alignment = 1
+
+[node name="RecordsPanel" type="PanelContainer" parent="Signage"]
+offset_left = 1116.0
+offset_top = 30.0
+offset_right = 1306.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("Style_sign_teal")
+
+[node name="Text" type="Label" parent="Signage/RecordsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 1, 0.92, 1)
+theme_override_font_sizes/font_size = 20
+text = "GEORGIAN GROOVES"
+horizontal_alignment = 1
+
+[node name="FlagPole" type="ColorRect" parent="Signage"]
+offset_left = 2038.0
+offset_top = 18.0
+offset_right = 2042.0
+offset_bottom = 144.0
+color = Color(0.75, 0.78, 0.82, 1)
+
+[node name="CanadianFlag" type="ColorRect" parent="Signage"]
+offset_left = 2042.0
+offset_top = 24.0
+offset_right = 2122.0
+offset_bottom = 68.0
+color = Color(0.8, 0.05, 0.08, 1)
+
+[node name="Maple" type="Label" parent="Signage/CanadianFlag"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "✦ CANADA ✦"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CafePanel" type="PanelContainer" parent="Signage"]
+offset_left = 4244.0
+offset_top = 28.0
+offset_right = 4412.0
+offset_bottom = 66.0
+theme_override_styles/panel = SubResource("Style_sign_red")
+
+[node name="Text" type="Label" parent="Signage/CafePanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.72, 1)
+theme_override_font_sizes/font_size = 24
+text = "TIMBO'S"
+horizontal_alignment = 1
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Entities" instance=ExtResource("7_player")]
+position = Vector2(280, 240)
+
+[node name="Car1" type="Sprite2D" parent="Entities"]
+position = Vector2(720, 214)
+scale = Vector2(2, 2)
+texture = ExtResource("5_car")
+offset = Vector2(0, -24)
+
+[node name="Hydrant1" type="Sprite2D" parent="Entities"]
+position = Vector2(1460, 232)
+scale = Vector2(2, 2)
+texture = ExtResource("6_hydrant")
+offset = Vector2(0, -18)
+
+[node name="Car2" type="Sprite2D" parent="Entities"]
+position = Vector2(2640, 214)
+scale = Vector2(2, 2)
+texture = ExtResource("5_car")
+offset = Vector2(0, -24)
+flip_h = true
+self_modulate = Color(0.72, 0.82, 1, 1)
+
+[node name="Hydrant2" type="Sprite2D" parent="Entities"]
+position = Vector2(3540, 232)
+scale = Vector2(2, 2)
+texture = ExtResource("6_hydrant")
+offset = Vector2(0, -18)
+self_modulate = Color(0.95, 0.75, 0.25, 1)
+
+[node name="TrashCan1" parent="Entities" instance=ExtResource("15_trash")]
+position = Vector2(1240, 250)
+pickup_scene = ExtResource("17_coffee")
+
+[node name="Crate1" parent="Entities" instance=ExtResource("16_crate")]
+position = Vector2(2160, 220)
+pickup_scene = ExtResource("18_cash")
+
+[node name="TrashCan2" parent="Entities" instance=ExtResource("15_trash")]
+position = Vector2(3020, 258)
+pickup_scene = ExtResource("19_loonie")
+self_modulate = Color(0.78, 0.88, 1, 1)
+
+[node name="Crate2" parent="Entities" instance=ExtResource("16_crate")]
+position = Vector2(3760, 238)
+pickup_scene = ExtResource("17_coffee")
+
+[node name="WaveTriggers" type="Node2D" parent="."]
+
+[node name="Wave1" type="Area2D" parent="WaveTriggers"]
+position = Vector2(720, 234)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("10_wave_trigger")
+wave_data = ExtResource("11_wave_1")
+lock_x = 800.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave1"]
+shape = SubResource("Rectangle_wave_trigger")
+
+[node name="Wave2" type="Area2D" parent="WaveTriggers"]
+position = Vector2(1600, 234)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("10_wave_trigger")
+wave_data = ExtResource("12_wave_2")
+lock_x = 1680.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave2"]
+shape = SubResource("Rectangle_wave_trigger")
+
+[node name="Wave3" type="Area2D" parent="WaveTriggers"]
+position = Vector2(2480, 234)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("10_wave_trigger")
+wave_data = ExtResource("13_wave_3")
+lock_x = 2560.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave3"]
+shape = SubResource("Rectangle_wave_trigger")
+
+[node name="Wave4" type="Area2D" parent="WaveTriggers"]
+position = Vector2(3360, 234)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("10_wave_trigger")
+wave_data = ExtResource("14_wave_4")
+lock_x = 3440.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave4"]
+shape = SubResource("Rectangle_wave_trigger")
+
+[node name="BossArena" type="Node2D" parent="."]
+
+[node name="Trigger" type="Area2D" parent="BossArena"]
+position = Vector2(4020, 234)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("20_boss_trigger")
+boss_scene = ExtResource("21_slick_rick")
+lock_x = 4160.0
+spawn_position = Vector2(4380, 240)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossArena/Trigger"]
+shape = SubResource("Rectangle_boss_trigger")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 200)
+limit_left = 0
+limit_top = 0
+limit_right = 4480
+limit_bottom = 480
+script = ExtResource("8_camera")
+
+[node name="HUD" parent="." instance=ExtResource("9_hud")]

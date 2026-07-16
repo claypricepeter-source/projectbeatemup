@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/enemy_stats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "KNIFE PUNK"
+max_hp = 20
+move_speed = Vector2(96, 68)
+damage = 8
+attack_range = 112.0
+recover_time = 0.75
+retreat_time = 0.55
+points = 150
+tint = Color(0.62, 0.92, 0.82, 1)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/enemy_stats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "SLICK RICK"
+max_hp = 200
+move_speed = Vector2(112, 72)
+damage = 10
+attack_range = 78.0
+recover_time = 0.85
+retreat_time = 0.4
+points = 2000
+tint = Color(0.58, 0.68, 0.92, 1)

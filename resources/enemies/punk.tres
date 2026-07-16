@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/enemy_stats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "PUNK"
+max_hp = 25
+move_speed = Vector2(80, 60)
+damage = 5
+attack_range = 60.0
+recover_time = 0.5
+retreat_time = 0.6
+points = 100
+tint = Color(1, 1, 1, 1)

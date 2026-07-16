@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/stages/wave_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/punk.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+enemy_scenes = Array[PackedScene]([ExtResource("2"), ExtResource("2")])
+spawn_positions = Array[Vector2]([Vector2(980, 218), Vector2(1010, 256)])
+spawn_delay = 0.15
