@@ -1,0 +1,21 @@
+{
+  "total_frames": 32,
+  "expected_total_frames": 32,
+  "uniform_size": [
+    384,
+    224
+  ],
+  "all_uniform_frames_valid": true,
+  "all_frames_have_transparency": true,
+  "animation_counts": {
+    "idle_walk": 5,
+    "light_attack_metal_swipe": 7,
+    "heavy_attack_magnetic_crush": 4,
+    "special_attack_rainbow_meteor": 6,
+    "dash_run": 3,
+    "grab": 1,
+    "throw": 2,
+    "taunt": 1,
+    "damage_ko": 3
+  }
+}

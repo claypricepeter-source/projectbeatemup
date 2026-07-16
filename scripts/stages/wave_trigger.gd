@@ -5,6 +5,9 @@ extends Area2D
 
 @export var wave_data: WaveData
 @export var lock_x := 320.0
+@export var restrict_depth := false
+@export var fight_min_y := 220.0
+@export var fight_max_y := 252.0
 
 var activated := false
 var cleared := false
@@ -31,6 +34,11 @@ func activate() -> void:
 	activated = true
 	set_deferred("monitoring", false)
 	camera.lock(lock_x)
+	if restrict_depth:
+		for node in get_tree().get_nodes_in_group("players"):
+			var player := node as Fighter
+			if player:
+				_apply_fight_depth(player)
 	_spawn_wave.call_deferred()
 
 
@@ -39,9 +47,13 @@ func _spawn_wave() -> void:
 		var enemy := wave_data.enemy_scenes[index].instantiate() as Enemy
 		if enemy == null:
 			continue
+		if not wave_data.enemy_stats.is_empty() and wave_data.enemy_stats[index] != null:
+			enemy.stats = wave_data.enemy_stats[index]
 		entities.add_child(enemy)
 		enemy.global_position = wave_data.spawn_positions[index]
 		stage.apply_bounds(enemy)
+		if restrict_depth:
+			_apply_fight_depth(enemy)
 		enemy.died.connect(_on_enemy_died, CONNECT_ONE_SHOT)
 		alive_count += 1
 		if wave_data.spawn_delay > 0.0 and index < wave_data.enemy_scenes.size() - 1:
@@ -61,3 +73,9 @@ func _try_clear() -> void:
 	cleared = true
 	camera.unlock()
 	EventBus.wave_cleared.emit()
+
+
+func _apply_fight_depth(fighter: Fighter) -> void:
+	fighter.walk_min_y = fight_min_y
+	fighter.walk_max_y = fight_max_y
+	fighter.position.y = clampf(fighter.position.y, fight_min_y, fight_max_y)

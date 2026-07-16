@@ -1,0 +1,1246 @@
+{
+  "image": "clay_atlas.png",
+  "size": [
+    2048,
+    2688
+  ],
+  "cell_size": [
+    256,
+    192
+  ],
+  "columns": 8,
+  "frames": [
+    {
+      "animation": "idle",
+      "frame": 0,
+      "region": [
+        0,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_00.png"
+    },
+    {
+      "animation": "idle",
+      "frame": 1,
+      "region": [
+        256,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_01.png"
+    },
+    {
+      "animation": "idle",
+      "frame": 2,
+      "region": [
+        512,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_02.png"
+    },
+    {
+      "animation": "idle",
+      "frame": 3,
+      "region": [
+        768,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_03.png"
+    },
+    {
+      "animation": "idle",
+      "frame": 4,
+      "region": [
+        1024,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_04.png"
+    },
+    {
+      "animation": "idle",
+      "frame": 5,
+      "region": [
+        1280,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_05.png"
+    },
+    {
+      "animation": "idle",
+      "frame": 6,
+      "region": [
+        1536,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_06.png"
+    },
+    {
+      "animation": "idle",
+      "frame": 7,
+      "region": [
+        1792,
+        0,
+        256,
+        192
+      ],
+      "individual_file": "sprites/idle/idle_07.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 0,
+      "region": [
+        0,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_00.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 1,
+      "region": [
+        256,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_01.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 2,
+      "region": [
+        512,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_02.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 3,
+      "region": [
+        768,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_03.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 4,
+      "region": [
+        1024,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_04.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 5,
+      "region": [
+        1280,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_05.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 6,
+      "region": [
+        1536,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_06.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 7,
+      "region": [
+        1792,
+        192,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_07.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 8,
+      "region": [
+        0,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_08.png"
+    },
+    {
+      "animation": "walk",
+      "frame": 9,
+      "region": [
+        256,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/walk/walk_09.png"
+    },
+    {
+      "animation": "run",
+      "frame": 0,
+      "region": [
+        512,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_00.png"
+    },
+    {
+      "animation": "run",
+      "frame": 1,
+      "region": [
+        768,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_01.png"
+    },
+    {
+      "animation": "run",
+      "frame": 2,
+      "region": [
+        1024,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_02.png"
+    },
+    {
+      "animation": "run",
+      "frame": 3,
+      "region": [
+        1280,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_03.png"
+    },
+    {
+      "animation": "run",
+      "frame": 4,
+      "region": [
+        1536,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_04.png"
+    },
+    {
+      "animation": "run",
+      "frame": 5,
+      "region": [
+        1792,
+        384,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_05.png"
+    },
+    {
+      "animation": "run",
+      "frame": 6,
+      "region": [
+        0,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_06.png"
+    },
+    {
+      "animation": "run",
+      "frame": 7,
+      "region": [
+        256,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_07.png"
+    },
+    {
+      "animation": "run",
+      "frame": 8,
+      "region": [
+        512,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/run/run_08.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 0,
+      "region": [
+        768,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_00.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 1,
+      "region": [
+        1024,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_01.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 2,
+      "region": [
+        1280,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_02.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 3,
+      "region": [
+        1536,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_03.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 4,
+      "region": [
+        1792,
+        576,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_04.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 5,
+      "region": [
+        0,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_05.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 6,
+      "region": [
+        256,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_06.png"
+    },
+    {
+      "animation": "jump",
+      "frame": 7,
+      "region": [
+        512,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/jump/jump_07.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 0,
+      "region": [
+        768,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_00.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 1,
+      "region": [
+        1024,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_01.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 2,
+      "region": [
+        1280,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_02.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 3,
+      "region": [
+        1536,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_03.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 4,
+      "region": [
+        1792,
+        768,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_04.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 5,
+      "region": [
+        0,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_05.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 6,
+      "region": [
+        256,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_06.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 7,
+      "region": [
+        512,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_07.png"
+    },
+    {
+      "animation": "crouch_block",
+      "frame": 8,
+      "region": [
+        768,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/crouch_block/crouch_block_08.png"
+    },
+    {
+      "animation": "light_punch",
+      "frame": 0,
+      "region": [
+        1024,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/light_punch/light_punch_00.png"
+    },
+    {
+      "animation": "light_punch",
+      "frame": 1,
+      "region": [
+        1280,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/light_punch/light_punch_01.png"
+    },
+    {
+      "animation": "strong_punch",
+      "frame": 0,
+      "region": [
+        1536,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/strong_punch/strong_punch_00.png"
+    },
+    {
+      "animation": "strong_punch",
+      "frame": 1,
+      "region": [
+        1792,
+        960,
+        256,
+        192
+      ],
+      "individual_file": "sprites/strong_punch/strong_punch_01.png"
+    },
+    {
+      "animation": "strong_punch",
+      "frame": 2,
+      "region": [
+        0,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/strong_punch/strong_punch_02.png"
+    },
+    {
+      "animation": "light_kick",
+      "frame": 0,
+      "region": [
+        256,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/light_kick/light_kick_00.png"
+    },
+    {
+      "animation": "light_kick",
+      "frame": 1,
+      "region": [
+        512,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/light_kick/light_kick_01.png"
+    },
+    {
+      "animation": "light_kick",
+      "frame": 2,
+      "region": [
+        768,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/light_kick/light_kick_02.png"
+    },
+    {
+      "animation": "strong_kick",
+      "frame": 0,
+      "region": [
+        1024,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/strong_kick/strong_kick_00.png"
+    },
+    {
+      "animation": "strong_kick",
+      "frame": 1,
+      "region": [
+        1280,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/strong_kick/strong_kick_01.png"
+    },
+    {
+      "animation": "strong_kick",
+      "frame": 2,
+      "region": [
+        1536,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/strong_kick/strong_kick_02.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 0,
+      "region": [
+        1792,
+        1152,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_00.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 1,
+      "region": [
+        0,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_01.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 2,
+      "region": [
+        256,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_02.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 3,
+      "region": [
+        512,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_03.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 4,
+      "region": [
+        768,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_04.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 5,
+      "region": [
+        1024,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_05.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 6,
+      "region": [
+        1280,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_06.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 7,
+      "region": [
+        1536,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_07.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 8,
+      "region": [
+        1792,
+        1344,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_08.png"
+    },
+    {
+      "animation": "combo",
+      "frame": 9,
+      "region": [
+        0,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/combo/combo_09.png"
+    },
+    {
+      "animation": "burning_uppercut",
+      "frame": 0,
+      "region": [
+        256,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/burning_uppercut/burning_uppercut_00.png"
+    },
+    {
+      "animation": "burning_uppercut",
+      "frame": 1,
+      "region": [
+        512,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/burning_uppercut/burning_uppercut_01.png"
+    },
+    {
+      "animation": "burning_uppercut",
+      "frame": 2,
+      "region": [
+        768,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/burning_uppercut/burning_uppercut_02.png"
+    },
+    {
+      "animation": "burning_uppercut",
+      "frame": 3,
+      "region": [
+        1024,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/burning_uppercut/burning_uppercut_03.png"
+    },
+    {
+      "animation": "power_forearm",
+      "frame": 0,
+      "region": [
+        1280,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/power_forearm/power_forearm_00.png"
+    },
+    {
+      "animation": "power_forearm",
+      "frame": 1,
+      "region": [
+        1536,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/power_forearm/power_forearm_01.png"
+    },
+    {
+      "animation": "power_forearm",
+      "frame": 2,
+      "region": [
+        1792,
+        1536,
+        256,
+        192
+      ],
+      "individual_file": "sprites/power_forearm/power_forearm_02.png"
+    },
+    {
+      "animation": "spinning_backfist",
+      "frame": 0,
+      "region": [
+        0,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/spinning_backfist/spinning_backfist_00.png"
+    },
+    {
+      "animation": "spinning_backfist",
+      "frame": 1,
+      "region": [
+        256,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/spinning_backfist/spinning_backfist_01.png"
+    },
+    {
+      "animation": "spinning_backfist",
+      "frame": 2,
+      "region": [
+        512,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/spinning_backfist/spinning_backfist_02.png"
+    },
+    {
+      "animation": "flying_knee",
+      "frame": 0,
+      "region": [
+        768,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/flying_knee/flying_knee_00.png"
+    },
+    {
+      "animation": "flying_knee",
+      "frame": 1,
+      "region": [
+        1024,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/flying_knee/flying_knee_01.png"
+    },
+    {
+      "animation": "flying_knee",
+      "frame": 2,
+      "region": [
+        1280,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/flying_knee/flying_knee_02.png"
+    },
+    {
+      "animation": "throw",
+      "frame": 0,
+      "region": [
+        1536,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/throw/throw_00.png"
+    },
+    {
+      "animation": "throw",
+      "frame": 1,
+      "region": [
+        1792,
+        1728,
+        256,
+        192
+      ],
+      "individual_file": "sprites/throw/throw_01.png"
+    },
+    {
+      "animation": "throw",
+      "frame": 2,
+      "region": [
+        0,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/throw/throw_02.png"
+    },
+    {
+      "animation": "throw",
+      "frame": 3,
+      "region": [
+        256,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/throw/throw_03.png"
+    },
+    {
+      "animation": "throw",
+      "frame": 4,
+      "region": [
+        512,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/throw/throw_04.png"
+    },
+    {
+      "animation": "get_hit",
+      "frame": 0,
+      "region": [
+        768,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/get_hit/get_hit_00.png"
+    },
+    {
+      "animation": "get_hit",
+      "frame": 1,
+      "region": [
+        1024,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/get_hit/get_hit_01.png"
+    },
+    {
+      "animation": "get_hit",
+      "frame": 2,
+      "region": [
+        1280,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/get_hit/get_hit_02.png"
+    },
+    {
+      "animation": "get_hit",
+      "frame": 3,
+      "region": [
+        1536,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/get_hit/get_hit_03.png"
+    },
+    {
+      "animation": "get_hit",
+      "frame": 4,
+      "region": [
+        1792,
+        1920,
+        256,
+        192
+      ],
+      "individual_file": "sprites/get_hit/get_hit_04.png"
+    },
+    {
+      "animation": "get_hit",
+      "frame": 5,
+      "region": [
+        0,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/get_hit/get_hit_05.png"
+    },
+    {
+      "animation": "get_hit",
+      "frame": 6,
+      "region": [
+        256,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/get_hit/get_hit_06.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 0,
+      "region": [
+        512,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_00.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 1,
+      "region": [
+        768,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_01.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 2,
+      "region": [
+        1024,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_02.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 3,
+      "region": [
+        1280,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_03.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 4,
+      "region": [
+        1536,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_04.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 5,
+      "region": [
+        1792,
+        2112,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_05.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 6,
+      "region": [
+        0,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_06.png"
+    },
+    {
+      "animation": "knocked_down",
+      "frame": 7,
+      "region": [
+        256,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/knocked_down/knocked_down_07.png"
+    },
+    {
+      "animation": "victory",
+      "frame": 0,
+      "region": [
+        512,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/victory/victory_00.png"
+    },
+    {
+      "animation": "victory",
+      "frame": 1,
+      "region": [
+        768,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/victory/victory_01.png"
+    },
+    {
+      "animation": "victory",
+      "frame": 2,
+      "region": [
+        1024,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/victory/victory_02.png"
+    },
+    {
+      "animation": "victory",
+      "frame": 3,
+      "region": [
+        1280,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/victory/victory_03.png"
+    },
+    {
+      "animation": "defeat",
+      "frame": 0,
+      "region": [
+        1536,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/defeat/defeat_00.png"
+    },
+    {
+      "animation": "defeat",
+      "frame": 1,
+      "region": [
+        1792,
+        2304,
+        256,
+        192
+      ],
+      "individual_file": "sprites/defeat/defeat_01.png"
+    },
+    {
+      "animation": "defeat",
+      "frame": 2,
+      "region": [
+        0,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/defeat/defeat_02.png"
+    },
+    {
+      "animation": "fatality",
+      "frame": 0,
+      "region": [
+        256,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/fatality/fatality_00.png"
+    },
+    {
+      "animation": "fatality",
+      "frame": 1,
+      "region": [
+        512,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/fatality/fatality_01.png"
+    },
+    {
+      "animation": "fatality",
+      "frame": 2,
+      "region": [
+        768,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/fatality/fatality_02.png"
+    },
+    {
+      "animation": "fatality",
+      "frame": 3,
+      "region": [
+        1024,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/fatality/fatality_03.png"
+    },
+    {
+      "animation": "taunts",
+      "frame": 0,
+      "region": [
+        1280,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/taunts/taunts_00.png"
+    },
+    {
+      "animation": "taunts",
+      "frame": 1,
+      "region": [
+        1536,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/taunts/taunts_01.png"
+    },
+    {
+      "animation": "taunts",
+      "frame": 2,
+      "region": [
+        1792,
+        2496,
+        256,
+        192
+      ],
+      "individual_file": "sprites/taunts/taunts_02.png"
+    }
+  ]
+}

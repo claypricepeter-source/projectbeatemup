@@ -9,7 +9,7 @@ extends Area2D
 
 var activated := false
 var completed := false
-var boss: SlickRick
+var boss: Enemy
 
 @onready var stage: Stage = get_parent().get_parent() as Stage
 @onready var camera: CameraDirector = stage.get_node("Camera") as CameraDirector
@@ -31,11 +31,16 @@ func activate() -> void:
 	activated = true
 	set_deferred("monitoring", false)
 	camera.lock(lock_x)
+	AudioManager.play_sfx(&"boss_stinger", -2.0)
+	AudioManager.play_music(&"boss")
 	_spawn_boss.call_deferred()
 
 
 func _spawn_boss() -> void:
-	boss = boss_scene.instantiate() as SlickRick
+	boss = boss_scene.instantiate() as Enemy
+	if boss == null:
+		push_error("Boss scene must instantiate an Enemy.")
+		return
 	entities.add_child(boss)
 	boss.global_position = spawn_position
 	stage.apply_bounds(boss)

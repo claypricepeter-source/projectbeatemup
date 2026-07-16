@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/enemy_stats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "MARTA THE CRANE"
+max_hp = 250
+move_speed = Vector2(72, 54)
+damage = 14
+attack_range = 148.0
+recover_time = 0.9
+retreat_time = 0.45
+points = 2500
+tint = Color(0.78, 0.88, 1, 1)

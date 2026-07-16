@@ -48,4 +48,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if absf(source.global_position.y - target.global_position.y) > depth_band:
 		return
 	_hit_targets.append(target)
-	target.take_hit(damage, knockdown, source)
+	if target.take_hit(damage, knockdown, source):
+		source.on_attack_connected(target, target.hp <= 0)
+		ImpactManager.connected_hit(target, knockdown)

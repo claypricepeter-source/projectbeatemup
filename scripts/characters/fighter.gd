@@ -35,6 +35,7 @@ var walk_max_y := 100000.0
 var _sprite_base_y: float
 var _chain_hits := 0
 var _last_hit_ms := 0
+var _flash_tween: Tween
 
 
 func _ready() -> void:
@@ -60,6 +61,15 @@ func play(anim: StringName) -> void:
 		sprite.play(anim)
 
 
+func flash_hit() -> void:
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	var alpha := sprite.modulate.a
+	sprite.modulate = Color(2.2, 2.2, 2.2, alpha)
+	_flash_tween = create_tween()
+	_flash_tween.tween_property(sprite, "modulate", Color(1.0, 1.0, 1.0, alpha), 0.1)
+
+
 ## Moves along the ground plane and clamps to the stage's walkable bounds.
 func apply_movement(_delta: float) -> void:
 	move_and_slide()
@@ -76,9 +86,9 @@ func start_jump() -> void:
 
 
 ## Entry point for all incoming damage. Routes to Hurt/Knockdown/Death states.
-func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> void:
+func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> bool:
 	if is_dead or invulnerable:
-		return
+		return false
 	hp = maxi(hp - damage, 0)
 	var dir := attacker.global_position.x - global_position.x
 	if dir != 0.0:
@@ -98,6 +108,12 @@ func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> void:
 		state_machine.transition("Knockdown")
 	else:
 		state_machine.transition("Hurt")
+	return true
+
+
+## Attacker-side hook invoked only after an incoming hit accepts damage.
+func on_attack_connected(_target: Fighter, _defeated: bool) -> void:
+	pass
 
 
 ## Post-knockdown hook; Player overrides to add i-frames.

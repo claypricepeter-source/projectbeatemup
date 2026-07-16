@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var run_label: Label = $Root/RunLabel
 @onready var pickup_feedback: Label = $Root/PickupFeedback
 @onready var boss_box: VBoxContainer = $Root/BossBox
+@onready var boss_label: Label = $Root/BossBox/BossLabel
 @onready var boss_bar: ProgressBar = $Root/BossBox/BossBar
 @onready var hide_timer: Timer = $HideTimer
 
@@ -85,6 +86,7 @@ func _on_pickup_collected(kind) -> void:
 		_pickup_tween.kill()
 	match StringName(kind):
 		&"coffee": pickup_feedback.text = "TIMBO'S COFFEE  +25 HP"
+		&"poutine": pickup_feedback.text = "POUTINE  FULL HEAL"
 		&"cash_500": pickup_feedback.text = "CASH  +500"
 		&"cash_100": pickup_feedback.text = "LOONIE STACK  +100"
 		_: pickup_feedback.text = String(kind).to_upper()
@@ -98,5 +100,11 @@ func _on_pickup_collected(kind) -> void:
 
 func _on_boss_health_changed(ratio) -> void:
 	var health_ratio := clampf(float(ratio), 0.0, 1.0)
+	if health_ratio > 0.0:
+		for node in get_tree().get_nodes_in_group("bosses"):
+			var boss := node as Enemy
+			if boss and boss.stats:
+				boss_label.text = boss.stats.display_name
+				break
 	boss_bar.value = health_ratio
 	boss_box.visible = health_ratio > 0.0

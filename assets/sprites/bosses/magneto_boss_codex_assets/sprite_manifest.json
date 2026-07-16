@@ -1,0 +1,734 @@
+{
+  "character": "magneto_pride_boss",
+  "format_version": 1,
+  "image_format": "RGBA PNG",
+  "canvas": {
+    "width": 384,
+    "height": 224
+  },
+  "pivot": {
+    "x": 192,
+    "y": 212
+  },
+  "rendering": {
+    "texture_filter": "nearest",
+    "mipmaps": false,
+    "pixel_snap": true
+  },
+  "animations": {
+    "idle_walk": {
+      "fps": 7,
+      "loop": true,
+      "frames": [
+        {
+          "file": "frames_uniform/idle_walk/idle_walk_000.png",
+          "tight_file": "frames_tight/idle_walk/idle_walk_000.png",
+          "source_bbox": [
+            0,
+            224,
+            102,
+            387
+          ],
+          "content_bbox": [
+            141,
+            49,
+            243,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/idle_walk/idle_walk_001.png",
+          "tight_file": "frames_tight/idle_walk/idle_walk_001.png",
+          "source_bbox": [
+            114,
+            216,
+            230,
+            386
+          ],
+          "content_bbox": [
+            134,
+            42,
+            250,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/idle_walk/idle_walk_002.png",
+          "tight_file": "frames_tight/idle_walk/idle_walk_002.png",
+          "source_bbox": [
+            250,
+            218,
+            337,
+            387
+          ],
+          "content_bbox": [
+            148,
+            43,
+            235,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/idle_walk/idle_walk_003.png",
+          "tight_file": "frames_tight/idle_walk/idle_walk_003.png",
+          "source_bbox": [
+            360,
+            218,
+            458,
+            387
+          ],
+          "content_bbox": [
+            143,
+            43,
+            241,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/idle_walk/idle_walk_004.png",
+          "tight_file": "frames_tight/idle_walk/idle_walk_004.png",
+          "source_bbox": [
+            476,
+            215,
+            586,
+            385
+          ],
+          "content_bbox": [
+            137,
+            42,
+            247,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "light_attack_metal_swipe": {
+      "fps": 12,
+      "loop": false,
+      "frames": [
+        {
+          "file": "frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_000.png",
+          "tight_file": "frames_tight/light_attack_metal_swipe/light_attack_metal_swipe_000.png",
+          "source_bbox": [
+            9,
+            420,
+            197,
+            565
+          ],
+          "content_bbox": [
+            98,
+            67,
+            286,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_001.png",
+          "tight_file": "frames_tight/light_attack_metal_swipe/light_attack_metal_swipe_001.png",
+          "source_bbox": [
+            200,
+            420,
+            383,
+            565
+          ],
+          "content_bbox": [
+            100,
+            67,
+            283,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_002.png",
+          "tight_file": "frames_tight/light_attack_metal_swipe/light_attack_metal_swipe_002.png",
+          "source_bbox": [
+            376,
+            424,
+            546,
+            565
+          ],
+          "content_bbox": [
+            107,
+            71,
+            277,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_003.png",
+          "tight_file": "frames_tight/light_attack_metal_swipe/light_attack_metal_swipe_003.png",
+          "source_bbox": [
+            552,
+            420,
+            831,
+            565
+          ],
+          "content_bbox": [
+            52,
+            67,
+            331,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_004.png",
+          "tight_file": "frames_tight/light_attack_metal_swipe/light_attack_metal_swipe_004.png",
+          "source_bbox": [
+            820,
+            420,
+            1041,
+            564
+          ],
+          "content_bbox": [
+            81,
+            68,
+            302,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_005.png",
+          "tight_file": "frames_tight/light_attack_metal_swipe/light_attack_metal_swipe_005.png",
+          "source_bbox": [
+            1034,
+            420,
+            1286,
+            562
+          ],
+          "content_bbox": [
+            66,
+            70,
+            318,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_006.png",
+          "tight_file": "frames_tight/light_attack_metal_swipe/light_attack_metal_swipe_006.png",
+          "source_bbox": [
+            1239,
+            420,
+            1521,
+            563
+          ],
+          "content_bbox": [
+            51,
+            69,
+            333,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "heavy_attack_magnetic_crush": {
+      "fps": 9,
+      "loop": false,
+      "frames": [
+        {
+          "file": "frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_000.png",
+          "tight_file": "frames_tight/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_000.png",
+          "source_bbox": [
+            27,
+            611,
+            173,
+            766
+          ],
+          "content_bbox": [
+            119,
+            57,
+            265,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_001.png",
+          "tight_file": "frames_tight/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_001.png",
+          "source_bbox": [
+            167,
+            620,
+            282,
+            766
+          ],
+          "content_bbox": [
+            134,
+            66,
+            249,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_002.png",
+          "tight_file": "frames_tight/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_002.png",
+          "source_bbox": [
+            295,
+            610,
+            532,
+            780
+          ],
+          "content_bbox": [
+            73,
+            42,
+            310,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_003.png",
+          "tight_file": "frames_tight/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_003.png",
+          "source_bbox": [
+            537,
+            610,
+            696,
+            766
+          ],
+          "content_bbox": [
+            112,
+            56,
+            271,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "special_attack_rainbow_meteor": {
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        {
+          "file": "frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_000.png",
+          "tight_file": "frames_tight/special_attack_rainbow_meteor/special_attack_rainbow_meteor_000.png",
+          "source_bbox": [
+            754,
+            610,
+            850,
+            766
+          ],
+          "content_bbox": [
+            144,
+            56,
+            240,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_001.png",
+          "tight_file": "frames_tight/special_attack_rainbow_meteor/special_attack_rainbow_meteor_001.png",
+          "source_bbox": [
+            855,
+            611,
+            1007,
+            766
+          ],
+          "content_bbox": [
+            116,
+            57,
+            268,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_002.png",
+          "tight_file": "frames_tight/special_attack_rainbow_meteor/special_attack_rainbow_meteor_002.png",
+          "source_bbox": [
+            988,
+            610,
+            1091,
+            766
+          ],
+          "content_bbox": [
+            140,
+            56,
+            243,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_003.png",
+          "tight_file": "frames_tight/special_attack_rainbow_meteor/special_attack_rainbow_meteor_003.png",
+          "source_bbox": [
+            1089,
+            610,
+            1255,
+            776
+          ],
+          "content_bbox": [
+            109,
+            46,
+            275,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_004.png",
+          "tight_file": "frames_tight/special_attack_rainbow_meteor/special_attack_rainbow_meteor_004.png",
+          "source_bbox": [
+            1264,
+            610,
+            1414,
+            772
+          ],
+          "content_bbox": [
+            117,
+            50,
+            267,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_005.png",
+          "tight_file": "frames_tight/special_attack_rainbow_meteor/special_attack_rainbow_meteor_005.png",
+          "source_bbox": [
+            1421,
+            611,
+            1527,
+            772
+          ],
+          "content_bbox": [
+            139,
+            51,
+            245,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "dash_run": {
+      "fps": 12,
+      "loop": true,
+      "frames": [
+        {
+          "file": "frames_uniform/dash_run/dash_run_000.png",
+          "tight_file": "frames_tight/dash_run/dash_run_000.png",
+          "source_bbox": [
+            7,
+            826,
+            132,
+            972
+          ],
+          "content_bbox": [
+            129,
+            66,
+            254,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/dash_run/dash_run_001.png",
+          "tight_file": "frames_tight/dash_run/dash_run_001.png",
+          "source_bbox": [
+            126,
+            834,
+            243,
+            972
+          ],
+          "content_bbox": [
+            133,
+            74,
+            250,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/dash_run/dash_run_002.png",
+          "tight_file": "frames_tight/dash_run/dash_run_002.png",
+          "source_bbox": [
+            243,
+            828,
+            376,
+            972
+          ],
+          "content_bbox": [
+            125,
+            68,
+            258,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "grab": {
+      "fps": 6,
+      "loop": false,
+      "frames": [
+        {
+          "file": "frames_uniform/grab/grab_000.png",
+          "tight_file": "frames_tight/grab/grab_000.png",
+          "source_bbox": [
+            397,
+            820,
+            550,
+            977
+          ],
+          "content_bbox": [
+            115,
+            55,
+            268,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "throw": {
+      "fps": 8,
+      "loop": false,
+      "frames": [
+        {
+          "file": "frames_uniform/throw/throw_000.png",
+          "tight_file": "frames_tight/throw/throw_000.png",
+          "source_bbox": [
+            579,
+            820,
+            765,
+            979
+          ],
+          "content_bbox": [
+            99,
+            53,
+            285,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/throw/throw_001_victim_overlay.png",
+          "tight_file": "frames_tight/throw/throw_001_victim_overlay.png",
+          "source_bbox": [
+            767,
+            820,
+            874,
+            910
+          ],
+          "content_bbox": [
+            138,
+            122,
+            245,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "taunt": {
+      "fps": 6,
+      "loop": false,
+      "frames": [
+        {
+          "file": "frames_uniform/taunt/taunt_000.png",
+          "tight_file": "frames_tight/taunt/taunt_000.png",
+          "source_bbox": [
+            904,
+            820,
+            1111,
+            984
+          ],
+          "content_bbox": [
+            88,
+            48,
+            295,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    },
+    "damage_ko": {
+      "fps": 7,
+      "loop": false,
+      "frames": [
+        {
+          "file": "frames_uniform/damage_ko/damage_ko_000.png",
+          "tight_file": "frames_tight/damage_ko/damage_ko_000.png",
+          "source_bbox": [
+            1119,
+            860,
+            1233,
+            975
+          ],
+          "content_bbox": [
+            135,
+            97,
+            249,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/damage_ko/damage_ko_001.png",
+          "tight_file": "frames_tight/damage_ko/damage_ko_001.png",
+          "source_bbox": [
+            1231,
+            830,
+            1386,
+            976
+          ],
+          "content_bbox": [
+            114,
+            66,
+            269,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        },
+        {
+          "file": "frames_uniform/damage_ko/damage_ko_002.png",
+          "tight_file": "frames_tight/damage_ko/damage_ko_002.png",
+          "source_bbox": [
+            1374,
+            820,
+            1527,
+            973
+          ],
+          "content_bbox": [
+            115,
+            59,
+            268,
+            212
+          ],
+          "pivot": {
+            "x": 192,
+            "y": 212
+          }
+        }
+      ]
+    }
+  },
+  "implementation_notes": {
+    "special_attack_rainbow_meteor": {
+      "character_frames": [
+        0,
+        1
+      ],
+      "effect_frames": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "suggestion": "Hold character frame 1 while playing effect frames 2-5 on a separate effect layer."
+    },
+    "throw": {
+      "frame_0": "Boss and victim combined.",
+      "frame_1": "Victim-only overlay. Hold the boss pose from frame 0 or animate the victim as a separate entity."
+    },
+    "combat_boxes": "Hitboxes and hurtboxes are intentionally not guessed. Author them in-engine after animation timing is approved."
+  }
+}

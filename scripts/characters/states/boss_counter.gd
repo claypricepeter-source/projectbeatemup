@@ -27,7 +27,7 @@ func physics_update(delta: float) -> void:
 	if not _active and _elapsed >= WINDUP:
 		_active = true
 		fighter.velocity = Vector2(fighter.facing * 155.0, 0)
-		fighter.play(&"attack")
+		fighter.play(&"heavy_attack_magnetic_crush")
 		fighter.hitbox.activate(10, true)
 	if _active and _elapsed >= ACTIVE_END:
 		fighter.velocity = Vector2.ZERO

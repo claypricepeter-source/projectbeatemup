@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/enemy_stats.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/enemies/thug.tres" id="2"]
+
+[resource]
+script = ExtResource("1")
+display_name = "DOCK THUG"
+tint = Color(0.42, 0.66, 0.9, 1)
+base_variant = ExtResource("2")
+hp_multiplier = 1.25
+damage_multiplier = 1.15
+speed_multiplier = 1.0
+points_multiplier = 1.4

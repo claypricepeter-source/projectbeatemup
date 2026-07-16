@@ -1,0 +1,16 @@
+Implement the boss character using this asset pack.
+
+Requirements:
+- Read sprite_manifest.json before writing animation code.
+- Load frames from frames_uniform/.
+- Preserve the listed frame order and FPS.
+- Use nearest-neighbour / point texture filtering.
+- Disable mipmaps and texture smoothing.
+- Use the manifest pivot for every frame.
+- Flip frames horizontally for left-facing movement.
+- Implement Rainbow Meteor as a layered animation:
+  hold character frame 1 while effect frames 2-5 play.
+- Implement throw_001_victim_overlay.png as a victim overlay,
+  not as a replacement boss pose.
+- Add debug rendering for movement collision, hurtboxes and attack hitboxes.
+- Do not edit, resize, blur or recompress the source PNG files.

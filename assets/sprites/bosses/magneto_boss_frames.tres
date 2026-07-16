@@ -1,0 +1,107 @@
+[gd_resource type="SpriteFrames" load_steps=33 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/idle_walk/idle_walk_000.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/idle_walk/idle_walk_001.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/idle_walk/idle_walk_002.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/idle_walk/idle_walk_003.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/idle_walk/idle_walk_004.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_000.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_001.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_002.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_003.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_004.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_005.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/light_attack_metal_swipe/light_attack_metal_swipe_006.png" id="12"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_000.png" id="13"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_001.png" id="14"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_002.png" id="15"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/heavy_attack_magnetic_crush/heavy_attack_magnetic_crush_003.png" id="16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_000.png" id="17"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_001.png" id="18"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_002.png" id="19"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_003.png" id="20"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_004.png" id="21"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/special_attack_rainbow_meteor/special_attack_rainbow_meteor_005.png" id="22"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/dash_run/dash_run_000.png" id="23"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/dash_run/dash_run_001.png" id="24"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/dash_run/dash_run_002.png" id="25"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/grab/grab_000.png" id="26"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/throw/throw_000.png" id="27"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/throw/throw_001_victim_overlay.png" id="28"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/taunt/taunt_000.png" id="29"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/damage_ko/damage_ko_000.png" id="30"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/damage_ko/damage_ko_001.png" id="31"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/magneto_boss_codex_assets/frames_uniform/damage_ko/damage_ko_002.png" id="32"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("30")}, {"duration": 1.0, "texture": ExtResource("31")}, {"duration": 1.0, "texture": ExtResource("32")}],
+"loop": false,
+"name": &"damage_ko",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("23")}, {"duration": 1.0, "texture": ExtResource("24")}, {"duration": 1.0, "texture": ExtResource("25")}],
+"loop": true,
+"name": &"dash_run",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("30")}, {"duration": 1.0, "texture": ExtResource("31")}, {"duration": 1.0, "texture": ExtResource("32")}],
+"loop": false,
+"name": &"death",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("26")}],
+"loop": false,
+"name": &"grab",
+"speed": 6.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("13")}, {"duration": 1.0, "texture": ExtResource("14")}, {"duration": 1.0, "texture": ExtResource("15")}, {"duration": 1.0, "texture": ExtResource("16")}],
+"loop": false,
+"name": &"heavy_attack_magnetic_crush",
+"speed": 9.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("30")}, {"duration": 1.0, "texture": ExtResource("31")}],
+"loop": false,
+"name": &"hurt",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1")}, {"duration": 1.0, "texture": ExtResource("2")}, {"duration": 1.0, "texture": ExtResource("3")}, {"duration": 1.0, "texture": ExtResource("4")}, {"duration": 1.0, "texture": ExtResource("5")}],
+"loop": true,
+"name": &"idle_walk",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("6")}, {"duration": 1.0, "texture": ExtResource("7")}, {"duration": 1.0, "texture": ExtResource("8")}, {"duration": 1.0, "texture": ExtResource("9")}, {"duration": 1.0, "texture": ExtResource("10")}, {"duration": 1.0, "texture": ExtResource("11")}, {"duration": 1.0, "texture": ExtResource("12")}],
+"loop": false,
+"name": &"light_attack_metal_swipe",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("32")}],
+"loop": false,
+"name": &"knockdown",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("19")}, {"duration": 1.0, "texture": ExtResource("20")}, {"duration": 1.0, "texture": ExtResource("21")}, {"duration": 1.0, "texture": ExtResource("22")}],
+"loop": false,
+"name": &"rainbow_meteor_effect",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("17")}, {"duration": 1.0, "texture": ExtResource("18")}],
+"loop": false,
+"name": &"special_attack_rainbow_meteor",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("29")}],
+"loop": false,
+"name": &"taunt",
+"speed": 6.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("27")}],
+"loop": false,
+"name": &"throw",
+"speed": 8.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("28")}],
+"loop": false,
+"name": &"throw_victim_overlay",
+"speed": 8.0
+}]

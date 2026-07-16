@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/ui/title_screen.tscn" id="2_title"]
+[ext_resource type="PackedScene" path="res://scenes/ui/stage_intro.tscn" id="3_intro"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="4_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/game_over.tscn" id="5_game_over"]
 
 [sub_resource type="StyleBoxFlat" id="Style_flow_panel"]
 bg_color = Color(0.025, 0.055, 0.09, 0.96)
@@ -19,6 +23,20 @@ process_mode = 3
 script = ExtResource("1_main")
 
 [node name="StageSlot" type="Node2D" parent="."]
+
+[node name="MenuUI" type="CanvasLayer" parent="."]
+layer = 30
+
+[node name="TitleScreen" parent="MenuUI" instance=ExtResource("2_title")]
+
+[node name="StageIntro" parent="MenuUI" instance=ExtResource("3_intro")]
+visible = false
+
+[node name="PauseMenu" parent="MenuUI" instance=ExtResource("4_pause")]
+visible = false
+
+[node name="GameOver" parent="MenuUI" instance=ExtResource("5_game_over")]
+visible = false
 
 [node name="FlowUI" type="CanvasLayer" parent="."]
 layer = 20

@@ -1,0 +1,221 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/stages/finale_stage.gd" id="1_stage"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/stages/camera_director.gd" id="3_camera"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/stages/wave_trigger.gd" id="5_wave_trigger"]
+[ext_resource type="Resource" path="res://resources/waves/stage_3_wave_1.tres" id="6_wave_1"]
+[ext_resource type="Resource" path="res://resources/waves/stage_3_wave_2.tres" id="7_wave_2"]
+[ext_resource type="Resource" path="res://resources/waves/stage_3_wave_3.tres" id="8_wave_3"]
+[ext_resource type="Resource" path="res://resources/waves/stage_3_wave_4.tres" id="9_wave_4"]
+[ext_resource type="Resource" path="res://resources/waves/stage_3_wave_5.tres" id="10_wave_5"]
+[ext_resource type="PackedScene" path="res://scenes/props/trash_can.tscn" id="11_trash"]
+[ext_resource type="PackedScene" path="res://scenes/props/crate.tscn" id="12_crate"]
+[ext_resource type="PackedScene" path="res://scenes/props/poutine_pickup.tscn" id="13_poutine"]
+[ext_resource type="PackedScene" path="res://scenes/props/coffee_pickup.tscn" id="14_coffee"]
+[ext_resource type="PackedScene" path="res://scenes/props/cash_pickup.tscn" id="15_cash"]
+[ext_resource type="Script" path="res://scripts/stages/boss_trigger.gd" id="16_boss_trigger"]
+[ext_resource type="PackedScene" path="res://scenes/characters/bosses/victor.tscn" id="17_victor"]
+
+[sub_resource type="RectangleShape2D" id="WaveTriggerShape"]
+size = Vector2(48, 140)
+
+[sub_resource type="RectangleShape2D" id="BossTriggerShape"]
+size = Vector2(48, 140)
+
+[sub_resource type="StyleBoxFlat" id="ParkSign"]
+bg_color = Color(0.04, 0.13, 0.09, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.82, 0.46, 0.08, 1)
+
+[node name="Stage3" type="Node2D"]
+script = ExtResource("1_stage")
+walk_min_x = 24.0
+walk_max_x = 5096.0
+walk_min_y = 204.0
+walk_max_y = 280.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -10
+scroll_ignore_camera_zoom = true
+
+[node name="SkyLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.03, 0.03)
+
+[node name="Sky" type="ColorRect" parent="ParallaxBackground/SkyLayer"]
+offset_left = -480.0
+offset_top = -240.0
+offset_right = 1440.0
+offset_bottom = 600.0
+color = Color(0.035, 0.055, 0.105, 1)
+mouse_filter = 2
+
+[node name="Horizon" type="ColorRect" parent="ParallaxBackground/SkyLayer"]
+offset_left = -480.0
+offset_top = 70.0
+offset_right = 1440.0
+offset_bottom = 190.0
+color = Color(0.22, 0.12, 0.16, 1)
+mouse_filter = 2
+
+[node name="FarTrees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.16, 0.08)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="TreeLine" type="Polygon2D" parent="ParallaxBackground/FarTrees"]
+polygon = PackedVector2Array(-100, 176, 0, 110, 70, 146, 140, 82, 220, 142, 310, 72, 400, 138, 500, 92, 600, 145, 700, 76, 800, 142, 900, 88, 1000, 146, 1100, 70, 1200, 142, 1380, 104, 1380, 206, -100, 206)
+color = Color(0.04, 0.095, 0.075, 1)
+
+[node name="WorldSigns" type="Node2D" parent="."]
+
+[node name="Park" type="PanelContainer" parent="WorldSigns"]
+offset_left = 32.0
+offset_top = 64.0
+offset_right = 298.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("ParkSign")
+
+[node name="Text" type="Label" parent="WorldSigns/Park"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.94, 0.76, 1)
+theme_override_font_sizes/font_size = 22
+text = "HARRISON PARK"
+horizontal_alignment = 1
+
+[node name="Bridge" type="Label" parent="WorldSigns"]
+offset_left = 2740.0
+offset_top = 172.0
+offset_right = 3160.0
+offset_bottom = 202.0
+theme_override_colors/font_color = Color(0.92, 0.72, 0.32, 1)
+theme_override_font_sizes/font_size = 18
+text = "SYDENHAM FOOTBRIDGE"
+horizontal_alignment = 1
+
+[node name="Dam" type="PanelContainer" parent="WorldSigns"]
+offset_left = 4720.0
+offset_top = 48.0
+offset_right = 5080.0
+offset_bottom = 92.0
+theme_override_styles/panel = SubResource("ParkSign")
+
+[node name="Text" type="Label" parent="WorldSigns/Dam"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "MILL DAM • FISH LADDER"
+horizontal_alignment = 1
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Entities" instance=ExtResource("2_player")]
+position = Vector2(280, 244)
+
+[node name="TrashCan1" parent="Entities" instance=ExtResource("11_trash")]
+position = Vector2(1180, 266)
+pickup_scene = ExtResource("14_coffee")
+self_modulate = Color(0.55, 0.68, 0.42, 1)
+
+[node name="Crate1" parent="Entities" instance=ExtResource("12_crate")]
+position = Vector2(1980, 220)
+pickup_scene = ExtResource("15_cash")
+self_modulate = Color(0.58, 0.36, 0.18, 1)
+
+[node name="TrashCan2" parent="Entities" instance=ExtResource("11_trash")]
+position = Vector2(3470, 266)
+pickup_scene = ExtResource("14_coffee")
+self_modulate = Color(0.48, 0.64, 0.7, 1)
+
+[node name="Crate2" parent="Entities" instance=ExtResource("12_crate")]
+position = Vector2(4020, 222)
+pickup_scene = ExtResource("13_poutine")
+self_modulate = Color(0.72, 0.28, 0.14, 1)
+
+[node name="WaveTriggers" type="Node2D" parent="."]
+
+[node name="Wave1" type="Area2D" parent="WaveTriggers"]
+position = Vector2(700, 242)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_wave_trigger")
+wave_data = ExtResource("6_wave_1")
+lock_x = 780.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave1"]
+shape = SubResource("WaveTriggerShape")
+
+[node name="Wave2" type="Area2D" parent="WaveTriggers"]
+position = Vector2(1480, 242)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_wave_trigger")
+wave_data = ExtResource("7_wave_2")
+lock_x = 1560.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave2"]
+shape = SubResource("WaveTriggerShape")
+
+[node name="Wave3" type="Area2D" parent="WaveTriggers"]
+position = Vector2(2220, 242)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_wave_trigger")
+wave_data = ExtResource("8_wave_3")
+lock_x = 2360.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave3"]
+shape = SubResource("WaveTriggerShape")
+
+[node name="Wave4" type="Area2D" parent="WaveTriggers"]
+position = Vector2(2860, 242)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_wave_trigger")
+wave_data = ExtResource("9_wave_4")
+lock_x = 3000.0
+restrict_depth = true
+fight_min_y = 232.0
+fight_max_y = 250.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave4"]
+shape = SubResource("WaveTriggerShape")
+
+[node name="Wave5" type="Area2D" parent="WaveTriggers"]
+position = Vector2(3740, 242)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_wave_trigger")
+wave_data = ExtResource("10_wave_5")
+lock_x = 3900.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveTriggers/Wave5"]
+shape = SubResource("WaveTriggerShape")
+
+[node name="BossArena" type="Node2D" parent="."]
+
+[node name="Trigger" type="Area2D" parent="BossArena"]
+position = Vector2(4560, 242)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("16_boss_trigger")
+boss_scene = ExtResource("17_victor")
+lock_x = 4800.0
+spawn_position = Vector2(5010, 244)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossArena/Trigger"]
+shape = SubResource("BossTriggerShape")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 210)
+limit_left = 0
+limit_top = 0
+limit_right = 5120
+limit_bottom = 480
+script = ExtResource("3_camera")
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]

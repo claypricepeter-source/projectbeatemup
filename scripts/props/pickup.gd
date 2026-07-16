@@ -27,6 +27,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if player == null or collected:
 		return
 	collected = true
+	AudioManager.play_sfx(&"pickup", -6.0)
 	if heal_amount > 0:
 		player.hp = mini(player.hp + heal_amount, player.max_hp)
 		EventBus.fighter_damaged.emit(player)

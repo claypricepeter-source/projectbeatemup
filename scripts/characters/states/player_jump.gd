@@ -21,10 +21,13 @@ func physics_update(delta: float) -> void:
 	var player := fighter as Player
 	if not _kicking and player.attack_just_pressed():
 		_kicking = true
+		player.begin_attack_swing()
 		fighter.play(&"jump_kick")
 		fighter.hitbox.activate(JUMP_KICK_DAMAGE, true)
 	var landed := player.update_air(delta)
 	player.apply_movement(delta)
 	if landed:
 		fighter.hitbox.deactivate()
+		if _kicking:
+			player.finish_attack_swing()
 		machine.transition("Idle" if player.input_vector() == Vector2.ZERO else "Move")

@@ -31,6 +31,7 @@ func take_hit(damage: int, _source: Fighter) -> void:
 
 func _break_open() -> void:
 	broken = true
+	AudioManager.play_sfx(&"breakable", -5.0)
 	set_deferred("collision_layer", 0)
 	set_deferred("monitoring", false)
 	shape.set_deferred("disabled", true)

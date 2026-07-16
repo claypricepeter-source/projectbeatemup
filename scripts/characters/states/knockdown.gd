@@ -36,14 +36,17 @@ func physics_update(delta: float) -> void:
 				_phase = Phase.DOWN
 				_timer = DOWN_TIME
 				fighter.velocity = Vector2.ZERO
-				fighter.sprite.rotation_degrees = -90.0 * fighter.facing
+				if fighter.sprite.sprite_frames.has_animation(&"knockdown"):
+					fighter.play(&"knockdown")
+				else:
+					fighter.sprite.rotation_degrees = -90.0 * fighter.facing
 		Phase.DOWN:
 			_timer -= delta
 			if _timer <= 0.0:
 				_phase = Phase.GETUP
 				_timer = GETUP_TIME
 				fighter.sprite.rotation = 0.0
-				fighter.play(&"idle")
+				fighter.play(&"getup" if fighter.sprite.sprite_frames.has_animation(&"getup") else &"idle")
 		Phase.GETUP:
 			_timer -= delta
 			if _timer <= 0.0:

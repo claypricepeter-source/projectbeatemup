@@ -35,6 +35,7 @@ func physics_update(delta: float) -> void:
 		fighter.hitbox.deactivate()
 	fighter.apply_movement(delta)
 	if not fighter.sprite.is_playing():
+		player.finish_attack_swing()
 		if _buffered and _step < STEPS.size() - 1:
 			_step += 1
 			fighter.hitbox.deactivate()
@@ -47,4 +48,5 @@ func _start_step() -> void:
 	_buffered = false
 	_activated = false
 	fighter.velocity = Vector2.ZERO
+	(fighter as Player).begin_attack_swing()
 	fighter.play(STEPS[_step]["anim"])

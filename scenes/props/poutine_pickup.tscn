@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/props/pickup.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="PickupShape"]
+radius = 20.0
+
+[node name="PoutinePickup" type="Area2D" groups=["pickups"]]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1")
+kind = &"poutine"
+heal_amount = 1000
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Bowl" type="Polygon2D" parent="Visuals"]
+polygon = PackedVector2Array(-18, -16, 18, -16, 13, 0, -13, 0)
+color = Color(0.78, 0.12, 0.08, 1)
+
+[node name="Rim" type="Line2D" parent="Visuals"]
+points = PackedVector2Array(-18, -16, 18, -16)
+width = 4.0
+default_color = Color(0.96, 0.88, 0.7, 1)
+
+[node name="Fries" type="Line2D" parent="Visuals"]
+points = PackedVector2Array(-12, -17, -9, -30, -3, -17, 0, -33, 6, -17, 11, -29, 14, -16)
+width = 4.0
+default_color = Color(1, 0.72, 0.16, 1)
+
+[node name="Curds" type="Label" parent="Visuals"]
+offset_left = -13.0
+offset_top = -24.0
+offset_right = 14.0
+offset_bottom = -8.0
+theme_override_colors/font_color = Color(1, 0.95, 0.72, 1)
+theme_override_font_sizes/font_size = 13
+text = "•••"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("PickupShape")

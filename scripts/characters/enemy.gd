@@ -11,6 +11,7 @@ const MAX_ATTACKERS := 2
 
 func _ready() -> void:
 	if stats:
+		stats = stats.resolved()
 		max_hp = stats.max_hp
 		move_speed = stats.move_speed
 		sprite.self_modulate = stats.tint
@@ -45,7 +46,7 @@ func attackers_count() -> int:
 func is_committed_attack() -> bool:
 	if state_machine.current == null:
 		return false
-	return state_machine.current.name in [&"Attack", &"Dash", &"Counter"]
+	return state_machine.current.name in [&"Attack", &"Charge", &"Dash", &"Sweep", &"Counter"]
 
 
 ## Gentle steering prevents enemies from occupying the same feet position while

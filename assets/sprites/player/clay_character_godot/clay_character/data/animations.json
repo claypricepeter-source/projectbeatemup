@@ -1,0 +1,273 @@
+{
+  "character": "Clay",
+  "canvas_size": [
+    256,
+    192
+  ],
+  "anchor": [
+    128,
+    176
+  ],
+  "coordinate_note": "Frames share a 256x192 canvas. Character center is x=128 and the ground baseline is y=176.",
+  "animations": {
+    "idle": {
+      "fps": 6.0,
+      "loop": true,
+      "frame_count": 8,
+      "frames": [
+        "sprites/idle/idle_00.png",
+        "sprites/idle/idle_01.png",
+        "sprites/idle/idle_02.png",
+        "sprites/idle/idle_03.png",
+        "sprites/idle/idle_04.png",
+        "sprites/idle/idle_05.png",
+        "sprites/idle/idle_06.png",
+        "sprites/idle/idle_07.png"
+      ]
+    },
+    "walk": {
+      "fps": 10.0,
+      "loop": true,
+      "frame_count": 10,
+      "frames": [
+        "sprites/walk/walk_00.png",
+        "sprites/walk/walk_01.png",
+        "sprites/walk/walk_02.png",
+        "sprites/walk/walk_03.png",
+        "sprites/walk/walk_04.png",
+        "sprites/walk/walk_05.png",
+        "sprites/walk/walk_06.png",
+        "sprites/walk/walk_07.png",
+        "sprites/walk/walk_08.png",
+        "sprites/walk/walk_09.png"
+      ]
+    },
+    "run": {
+      "fps": 12.0,
+      "loop": true,
+      "frame_count": 9,
+      "frames": [
+        "sprites/run/run_00.png",
+        "sprites/run/run_01.png",
+        "sprites/run/run_02.png",
+        "sprites/run/run_03.png",
+        "sprites/run/run_04.png",
+        "sprites/run/run_05.png",
+        "sprites/run/run_06.png",
+        "sprites/run/run_07.png",
+        "sprites/run/run_08.png"
+      ]
+    },
+    "jump": {
+      "fps": 10.0,
+      "loop": false,
+      "frame_count": 8,
+      "frames": [
+        "sprites/jump/jump_00.png",
+        "sprites/jump/jump_01.png",
+        "sprites/jump/jump_02.png",
+        "sprites/jump/jump_03.png",
+        "sprites/jump/jump_04.png",
+        "sprites/jump/jump_05.png",
+        "sprites/jump/jump_06.png",
+        "sprites/jump/jump_07.png"
+      ]
+    },
+    "crouch_block": {
+      "fps": 8.0,
+      "loop": true,
+      "frame_count": 9,
+      "frames": [
+        "sprites/crouch_block/crouch_block_00.png",
+        "sprites/crouch_block/crouch_block_01.png",
+        "sprites/crouch_block/crouch_block_02.png",
+        "sprites/crouch_block/crouch_block_03.png",
+        "sprites/crouch_block/crouch_block_04.png",
+        "sprites/crouch_block/crouch_block_05.png",
+        "sprites/crouch_block/crouch_block_06.png",
+        "sprites/crouch_block/crouch_block_07.png",
+        "sprites/crouch_block/crouch_block_08.png"
+      ]
+    },
+    "light_punch": {
+      "fps": 12.0,
+      "loop": false,
+      "frame_count": 2,
+      "frames": [
+        "sprites/light_punch/light_punch_00.png",
+        "sprites/light_punch/light_punch_01.png"
+      ]
+    },
+    "strong_punch": {
+      "fps": 12.0,
+      "loop": false,
+      "frame_count": 3,
+      "frames": [
+        "sprites/strong_punch/strong_punch_00.png",
+        "sprites/strong_punch/strong_punch_01.png",
+        "sprites/strong_punch/strong_punch_02.png"
+      ]
+    },
+    "light_kick": {
+      "fps": 11.0,
+      "loop": false,
+      "frame_count": 3,
+      "frames": [
+        "sprites/light_kick/light_kick_00.png",
+        "sprites/light_kick/light_kick_01.png",
+        "sprites/light_kick/light_kick_02.png"
+      ]
+    },
+    "strong_kick": {
+      "fps": 11.0,
+      "loop": false,
+      "frame_count": 3,
+      "frames": [
+        "sprites/strong_kick/strong_kick_00.png",
+        "sprites/strong_kick/strong_kick_01.png",
+        "sprites/strong_kick/strong_kick_02.png"
+      ]
+    },
+    "combo": {
+      "fps": 14.0,
+      "loop": false,
+      "frame_count": 10,
+      "frames": [
+        "sprites/combo/combo_00.png",
+        "sprites/combo/combo_01.png",
+        "sprites/combo/combo_02.png",
+        "sprites/combo/combo_03.png",
+        "sprites/combo/combo_04.png",
+        "sprites/combo/combo_05.png",
+        "sprites/combo/combo_06.png",
+        "sprites/combo/combo_07.png",
+        "sprites/combo/combo_08.png",
+        "sprites/combo/combo_09.png"
+      ]
+    },
+    "burning_uppercut": {
+      "fps": 12.0,
+      "loop": false,
+      "frame_count": 4,
+      "frames": [
+        "sprites/burning_uppercut/burning_uppercut_00.png",
+        "sprites/burning_uppercut/burning_uppercut_01.png",
+        "sprites/burning_uppercut/burning_uppercut_02.png",
+        "sprites/burning_uppercut/burning_uppercut_03.png"
+      ]
+    },
+    "power_forearm": {
+      "fps": 12.0,
+      "loop": false,
+      "frame_count": 3,
+      "frames": [
+        "sprites/power_forearm/power_forearm_00.png",
+        "sprites/power_forearm/power_forearm_01.png",
+        "sprites/power_forearm/power_forearm_02.png"
+      ]
+    },
+    "spinning_backfist": {
+      "fps": 12.0,
+      "loop": false,
+      "frame_count": 3,
+      "frames": [
+        "sprites/spinning_backfist/spinning_backfist_00.png",
+        "sprites/spinning_backfist/spinning_backfist_01.png",
+        "sprites/spinning_backfist/spinning_backfist_02.png"
+      ]
+    },
+    "flying_knee": {
+      "fps": 12.0,
+      "loop": false,
+      "frame_count": 3,
+      "frames": [
+        "sprites/flying_knee/flying_knee_00.png",
+        "sprites/flying_knee/flying_knee_01.png",
+        "sprites/flying_knee/flying_knee_02.png"
+      ]
+    },
+    "throw": {
+      "fps": 10.0,
+      "loop": false,
+      "frame_count": 5,
+      "frames": [
+        "sprites/throw/throw_00.png",
+        "sprites/throw/throw_01.png",
+        "sprites/throw/throw_02.png",
+        "sprites/throw/throw_03.png",
+        "sprites/throw/throw_04.png"
+      ]
+    },
+    "get_hit": {
+      "fps": 10.0,
+      "loop": false,
+      "frame_count": 7,
+      "frames": [
+        "sprites/get_hit/get_hit_00.png",
+        "sprites/get_hit/get_hit_01.png",
+        "sprites/get_hit/get_hit_02.png",
+        "sprites/get_hit/get_hit_03.png",
+        "sprites/get_hit/get_hit_04.png",
+        "sprites/get_hit/get_hit_05.png",
+        "sprites/get_hit/get_hit_06.png"
+      ]
+    },
+    "knocked_down": {
+      "fps": 8.0,
+      "loop": false,
+      "frame_count": 8,
+      "frames": [
+        "sprites/knocked_down/knocked_down_00.png",
+        "sprites/knocked_down/knocked_down_01.png",
+        "sprites/knocked_down/knocked_down_02.png",
+        "sprites/knocked_down/knocked_down_03.png",
+        "sprites/knocked_down/knocked_down_04.png",
+        "sprites/knocked_down/knocked_down_05.png",
+        "sprites/knocked_down/knocked_down_06.png",
+        "sprites/knocked_down/knocked_down_07.png"
+      ]
+    },
+    "victory": {
+      "fps": 6.0,
+      "loop": true,
+      "frame_count": 4,
+      "frames": [
+        "sprites/victory/victory_00.png",
+        "sprites/victory/victory_01.png",
+        "sprites/victory/victory_02.png",
+        "sprites/victory/victory_03.png"
+      ]
+    },
+    "defeat": {
+      "fps": 6.0,
+      "loop": false,
+      "frame_count": 3,
+      "frames": [
+        "sprites/defeat/defeat_00.png",
+        "sprites/defeat/defeat_01.png",
+        "sprites/defeat/defeat_02.png"
+      ]
+    },
+    "fatality": {
+      "fps": 8.0,
+      "loop": false,
+      "frame_count": 4,
+      "frames": [
+        "sprites/fatality/fatality_00.png",
+        "sprites/fatality/fatality_01.png",
+        "sprites/fatality/fatality_02.png",
+        "sprites/fatality/fatality_03.png"
+      ]
+    },
+    "taunts": {
+      "fps": 5.0,
+      "loop": true,
+      "frame_count": 3,
+      "frames": [
+        "sprites/taunts/taunts_00.png",
+        "sprites/taunts/taunts_01.png",
+        "sprites/taunts/taunts_02.png"
+      ]
+    }
+  }
+}

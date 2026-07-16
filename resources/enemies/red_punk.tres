@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/enemy_stats.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/enemies/punk.tres" id="2"]
+
+[resource]
+script = ExtResource("1")
+display_name = "RED PUNK"
+tint = Color(1, 0.42, 0.38, 1)
+base_variant = ExtResource("2")
+hp_multiplier = 1.5
+damage_multiplier = 1.2
+speed_multiplier = 1.05
+points_multiplier = 1.5

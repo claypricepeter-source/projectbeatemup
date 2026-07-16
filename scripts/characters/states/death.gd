@@ -17,7 +17,7 @@ func enter() -> void:
 	fighter.is_dead = true
 	fighter.invulnerable = true
 	fighter.hitbox.deactivate()
-	fighter.play(&"hurt")
+	fighter.play(&"death" if fighter.sprite.sprite_frames.has_animation(&"death") else &"hurt")
 	fighter.velocity = Vector2(-fighter.facing * KNOCKBACK_X, 0)
 	fighter.air_velocity = POP_VELOCITY
 	_phase = Phase.AIRBORNE
@@ -32,7 +32,10 @@ func physics_update(delta: float) -> void:
 				_phase = Phase.DOWN
 				_timer = LIE_TIME
 				fighter.velocity = Vector2.ZERO
-				fighter.sprite.rotation_degrees = -90.0 * fighter.facing
+				if fighter.sprite.sprite_frames.has_animation(&"death"):
+					fighter.sprite.frame = fighter.sprite.sprite_frames.get_frame_count(&"death") - 1
+				else:
+					fighter.sprite.rotation_degrees = -90.0 * fighter.facing
 		Phase.DOWN:
 			_timer -= delta
 			if _timer <= 0.0:

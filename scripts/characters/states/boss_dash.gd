@@ -32,7 +32,7 @@ func physics_update(delta: float) -> void:
 	if not _active and _elapsed >= TELEGRAPH_TIME:
 		_active = true
 		fighter.velocity = Vector2(fighter.facing * DASH_SPEED, 0)
-		fighter.play(&"attack")
+		fighter.play(&"dash_run")
 		fighter.hitbox.activate(12, true)
 	if _active and _elapsed >= TELEGRAPH_TIME + DASH_TIME:
 		fighter.velocity = Vector2.ZERO

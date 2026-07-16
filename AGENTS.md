@@ -7,42 +7,70 @@
 
 ---
 
-## 0. HANDOFF STATUS (updated 2026-07-15)
+## 0. HANDOFF STATUS (updated 2026-07-16)
 
-**Where the project stands:** Phases 0–3 are complete and verified in-game (see
-checked boxes + per-phase notes in §8). **The next task is Phase 4 — game loop and
-UI**: add the title/intro/pause screens, persist the high score, and expand the
-minimal Phase 3 clear/game-over flow into the campaign stage-transition shell.
+**Where the project stands:** Phases 0–5 are complete and verified in-game (see
+checked boxes + per-phase notes in §8). The full three-stage campaign, complete
+enemy roster, all three bosses, pickups, stage-clear routing and ending card are
+playable. **The next task is the final Phase 6 human feel/continue-target playtest**;
+the repeatable automated balance run is complete, after which Phase 7 release work
+can begin.
 
-**What runs today:** F5 launches `scenes/main.tscn`, which instantiates the complete
-Stage 1 vertical slice, **Second Avenue at Night**. Sean can play through four
-camera-locked waves, props and pickups, and Slick Rick's boss arena to a stage-clear
-tally. Losing a life respawns in the active fight; zero lives routes through the
-continue countdown and then Game Over. Attack confirms Continue/retry/play-again.
+**What runs today:** F5 launches `scenes/main.tscn` at the title screen. Start routes
+through story cards into three consecutive stages: **Second Avenue at Night**
+(four waves + Slick Rick), **The Harbour** (five waves + Marta), and **Harrison
+Park to the Mill Dam** (five waves + Victor). Stages include camera locks, props,
+pickups, boss bars and stage-clear tallies; the finale adds a narrow footbridge
+fight, Victor's two phases, and the ending card. Losing a life respawns in the
+active fight; zero lives routes through Continue and Game Over. High score persists
+in `user://save.cfg`.
 
 **Controls:** Arrows/WASD move, Z/J attack (mash = 3-hit combo; finisher knocks
-down), X/K jump (attack airborne = jump kick), Esc = `pause` action (no pause menu
-yet). Gamepad: D-pad/left stick, X/Square attack, A/Cross jump, Start pause.
+down), X/K jump (attack airborne = jump kick), Esc opens/resumes the pause menu.
+Gamepad: D-pad/left stick, X/Square attack, A/Cross jump, Start pause.
 
 **Key facts a new agent needs (details in the sections referenced):**
 - Working via the **godot-ai MCP plugin** on Godot **4.7-stable** (§9 Tooling). After
   writing .gd/.tscn/.tres files externally, call `filesystem_manage(op="scan")`,
   then run + verify with `project_run` / `game_eval` / `editor_screenshot`.
   `game_eval` code must be straight-line (no indented blocks) or it may fail to parse.
-- Art comes from the **Streets of Fight** pack (§6.2, CREDITS.md). Sprites render at
-  **2× scale**; character canvases are 96×63 with the node origin at the feet.
-  Sean is currently the pack's **Brawler Girl** stand-in (§8 Phase 1 notes).
+- Enemies and Stage 1 art come from the **Streets of Fight** pack (§6.2,
+  CREDITS.md) and render at **2× scale**. Sean now uses the user-provided
+  `clay_character_godot` set at native 1×: 256×192 canvases, supplied feet anchor
+  (128, 176), and dedicated combat/KO art (§8 Phase 1 notes).
 - Stage 1 is 4480×480 (seven 640 px screens), composed from
   `assets/_source_packs/streets-of-fight/Stage Layers/tileset.png`; its walkable
   band is y ∈ [204, 264], with the camera fixed at y=200. Source art remains at 2×.
+- Stage 2 is 5120×480 (eight screens), with a y ∈ [204, 280] dock plane. Its dusk
+  parallax, grain elevators, water, container yards, boats and cranes are drawn from
+  project-native Godot shapes in `harbour_stage.gd`; it introduces no new art license.
+- Stage 3 is 5120×480 with a y ∈ [204, 280] plane, split between autumn Harrison
+  Park and the floodlit Mill Dam in `finale_stage.gd`. Wave 4 clamps both sides to
+  the footbridge y ∈ [232, 250] and restores full depth when cleared.
 - Combat rules implemented in `scripts/` match §4.2 **plus** the anti-stunlock rule
   (3rd consecutive hit within 0.7s → knockdown) — see §8 Phase 2 notes for this and
-  other gotchas. EventBus parameters must stay untyped; knockdown art is a rotated
-  `hurt` frame. Enemy soft separation and per-sheet source-facing metadata are now
+  other gotchas. EventBus parameters must stay untyped; Streets of Fight characters
+  rotate the `hurt` frame for knockdown, while the new boss uses dedicated KO art.
+  Enemy soft separation and per-sheet source-facing metadata are now
   implemented; keep both when adding the Phase 5 roster.
 - Phase 3's reusable pieces are `WaveData`/`WaveTrigger`, `CameraDirector`, the
   breakable/pickup base scenes, and `MainFlow`. Boss-wave camera lock intentionally
   remains active while the clear tally is shown.
+- Phase 4's `MainFlow` owns title/intro/pause/continue/clear/game-over/ending routing.
+  `STAGE_SCENES` and `INTRO_CARDS` contain all three stages; `GameState.next_stage()`
+  advances the shell, while high score is persisted immediately through `ConfigFile`.
+- Phase 5 enemy variants resolve from `EnemyStats.base_variant` plus stat
+  multipliers. `WaveData.enemy_stats` is an optional per-spawn override array; use
+  it to mix Red Punk/Dock Thug/Park Punk resources into waves without new scenes.
+- `AudioManager` is a persistent two-player music router plus an eight-player SFX
+  pool. Stage 1 uses the supplied MP3; title, Stages 2–3, boss, clear, Game Over and
+  ending use distinct project-native chiptune loops synthesized at runtime. A boss
+  stinger and seven small gameplay/UI cues are also synthesized at runtime, so they
+  introduce no external asset license.
+- `scripts/testing/balance_autoplay_bot.gd` is a test-only runtime-injected campaign
+  driver; no shipping scene references it. It walks the full route, fights through
+  normal hitboxes/AI, accepts continues and records stage HP/lives/score so balance
+  changes can be compared repeatably.
 - The public Web preview is deployed by `.github/workflows/pages.yml` to
   https://ariesyous.github.io/projectbeatemup/ using Godot 4.7's single-threaded
   Web export. The GitHub Actions deployment and live keyboard play were verified.
@@ -148,7 +176,7 @@ not new scenes.
 
 | Boss | Stage | Gimmick |
 |---|---|---|
-| **"Slick" Rick Delaney** — corrupt downtown fixer, switchblade & suit | 1 — Downtown | Fast dashes and knife flurries; periodically calls in 2 Punks. Teaches: prioritize adds vs. boss. |
+| **"Slick" Rick Delaney** — corrupt downtown fixer in flamboyant magnetic armour | 1 — Downtown | Fast dashes and metal-swipe flurries; periodically calls in 2 Punks. Teaches: prioritize adds vs. boss. |
 | **Marta "The Crane" Kovac** — dockworker turned enforcer, wields a boat hook | 2 — Harbour | Long horizontal reach; slow but hits hard; occasionally pulls a shipping-crate swing that sweeps a lane (dodge via Y-depth movement). Teaches: use the depth axis. |
 | **Victor Bayshore** — syndicate leader, final boss at the Mill Dam | 3 — Mill Dam | Two phases: (1) brawler with combo strings; (2) at 50% HP, enrages — faster, adds a charging grab. Arena hazard: slippery wet edge near the dam (visual only in v1). |
 
@@ -177,6 +205,8 @@ repeat → boss arena → boss fight → stage clear score tally → next stage.
 **Hit rules:**
 - Attacks connect only if attacker and target overlap in X (hitbox) **and** are within
   a **Y-depth band of ±12 px**.
+- Confirmed player hits alternate `punch1` / `punch2` SFX. A hit that reduces an
+  enemy to 0 HP plays `punch3` instead; misses and rejected invulnerable hits are silent.
 - **Hitstun:** non-knockdown hits freeze the victim in `hurt` for 0.3 s and interrupt
   their action (except armored hits, see Thug/bosses).
 - **Knockdown:** victim falls, is invulnerable while down and during `getup`
@@ -389,8 +419,14 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 - [x] `camera_director.gd` follow + limits.
 - [x] **DoD:** verified in-game via MCP (walk 120px/s, camera scroll, jump air-sim, Y-sort behind/in-front, bounds clamping).
 
-> **Phase 1 notes:** Sean currently uses the pack's *Brawler Girl* sprites as a stand-in
-> (closest available base; recolour/pixel-edit to bald male Sean is a later art task).
+> **Phase 1 notes:** Sean now uses the user-provided `clay_character_godot` sprite
+> set: a bald male fighter matching the intended silhouette. Its 256×192 frames render
+> at native 1× with the supplied (128, 176) feet anchor. `player.gd` installs canonical
+> runtime aliases so the existing FSM uses light punch, strong punch, strong kick,
+> flying knee, get-hit and dedicated knocked-down frames without changing combat logic.
+> The previous Streets of Fight Brawler Girl resource remains in the project but is no
+> longer assigned to `player.tscn`; confirm the Clay folder's redistribution permission
+> before the next public export (see CREDITS.md).
 > `assets/props/barrel.png` holds two barrel variants — use `region_rect = Rect2(0, 0, 28, 48)`
 > for the upright one. Implementation detail: jump is a state; airborne attack (jump_kick)
 > hooks into `player_jump.gd` in Phase 2.
@@ -447,12 +483,16 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 >   Trash cans and crates take normal player-hitbox damage and drop Coffee (+25 HP),
 >   Cash (+500), or loonie stacks (+100); pickups update HP/score and HUD feedback.
 >   `GameState` now owns run score and receives untyped `EventBus.enemy_died` events.
-> - Slick Rick reuses the cohesive Punk sheet with a suit-blue tint, larger scale,
->   red tie, and drawn switchblade. His 200 HP FSM has a 143 px dash (12 + KD),
->   6+6+10 knife flurry, punishable recovery, and armored Counter on the third
+> - Slick Rick now uses the user-provided `magneto_boss_codex_assets` art at native
+>   1× scale, with its manifest's 384×224 canvas, (192, 212) feet pivot, authored
+>   frame order/FPS, nearest filtering, and dedicated KO art. His 200 HP FSM retains
+>   its 143 px dash (12 + KD), 6+6+10 swipe flurry, punishable recovery, and armored Counter on the third
 >   quick hit. He periodically maintains two Punk adds (verified 2→1→2), with all
 >   special states respecting the max-two-attacker rule. The boss bar tracks exact
 >   health ratio and hides on death; boss defeat cleans up adds and emits stage clear.
+>   Rainbow Meteor and the throw victim are correctly authored as separate visual
+>   layers and exposed as QA/future-state hooks; they are not active combat moves in
+>   v1 because grabs/throws and extra player specials remain explicitly deferred.
 > - Final DoD run crossed all four physical wave triggers in one launch, verified
 >   all 11 enemies and exact lineups, then spawned Slick Rick plus two adds. Wave
 >   score was 1250; boss/add cleanup plus an 87-HP clear bonus produced the exact
@@ -461,25 +501,121 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 >   Game Over. Both runs had empty current-run error logs and were screenshot-checked.
 
 ### Phase 4 — Game loop & UI
-- [ ] Title screen (start / quit), stage intro text cards (§2 story beats), pause menu.
-- [ ] Full HUD: player HP, lives, score, boss bar, GO indicator, pickup feedback.
-- [ ] Continues + Game Over screen; high score persisted via `GameState`.
-- [ ] Stage transition flow in `main.tscn` (`GameState.next_stage()`).
-- [ ] **DoD:** full loop title → intro card → Stage 1 → clear/game-over → title; high score survives restart.
+- [x] Title screen (start / quit), stage intro text cards (§2 story beats), pause menu.
+- [x] Full HUD: player HP, lives, score, boss bar, GO indicator, pickup feedback.
+- [x] Continues + Game Over screen; high score persisted via `GameState`.
+- [x] Stage transition flow in `main.tscn` (`GameState.next_stage()`).
+- [x] **DoD:** full loop title → intro card → Stage 1 → clear/game-over → title; high score survives restart.
+
+> **Phase 4 notes (complete):**
+> - `main.tscn` now starts at a keyboard/gamepad/mouse title menu, shows the Stage 1
+>   story card before instantiation, and owns dedicated pause and Game Over scenes.
+>   The stage is disabled while overlays are active, so menu input remains live
+>   without enemies or timers progressing behind it.
+> - `MainFlow.STAGE_SCENES` and matching intro-card data form the campaign shell.
+>   Clear calls `GameState.next_stage()`; Stage 2 was added in Phase 5 and the same
+>   shell is ready for Stage 3.
+> - `GameState` loads/saves `high_score` in `user://save.cfg` via `ConfigFile` and
+>   writes whenever a new high score is reached. The full Phase 3 HUD already covered
+>   player HP, lives/continues, score, boss HP, GO, enemy HP, and pickup feedback and
+>   was retained unchanged under the new shell.
+> - Runtime verification used actual Z/Esc input for title→intro→stage and pause→resume,
+>   probed continue acceptance (3 lives restored and one credit consumed), checked
+>   Game Over/clear routing back to title, and restarted the project to confirm the
+>   exact saved high score was reloaded. All tested screens were screenshot-checked.
 
 ### Phase 5 — Stages 2 & 3
-- [ ] **Thug** and **Biker** enemies (armor + charge behaviours); palette-swap resources.
-- [ ] `stage_2.tscn` harbour: art, waves, **Boss 2 (Marta)** with lane-sweep attack.
-- [ ] `stage_3.tscn` park→dam: art (two segments), footbridge narrow-band fight, waves.
-- [ ] **Boss 3 (Victor Bayshore)** two-phase AI; ending text card.
-- [ ] Poutine pickup; anti-stunlock boss armor rule (§3.3).
-- [ ] **DoD:** full 3-stage campaign playable start-to-finish.
+- [x] **Thug** and **Biker** enemies (armor + charge behaviours); palette-swap resources.
+- [x] `stage_2.tscn` harbour: art, waves, **Boss 2 (Marta)** with lane-sweep attack.
+- [x] `stage_3.tscn` park→dam: art (two segments), footbridge narrow-band fight, waves.
+- [x] **Boss 3 (Victor Bayshore)** two-phase AI; ending text card.
+- [x] Poutine pickup; anti-stunlock boss armor rule (§3.3).
+- [x] **DoD:** full 3-stage campaign playable start-to-finish.
+
+> **Phase 5 progress notes:**
+> - Thug is a 60 HP / 12 damage / 300 point heavy with a held haymaker telegraph.
+>   His first ordinary combo hit deals damage without interrupting his action; the
+>   second flinches and the third quick hit forces knockdown as usual.
+> - Biker is a 35 HP / 10 damage / 200 point spacing enemy with the canonical
+>   `charge` animation/state. He circles at range, telegraphs, commits to a fast
+>   lane-locked horizontal charge, and has a 1.15 s punish window after a miss.
+>   Charge counts toward the global max-two-attackers courtesy rule.
+> - `red_punk.tres`, `dock_thug.tres`, and `park_punk.tres` inherit base enemy stats
+>   through resource multipliers. `WaveData`/`WaveTrigger` accept optional per-spawn
+>   stat overrides so palette variants stay data-only.
+> - `roster_test.tscn` exercises Sean, Thug, Biker, and Red Punk together. Runtime
+>   probes verified Thug's armor/flinch/knockdown sequence, a 254 px missed Biker
+>   charge with the long recovery, resolved variant stats, and valid mixed-wave data.
+> - `stage_2.tscn` is a 5120×480 dusk harbour built from layered project-native
+>   shapes: Georgian Bay, grain elevators, boats, cranes, container yards, dock
+>   planking and the Bayshore Freight boss pier. Five `WaveData` resources encode
+>   the exact §5 lineups, including Red Punk and Dock Thug stat overrides; runtime
+>   verification observed 3/2/3/2/4 enemies with the expected types and values.
+> - Marta is a 250 HP / 14 damage / 2500 point boss with a 148 px boat-hook strike
+>   and a clearly marked shipping-crate sweep. The sweep deals 18 + knockdown in an
+>   18 px depth band: a same-lane probe lost exactly 18 HP while a 42 px Y dodge took
+>   zero. Her third quick hit routes Hurt → Hurt → armored Counter; the HUD now reads
+>   boss names from `EnemyStats`, so both Slick Rick and Marta label correctly.
+> - The campaign shell includes the Stage 2 story card and scene. Verification
+>   loaded it through `MainFlow`, defeated Marta to reach `STAGE 2 CLEAR` with the
+>   exact HP×10 bonus, and advanced into the Stage 3 card. Boss defeat awarded 2500
+>   points, hid the boss bar, and retained the arena camera lock during the tally.
+> - `stage_3.tscn` is a 5120×480 project-native composition with two distinct visual
+>   segments: autumn Harrison Park and the Sydenham River lead across a timber
+>   footbridge into the concrete, rushing-water, fish-ladder and floodlight Mill Dam
+>   arena. Five `WaveData` resources produced the exact 3/3/4/3/4 lineups. Wave 4
+>   constrained Sean and every enemy to y ∈ [232, 250], then restored y ∈ [204, 280]
+>   and unlocked the camera atomically on clear.
+> - Victor Bayshore is a 350 HP / 4000 point final boss. Phase 1 uses an 8+8+12
+>   three-hit string; crossing 50% HP enters an invulnerable enrage, boosts movement
+>   by 30%, changes the string to 10+10+14, and enables a 410 px/s charging grab for
+>   18 + knockdown. A missed charge leaves a verified 1.0 s punish window. Three
+>   quick incoming hits force an armored 12 + knockdown Counter, and the armor clears
+>   after recovery. Victor reuses the licensed boss sheet with a distinct data tint
+>   and aura; no additional art license was introduced.
+> - The rare poutine drops from the pre-boss crate and fully heals. Runtime validation
+>   broke the configured crate, observed one `poutine` pickup, healed Sean from 7 to
+>   100, and displayed `POUTINE  FULL HEAL` on the HUD.
+> - Finale verification defeated Victor through the normal Death state, awarded 4000
+>   points plus an exact 73 HP × 10 bonus for a 4730 total, showed `STAGE 3 CLEAR`,
+>   advanced to the `QUIET WATER` ending, removed the stage, and returned to title
+>   with an actual Z press. A separate single-run routing probe traversed the three
+>   intro cards, Stage1 → Stage2 → Stage3, all three clear states, and the ending.
+>   The final run had no current-run errors and a clean game log; park, bridge, dam,
+>   Victor and ending visuals were screenshot-checked.
 
 ### Phase 6 — Audio & polish
-- [ ] Music per stage + title + boss stinger (free packs, credited); `AudioManager` crossfades.
-- [ ] SFX: hits, whiffs, knockdown, breakables, pickups, UI.
-- [ ] Game feel: hit-pause (2–3 frames), light screen shake on knockdowns, sprite flash on hit, i-frame flicker.
-- [ ] Balance pass: play full campaign, tune HP/damage/wave sizes in resources.
+- [x] Music per stage + title + boss stinger (free packs, credited); `AudioManager` crossfades.
+  **The persistent two-player `AudioManager` crossfades every flow cue. Stage 1 uses
+  the supplied MP3; title, Stages 2–3, boss, clear, Game Over and ending each use a
+  distinct loopable 11.025 kHz project-native chiptune composition generated from
+  authored melody/bass/drum profiles. Runtime verification cycled all eight cues,
+  confirmed their identities and unique lengths, sought across a generated loop
+  boundary without playback stopping, and activated the Stage 1 boss gate to prove
+  that `boss_stinger` and the boss cue fire together. Current-run errors and the
+  current game log were clean.**
+- [x] SFX: hits, whiffs, knockdown, breakables, pickups, UI.
+  **Confirmed hits retain the supplied `punch1` / `punch2` alternation and `punch3`
+  for defeating blows. `AudioManager` now generates six license-free 16-bit mono
+  cues at runtime and serves them from an eight-player pool. Verification proved a
+  missed ground swing emitted `whiff` while a 6-damage confirmed swing played the
+  recorded punch without a whiff; breaking a prop, collecting its Coffee, triggering
+  knockdown, pressing Z through the intro, and pausing with Esc emitted `breakable`,
+  `pickup`, `knockdown`, `ui_confirm`, and `ui_pause` respectively.**
+- [x] Game feel: hit-pause (2–3 frames), light screen shake on knockdowns, sprite flash on hit, i-frame flicker.
+  **`ImpactManager` now applies an unscaled 0.04/0.055 s connected-hit pause and
+  extends overlapping pauses safely. Normal-hit verification dealt exactly 6 damage,
+  flashed the victim to 2.2× white, and restored time scale/colour to normal.
+  Knockdowns additionally produced a 4 px camera offset that settled back to zero;
+  the existing post-getup i-frame flicker remains active.**
+- [x] Balance pass: play full campaign, tune HP/damage/wave sizes in resources.
+  **The complete player/enemy/boss/pickup/wave resource audit found the authored
+  values internally consistent, so they were retained instead of changed without
+  evidence. A repeatable normal-combat autoplay run cleared all three stages with
+  five deaths and one continue used: Stage 1 ended at 85 HP / 2 lives, Stage 2 at
+  100 HP / 3 lives after the continue, and Stage 3 at 42 HP / 1 life. It finished
+  at 19,920 points with a clean current game log, demonstrating rising pressure and
+  a beatable finale even for a simple approach-and-mash strategy.**
 - [ ] **DoD:** full run feels punchy; no silent actions; campaign beatable but challenging (~2–4 continues for an average player).
 
 ### Phase 7 — Release
