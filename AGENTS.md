@@ -28,6 +28,8 @@ in `user://save.cfg`.
 **Controls:** Arrows/WASD move, Z/J attack (mash = 3-hit combo; finisher knocks
 down), X/K jump (attack airborne = jump kick), Esc opens/resumes the pause menu.
 Gamepad: D-pad/left stick, X/Square attack, A/Cross jump, Start pause.
+Touch/Web: responsive left virtual stick, ATTACK, JUMP and pause buttons; story,
+continue and clear cards show a contextual NEXT button.
 
 **Key facts a new agent needs (details in the sections referenced):**
 - Working via the **godot-ai MCP plugin** on Godot **4.7-stable** (§9 Tooling). After
@@ -72,17 +74,18 @@ Gamepad: D-pad/left stick, X/Square attack, A/Cross jump, Start pause.
   normal hitboxes/AI, accepts continues and records stage HP/lives/score so balance
   changes can be compared repeatably.
 - The public Web preview is deployed by `.github/workflows/pages.yml` to
-  https://ariesyous.github.io/projectbeatemup/ using Godot 4.7's single-threaded
-  Web export. The GitHub Actions deployment and live keyboard play were verified.
-  The source repository is private because the imported Streets of Fight pack may
-  be used in a game but its raw assets must not be redistributed separately.
+  https://claypricepeter-source.github.io/projectbeatemup/ using Godot 4.7's
+  single-threaded Web export. `MobileControls` is runtime-drawn and asset-free,
+  remains hidden during desktop play, and feeds the canonical InputMap actions.
 - This editor session can retain stale editor-side "EventBus not found" rows after
   external script scans (autoload compilation order); fresh `project_run` calls and
   the game logs compile and run clean. Judge changes from `current_run_errors` plus
   the current game log, not retained rows from an older run.
-- Git: the private source repository is https://github.com/ariesyous/projectbeatemup.
-  Its `main` branch was published as one squashed root snapshot; the prior local
-  history is retained only on `codex/pre-squash-history`.
+- Git: the writable repository is
+  https://github.com/claypricepeter-source/projectbeatemup; the original upstream
+  remains https://github.com/ariesyous/projectbeatemup. Its `main` branch began as
+  one squashed root snapshot; prior local history is retained only on
+  `codex/pre-squash-history`.
 
 ---
 
@@ -622,6 +625,13 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 - [ ] Windows export preset (embedded PCK), icon, project name/version.
 - [x] Web export preset + GitHub Pages deployment (completed early after Phase 3;
   CI export and live browser controls verified).
+- [x] Responsive mobile controls for the Web build.
+  **`MobileControls` provides a multi-touch virtual stick with diagonal movement,
+  simultaneous ATTACK/JUMP buttons, pause/resume mapping and a contextual NEXT
+  button on non-gameplay cards. It is hidden on non-touch desktops and the title/
+  pause menus remain directly tappable. Runtime probes moved Sean 54 px through
+  touch input, verified two-axis movement, held movement + attack + jump on three
+  distinct fingers, and confirmed clean release of every InputMap action.**
 - [ ] Final `CREDITS.md` audit + in-game credits screen.
 - [ ] Playtest export build outside the editor; fix export-only issues.
 - [ ] **DoD:** distributable zip that runs on a clean Windows machine.

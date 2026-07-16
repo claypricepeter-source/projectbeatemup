@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/ui/title_screen.tscn" id="2_title"]
 [ext_resource type="PackedScene" path="res://scenes/ui/stage_intro.tscn" id="3_intro"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="4_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/game_over.tscn" id="5_game_over"]
+[ext_resource type="PackedScene" path="res://scenes/ui/mobile_controls.tscn" id="6_mobile"]
 
 [sub_resource type="StyleBoxFlat" id="Style_flow_panel"]
 bg_color = Color(0.025, 0.055, 0.09, 0.96)
@@ -104,3 +105,5 @@ theme_override_colors/font_color = Color(0.5, 1, 0.72, 1)
 theme_override_font_sizes/font_size = 17
 text = "PRESS ATTACK"
 horizontal_alignment = 1
+
+[node name="MobileControls" parent="." instance=ExtResource("6_mobile")]
