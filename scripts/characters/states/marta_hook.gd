@@ -1,5 +1,5 @@
 extends FighterState
-## Slow long-reach boat-hook strike.
+## Slow long-reach strike with the flaming Phallus impudicus claymore.
 
 const ANIMATION_START := 0.30
 const ACTIVE_START := 0.44

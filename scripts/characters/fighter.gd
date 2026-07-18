@@ -12,6 +12,8 @@ extends CharacterBody2D
 @export var gravity := 700.0
 @export var max_hp := 100
 @export var sprite_faces_right := true
+@export var death_lie_time := 0.4
+@export var death_fade_time := 0.5
 
 signal died
 
@@ -113,6 +115,16 @@ func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> bool:
 
 ## Attacker-side hook invoked only after an incoming hit accepts damage.
 func on_attack_connected(_target: Fighter, _defeated: bool) -> void:
+	pass
+
+
+## State-entry hook used by the player for life-loss presentation.
+func on_death_started() -> void:
+	pass
+
+
+## Landing hook used by the player to start the blood-pool hold.
+func on_death_landed() -> void:
 	pass
 
 

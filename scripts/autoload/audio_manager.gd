@@ -3,17 +3,19 @@ extends Node
 ## boss entrances can crossfade without stage-local players restarting the track.
 
 const STAGE_THEME: AudioStream = preload("res://assets/audio/music/stage_1_theme.mp3")
+const STAGE_TWO_THEME: AudioStream = preload("res://assets/audio/music/stage_2_theme.mp3")
+const PLAYER_DEATH_SOUND: AudioStream = preload("res://assets/audio/sfx/deathsean.mp3")
+const AFTER_DEATH_SOUND: AudioStream = preload("res://assets/audio/sfx/after_death.mp3")
 const CROSSFADE_SECONDS := 0.65
 const SILENT_DB := -60.0
 const SFX_POOL_SIZE := 8
 const SFX_SAMPLE_RATE := 22050
 const MUSIC_SAMPLE_RATE := 11025
 
-# Compact original chiptune patterns. Stage 1 keeps the supplied full track;
-# every other campaign state gets its own generated, loopable composition.
+# Compact original chiptune patterns. Stages 1 and 2 keep their supplied full
+# tracks; every other campaign state gets its own generated loopable composition.
 const MUSIC_PROFILES := {
 	&"title": {"bpm": 96.0, "melody": [64, -1, 67, 71, 69, -1, 67, 64, 62, -1, 64, 67, 59, -1, 62, 64], "bass": [40, 40, 43, 43, 38, 38, 40, 40], "drums": 0.32, "volume_db": -18.0},
-	&"stage_2": {"bpm": 108.0, "melody": [52, 55, 58, 55, 52, 60, 58, 55, 51, 55, 58, 63, 60, 58, 55, 51], "bass": [28, 28, 31, 31, 27, 27, 34, 31], "drums": 0.72, "volume_db": -16.0},
 	&"stage_3": {"bpm": 138.0, "melody": [64, 67, 69, 71, 72, 71, 69, 67, 66, 69, 71, 74, 76, 74, 71, 69], "bass": [40, 40, 38, 38, 45, 43, 42, 38], "drums": 0.82, "volume_db": -15.0},
 	&"boss": {"bpm": 152.0, "melody": [48, 49, 55, 54, 48, 58, 55, 49, 51, 52, 58, 57, 51, 60, 58, 52], "bass": [24, 24, 27, 25, 24, 29, 27, 25], "drums": 1.0, "volume_db": -13.0},
 	&"clear": {"bpm": 126.0, "melody": [60, 64, 67, 72, 67, 72, 76, 79, 72, 76, 79, 84, 79, 76, 72, 67], "bass": [36, 36, 41, 41, 43, 43, 48, 48], "drums": 0.55, "volume_db": -17.0},
@@ -44,6 +46,7 @@ var last_sfx_cue: StringName = &""
 
 func _ready() -> void:
 	_music_cues[&"stage_1"] = {"stream": STAGE_THEME, "volume_db": -16.0, "pitch": 1.0, "generated": false}
+	_music_cues[&"stage_2"] = {"stream": STAGE_TWO_THEME, "volume_db": -16.0, "pitch": 1.0, "generated": false}
 	for cue: StringName in MUSIC_PROFILES:
 		var profile: Dictionary = MUSIC_PROFILES[cue]
 		_music_cues[cue] = {
@@ -67,6 +70,8 @@ func _ready() -> void:
 		_sfx_players.append(player)
 	for cue: StringName in SFX_SPECS:
 		_sfx_streams[cue] = _build_sfx(SFX_SPECS[cue], hash(cue))
+	_sfx_streams[&"player_death"] = PLAYER_DEATH_SOUND
+	_sfx_streams[&"after_death"] = AFTER_DEATH_SOUND
 
 
 func play_music(cue: StringName, restart := false) -> void:

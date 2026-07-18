@@ -8,9 +8,13 @@ extends Fighter
 @onready var punch_1_player: AudioStreamPlayer = $Punch1Player
 @onready var punch_2_player: AudioStreamPlayer = $Punch2Player
 @onready var punch_3_player: AudioStreamPlayer = $Punch3Player
+@onready var blood_pool: BloodPool = $Visuals/BloodPool
 
 var _next_punch_sound := 0
 var _swing_connected := false
+
+const SMOOTH_PLAYER_FRAMES: SpriteFrames = preload(
+	"res://assets/sprites/player/sean_smooth_frames.tres")
 
 const CANONICAL_ANIMATION_SOURCES := {
 	&"attack_1": &"light_punch",
@@ -32,6 +36,8 @@ func _ready() -> void:
 func _install_canonical_animations() -> void:
 	var source := sprite.sprite_frames
 	var frames := source.duplicate(true) as SpriteFrames
+	_copy_external_animation(frames, &"idle", SMOOTH_PLAYER_FRAMES, &"idle", true)
+	_copy_external_animation(frames, &"combo", SMOOTH_PLAYER_FRAMES, &"combo", false)
 	for canonical: StringName in CANONICAL_ANIMATION_SOURCES:
 		var source_name: StringName = CANONICAL_ANIMATION_SOURCES[canonical]
 		_copy_animation(frames, canonical, source_name, canonical == &"getup")
@@ -50,7 +56,25 @@ func _copy_animation(frames: SpriteFrames, target: StringName, source: StringNam
 		frames.add_frame(
 			target,
 			frames.get_frame_texture(source, source_index),
-			frames.get_frame_duration(source, source_index))
+		frames.get_frame_duration(source, source_index))
+
+
+func _copy_external_animation(
+		frames: SpriteFrames,
+		target: StringName,
+		source_frames: SpriteFrames,
+		source: StringName,
+		loop: bool) -> void:
+	if frames.has_animation(target):
+		frames.remove_animation(target)
+	frames.add_animation(target)
+	frames.set_animation_speed(target, source_frames.get_animation_speed(source))
+	frames.set_animation_loop(target, loop)
+	for index in source_frames.get_frame_count(source):
+		frames.add_frame(
+			target,
+			source_frames.get_frame_texture(source, index),
+			source_frames.get_frame_duration(source, index))
 
 
 func action(base: String) -> StringName:
@@ -101,6 +125,16 @@ func end_knockdown() -> void:
 	start_iframes(1.0)
 
 
+func on_death_started() -> void:
+	AudioManager.play_sfx(&"player_death", -2.0)
+	ImpactManager.player_ko_slowdown()
+
+
+func on_death_landed() -> void:
+	AudioManager.play_sfx(&"after_death", -2.0)
+	blood_pool.expand()
+
+
 func finish_death() -> void:
 	died.emit()
 	EventBus.player_died.emit()
@@ -122,6 +156,7 @@ func respawn(respawn_position: Vector2) -> void:
 	air_velocity = 0.0
 	velocity = Vector2.ZERO
 	hitbox.deactivate()
+	blood_pool.reset_pool()
 	set_physics_process(true)
 	state_machine.transition("Idle")
 	start_iframes(2.0)

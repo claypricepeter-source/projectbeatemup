@@ -1,5 +1,5 @@
 extends FighterState
-## Third-hit anti-stunlock response: a quick armored hook spin.
+## Third-hit anti-stunlock response: a quick armored mushroom spin.
 
 const ACTIVE_START := 0.14
 const ACTIVE_END := 0.36

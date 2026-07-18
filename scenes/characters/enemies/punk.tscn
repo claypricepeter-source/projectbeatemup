@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/characters/enemy.gd" id="1"]
 [ext_resource type="Resource" path="res://resources/enemies/punk.tres" id="2"]
-[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/punk_frames.tres" id="3"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/enemies/sikh_punk_frames.tres" id="3"]
 [ext_resource type="Texture2D" path="res://assets/sprites/shadow.png" id="4"]
 [ext_resource type="Script" path="res://scripts/characters/state_machine.gd" id="5"]
 [ext_resource type="Script" path="res://scripts/characters/states/enemy_idle.gd" id="6"]
@@ -30,7 +30,7 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1")
 stats = ExtResource("2")
-sprite_faces_right = false
+sprite_faces_right = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_feet")
@@ -42,8 +42,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("4")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(0, -63)
-scale = Vector2(2, 2)
+position = Vector2(0, -64)
 sprite_frames = ExtResource("3")
 animation = &"idle"
 autoplay = "idle"

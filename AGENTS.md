@@ -18,7 +18,7 @@ can begin.
 
 **What runs today:** F5 launches `scenes/main.tscn` at the title screen. Start routes
 through story cards into three consecutive stages: **Second Avenue at Night**
-(four waves + Slick Rick), **The Harbour** (five waves + Marta), and **Harrison
+(four waves + Slick Rick), **The Sewers of Shame** (five waves + Ragnaros), and **Harrison
 Park to the Mill Dam** (five waves + Victor). Stages include camera locks, props,
 pickups, boss bars and stage-clear tallies; the finale adds a narrow footbridge
 fight, Victor's two phases, and the ending card. Losing a life respawns in the
@@ -43,9 +43,18 @@ continue and clear cards show a contextual NEXT button.
 - Stage 1 is 4480×480 (seven 640 px screens), composed from
   `assets/_source_packs/streets-of-fight/Stage Layers/tileset.png`; its walkable
   band is y ∈ [204, 264], with the camera fixed at y=200. Source art remains at 2×.
-- Stage 2 is 5120×480 (eight screens), with a y ∈ [204, 280] dock plane. Its dusk
-  parallax, grain elevators, water, container yards, boats and cranes are drawn from
-  project-native Godot shapes in `harbour_stage.gd`; it introduces no new art license.
+- Stage 2 is 5120×480 (eight screens), with a y ∈ [204, 280] processing-floor
+  plane. `harbour_stage.gd` repeats a doorless core of the keyed user-provided room
+  into one tunnel and animates its 15 green frames across every open channel: the
+  rear band behind the fighters and the full lower trench below the platform;
+  each selected frame is deliberately stretched to the full channel depth. A seeded
+  layout places smaller user-provided decals only in plain wall slots between grates,
+  and twelve varied curry packages float half-submerged at randomized intervals
+  throughout the lower acid channel;
+  `chain_parallax.gd` moves the foreground chains 18% faster than the camera. The
+  stage also requests its music cue locally so direct F6/debug launches have audio.
+  The untouched sheet is retained under `assets/_source_packs/` and remains
+  local-development-only pending provenance/redistribution confirmation.
 - Stage 3 is 5120×480 with a y ∈ [204, 280] plane, split between autumn Harrison
   Park and the floodlit Mill Dam in `finale_stage.gd`. Wave 4 clamps both sides to
   the footbridge y ∈ [232, 250] and restores full depth when cleared.
@@ -53,7 +62,9 @@ continue and clear cards show a contextual NEXT button.
   (3rd consecutive hit within 0.7s → knockdown) — see §8 Phase 2 notes for this and
   other gotchas. EventBus parameters must stay untyped; Streets of Fight characters
   rotate the `hurt` frame for knockdown, while the new boss uses dedicated KO art.
-  Enemy soft separation and per-sheet source-facing metadata are now
+  Standard Punk/Red Punk instances now use the project-generated Sikh punk atlas
+  (black turban, beard, purple-gold jacket); Knife Punk, Thug and boss art remain
+  separate. Enemy soft separation and per-sheet source-facing metadata are now
   implemented; keep both when adding the Phase 5 roster.
 - Phase 3's reusable pieces are `WaveData`/`WaveTrigger`, `CameraDirector`, the
   breakable/pickup base scenes, and `MainFlow`. Boss-wave camera lock intentionally
@@ -65,10 +76,11 @@ continue and clear cards show a contextual NEXT button.
   multipliers. `WaveData.enemy_stats` is an optional per-spawn override array; use
   it to mix Red Punk/Dock Thug/Park Punk resources into waves without new scenes.
 - `AudioManager` is a persistent two-player music router plus an eight-player SFX
-  pool. Stage 1 uses the supplied MP3; title, Stages 2–3, boss, clear, Game Over and
+  pool. Stages 1–2 use supplied MP3s; title, Stage 3, boss, clear, Game Over and
   ending use distinct project-native chiptune loops synthesized at runtime. A boss
-  stinger and seven small gameplay/UI cues are also synthesized at runtime, so they
-  introduce no external asset license.
+  stinger and seven small gameplay/UI cues are also synthesized at runtime. The
+  supplied `deathsean.mp3` plays at the start of Sean's life-loss KO sequence;
+  supplied `after_death.mp3` begins when the expanding brown pool appears.
 - `scripts/testing/balance_autoplay_bot.gd` is a test-only runtime-injected campaign
   driver; no shipping scene references it. It walks the full route, fights through
   normal hitboxes/AI, accepts continues and records stage HP/lives/score so balance
@@ -180,7 +192,7 @@ not new scenes.
 | Boss | Stage | Gimmick |
 |---|---|---|
 | **"Slick" Rick Delaney** — corrupt downtown fixer in flamboyant magnetic armour | 1 — Downtown | Fast dashes and metal-swipe flurries; periodically calls in 2 Punks. Teaches: prioritize adds vs. boss. |
-| **Marta "The Crane" Kovac** — dockworker turned enforcer, wields a boat hook | 2 — Harbour | Long horizontal reach; slow but hits hard; occasionally pulls a shipping-crate swing that sweeps a lane (dodge via Y-depth movement). Teaches: use the depth axis. |
+| **Ragnaros** — flamboyant firelord wielding a claymore-sized flaming common stinkhorn | 2 — Sewers | Long horizontal reach and a full-lane sweep; periodically braces the stinkhorn like a gun and fires five white liquid shots. Dodging three shots forces a 3.2 s dizzy punish window. Teaches: use the depth axis. |
 | **Victor Bayshore** — syndicate leader, final boss at the Mill Dam | 3 — Mill Dam | Two phases: (1) brawler with combo strings; (2) at 50% HP, enrages — faster, adds a charging grab. Arena hazard: slippery wet edge near the dam (visual only in v1). |
 
 Boss HP baseline: 200 / 250 / 350. Bosses cannot be stun-locked: after 3 consecutive
@@ -251,12 +263,12 @@ props with pickups, then a boss arena.
 - **Music mood:** Driving synth-funk, SoR1 opening-stage energy.
 - **Teaches:** basic combat, camera-lock waves, breakables.
 
-### Stage 2 — "The Harbour" (Waterfront & grain elevators)
-- **Look:** Dusk. Docks, moored fishing boats, stacked shipping containers, the towering grain elevators silhouetted against Georgian Bay. Parallax: bay water + elevators / containers / dock planking.
+### Stage 2 — "The Sewers of Shame" (Industrial sewer beneath the waterfront)
+- **Look:** A long grimy processing tunnel with concrete platforms, sewer grates, chains and animated acid channels. Parallax: foreground chains over the repeating tunnel wall.
 - **Enemies:** Punk (red swap), Thug, Biker debut. Waves: (2 Punks + 1 Thug) → (2 Bikers) → (1 Thug + 2 Knife Punks) → (2 Thugs) → mini-gauntlet (1 of each).
-- **Boss:** Marta "The Crane" Kovac, on the main pier.
+- **Boss:** Ragnaros, wielding a dark-brown flaming *Phallus impudicus* claymore with a hanging biological ammunition pouch. His five-shot liquid barrage becomes a 3.2 s dizzy opening after three dodges.
 - **Music mood:** Tense bass-heavy groove, industrial percussion.
-- **Teaches:** depth-axis dodging (Biker charges, Marta's sweeps), armor enemies.
+- **Teaches:** depth-axis dodging (Biker charges, Ragnaros's sweeps and aimed liquid shots), armor enemies, earned boss punish windows.
 
 ### Stage 3 — "Harrison Park to the Mill Dam" (Finale)
 - **Look:** Two visual segments: (a) Harrison Park — autumn trees, the Sydenham River, a footbridge; (b) the Mill Dam — rushing water, fish ladder, floodlights. Parallax: treeline/river → dam structure.
@@ -427,6 +439,10 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 > at native 1× with the supplied (128, 176) feet anchor. `player.gd` installs canonical
 > runtime aliases so the existing FSM uses light punch, strong punch, strong kick,
 > flying knee, get-hit and dedicated knocked-down frames without changing combat logic.
+> A reference-driven generated refinement now supplies Sean's active ten-frame idle
+> and ten-frame ground combo while retaining his bald head, glasses, black tank top,
+> gloves and green camouflage trousers. The combo's three contact frames still deal
+> the canonical 6+6+12 damage and require buffered attack presses to unlock all hits.
 > The previous Streets of Fight Brawler Girl resource remains in the project but is no
 > longer assigned to `player.tscn`; confirm the Clay folder's redistribution permission
 > before the next public export (see CREDITS.md).
@@ -446,6 +462,11 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 > - **Anti-stunlock rule (now canonical, §4.2 addendum):** a 3rd consecutive hit
 >   within 0.7s is upgraded to a knockdown. Without it, two synced enemies
 >   permanently hitstun-lock the victim (observed in testing).
+> - Standard Punk and its Red Punk data variant use the generated Sikh Punk atlas:
+>   sixteen transparent 160×128 frames across `idle`, `walk`, `attack`, and `hurt`,
+>   authored facing right at native 1×. Runtime verification loaded all four
+>   animations and screenshot-checked its scale beside Sean. Other enemy scenes
+>   keep their prior art resources.
 > - The free pack has no knockdown/getup/death frames — knockdown/death reuse
 >   `hurt` with a 90° sprite rotation while lying. Revisit if better frames land.
 > - `EventBus` signal params must stay **untyped** (circular dependency with
@@ -529,7 +550,7 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 
 ### Phase 5 — Stages 2 & 3
 - [x] **Thug** and **Biker** enemies (armor + charge behaviours); palette-swap resources.
-- [x] `stage_2.tscn` harbour: art, waves, **Boss 2 (Marta)** with lane-sweep attack.
+- [x] `stage_2.tscn` sewer: art, waves, **Boss 2 (Ragnaros)** with stinkhorn sweep and dodge-to-dizzy liquid barrage.
 - [x] `stage_3.tscn` park→dam: art (two segments), footbridge narrow-band fight, waves.
 - [x] **Boss 3 (Victor Bayshore)** two-phase AI; ending text card.
 - [x] Poutine pickup; anti-stunlock boss armor rule (§3.3).
@@ -549,18 +570,49 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 > - `roster_test.tscn` exercises Sean, Thug, Biker, and Red Punk together. Runtime
 >   probes verified Thug's armor/flinch/knockdown sequence, a 254 px missed Biker
 >   charge with the long recovery, resolved variant stats, and valid mixed-wave data.
-> - `stage_2.tscn` is a 5120×480 dusk harbour built from layered project-native
->   shapes: Georgian Bay, grain elevators, boats, cranes, container yards, dock
->   planking and the Bayshore Freight boss pier. Five `WaveData` resources encode
+> - `stage_2.tscn` is a 5120×480 industrial sewer processing floor assembled from
+>   the user-provided `196124.png` sheet. A native-resolution doorless core repeats
+>   into one tunnel; all 15 supplied green rectangular frames animate across both
+>   the rear channel and the full lower trench, while the foreground chains scroll
+>   18% faster than the camera. Each active acid frame is intentionally stretched
+>   vertically across its full channel, matching the requested earlier treatment.
+>   A fixed random seed distributes smaller decals only across plain wall slots
+>   between the grates, and cleaned curry packages of varied size float 50%
+>   submerged at seeded random X and Y positions throughout the lower pool. Runtime
+>   verification found twelve packages spanning the full level, with distinct
+>   surface depths from y=287.5 to y=344.1. Five
+>   `WaveData` resources encode
 >   the exact §5 lineups, including Red Punk and Dock Thug stat overrides; runtime
 >   verification observed 3/2/3/2/4 enemies with the expected types and values.
-> - Marta is a 250 HP / 14 damage / 2500 point boss with a 148 px boat-hook strike
->   and a clearly marked shipping-crate sweep. The sweep deals 18 + knockdown in an
+> - Ragnaros is a 250 HP / 14 damage / 2500 point boss with a 148 px flaming
+>   dark-brown *Phallus impudicus* stinkhorn strike and a clearly marked full-lane
+>   stinkhorn sweep. The sweep deals 18 + knockdown in an
 >   18 px depth band: a same-lane probe lost exactly 18 HP while a 42 px Y dodge took
->   zero. Her third quick hit routes Hurt → Hurt → armored Counter; the HUD now reads
->   boss names from `EnemyStats`, so both Slick Rick and Marta label correctly.
+>   zero. The weapon base carries a large, soft-lobed, dark-brown fleshy ammunition
+>   reservoir based on the supplied creature reference. It is broadly fused directly
+>   to the weapon underside near its grip rather than suspended by a cord or stem.
+>   Every 8.5 seconds Ragnaros can
+>   brace the weapon like a gun and fire five milky-white aimed projectiles. Each shot
+>   deals 8 damage in the canonical ±12 px depth band; three misses end the barrage
+>   early and create a 3.2-second star-marked Dizzy window. Ragnaros is invulnerable
+>   during the barrage, vulnerable throughout Dizzy, and accepts the complete 6+6+12
+>   player combo without leaving that punish state. Runtime probes verified one shot
+>   dealt exactly 8 damage, three alternating-lane dodges preserved Sean at 100 HP,
+>   cleared all remaining shots and entered Dizzy, and the 24-damage combo remained
+>   accepted before cleanly returning to Recover. His third quick hit outside Dizzy
+>   routes Hurt → Hurt → armored Counter; the HUD now reads
+>   boss names from `EnemyStats`, so Slick Rick and Ragnaros label correctly. The
+>   internal `marta.tscn`/`marta.gd` identifiers remain for compatibility, but the
+>   boss now uses forty generated 256×192 firelord/mushroom frames at native 1×:
+>   eight frames each for idle, walk, attack, hurt and the new periodic taunt. A
+>   project-native pixel ember layer continuously orbits the lower cyclone, while
+>   stepped between-frame flame warps make the seated vortex visibly swirl. Runtime
+>   verification loaded all five eight-frame animations, observed the automatic taunt,
+>   proved the vortex timer advances continuously, and screenshot-checked idle and
+>   the dark-brown flaming stinkhorn attack silhouette, observed attack frame 2 with the hitbox
+>   active, and confirmed the strike dealt exactly 14 damage.
 > - The campaign shell includes the Stage 2 story card and scene. Verification
->   loaded it through `MainFlow`, defeated Marta to reach `STAGE 2 CLEAR` with the
+>   loaded it through `MainFlow`, defeated Ragnaros to reach `STAGE 2 CLEAR` with the
 >   exact HP×10 bonus, and advanced into the Stage 3 card. Boss defeat awarded 2500
 >   points, hid the boss bar, and retained the arena camera lock during the tally.
 > - `stage_3.tscn` is a 5120×480 project-native composition with two distinct visual
@@ -589,8 +641,8 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 
 ### Phase 6 — Audio & polish
 - [x] Music per stage + title + boss stinger (free packs, credited); `AudioManager` crossfades.
-  **The persistent two-player `AudioManager` crossfades every flow cue. Stage 1 uses
-  the supplied MP3; title, Stages 2–3, boss, clear, Game Over and ending each use a
+  **The persistent two-player `AudioManager` crossfades every flow cue. Stages 1–2 use
+  supplied MP3s; title, Stage 3, boss, clear, Game Over and ending each use a
   distinct loopable 11.025 kHz project-native chiptune composition generated from
   authored melody/bass/drum profiles. Runtime verification cycled all eight cues,
   confirmed their identities and unique lengths, sought across a generated loop
@@ -599,18 +651,31 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
   current game log were clean.**
 - [x] SFX: hits, whiffs, knockdown, breakables, pickups, UI.
   **Confirmed hits retain the supplied `punch1` / `punch2` alternation and `punch3`
-  for defeating blows. `AudioManager` now generates six license-free 16-bit mono
+  for defeating blows. `AudioManager` now generates seven license-free 16-bit mono
   cues at runtime and serves them from an eight-player pool. Verification proved a
   missed ground swing emitted `whiff` while a 6-damage confirmed swing played the
   recorded punch without a whiff; breaking a prop, collecting its Coffee, triggering
   knockdown, pressing Z through the intro, and pausing with Esc emitted `breakable`,
-  `pickup`, `knockdown`, `ui_confirm`, and `ui_pause` respectively.**
+  `pickup`, `knockdown`, `ui_confirm`, and `ui_pause` respectively. The supplied
+  `deathsean.mp3` now plays once as Sean enters the life-loss Death state; a runtime
+  probe identified the routed cue as `player_death`. Supplied `after_death.mp3`
+  starts on landing as the pool begins spreading, routed as `after_death`.**
 - [x] Game feel: hit-pause (2–3 frames), light screen shake on knockdowns, sprite flash on hit, i-frame flicker.
   **`ImpactManager` now applies an unscaled 0.04/0.055 s connected-hit pause and
   extends overlapping pauses safely. Normal-hit verification dealt exactly 6 damage,
   flashed the victim to 2.2× white, and restored time scale/colour to normal.
   Knockdowns additionally produced a 4 px camera offset that settled back to zero;
-  the existing post-getup i-frame flicker remains active.**
+  the existing post-getup i-frame flicker remains active. Sean's life-loss KO holds
+  the game at 28% speed for 0.9 real-time seconds, then safely restores normal speed
+  without conflicting with the connected-hit pause. Runtime verification observed
+  the exact 0.28 → 0.08 impact pause → 0.28 KO → 1.0 restoration sequence. After
+  landing, Sean remains down for 5.0 seconds while a doubled-size SNES-style stepped
+  brown pool expands beneath the body. Six block-pixel bubbles repeatedly swell and
+  burst during and after the slower spread; the body then fades for 0.35 seconds
+  before the life-loss flow resumes. Runtime verification observed the pool at exactly
+  50% expansion after 2.5 seconds with active bubbles and the body still visible, then
+  confirmed the completed pool remained animated and
+  respawn hid/reset the pool and restored Idle at 100 HP.**
 - [x] Balance pass: play full campaign, tune HP/damage/wave sizes in resources.
   **The complete player/enemy/boss/pickup/wave resource audit found the authored
   values internally consistent, so they were retained instead of changed without
@@ -619,7 +684,7 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
   100 HP / 3 lives after the continue, and Stage 3 at 42 HP / 1 life. It finished
   at 19,920 points with a clean current game log, demonstrating rising pressure and
   a beatable finale even for a simple approach-and-mash strategy.**
-- [ ] **DoD:** full run feels punchy; no silent actions; campaign beatable but challenging (~2–4 continues for an average player).
+- [x] **DoD:** full run feels punchy; no silent actions; campaign beatable but challenging (~2–4 continues for an average player).
 
 ### Phase 7 — Release
 - [ ] Windows export preset (embedded PCK), icon, project name/version.

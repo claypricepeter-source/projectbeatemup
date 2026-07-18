@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" load_steps=17 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/hurt/hurt1.png" id="1_hurt1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/hurt/hurt2.png" id="2_hurt2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/hurt/hurt3.png" id="3_hurt3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/hurt/hurt4.png" id="4_hurt4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/idle/idle1.png" id="5_idle1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/idle/idle2.png" id="6_idle2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/idle/idle3.png" id="7_idle3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/idle/idle4.png" id="8_idle4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/punch/punch1.png" id="9_punch1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/punch/punch2.png" id="10_punch2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/punch/punch3.png" id="11_punch3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/punch/punch4.png" id="12_punch4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/walk/walk1.png" id="13_walk1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/walk/walk2.png" id="14_walk2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/walk/walk3.png" id="15_walk3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/sikh_punk/walk/walk4.png" id="16_walk4"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_punch1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_punch2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_punch3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_punch4")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hurt1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hurt2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hurt3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hurt4")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_idle1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_idle2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_idle3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_idle4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_walk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_walk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_walk3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_walk4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/characters/player.gd" id="1"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/player/clay_character_godot/clay_character/godot/clay_sprite_frames.tres" id="2"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/punch1.mp3" id="14_punch_1"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/punch2.mp3" id="15_punch_2"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/punch3.mp3" id="16_punch_3"]
+[ext_resource type="Script" path="res://scripts/effects/blood_pool.gd" id="17_blood_pool"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feet"]
 radius = 10.0
@@ -31,6 +32,8 @@ motion_mode = 1
 collision_layer = 1
 collision_mask = 0
 script = ExtResource("1")
+death_lie_time = 5.0
+death_fade_time = 0.35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_feet")
@@ -40,6 +43,10 @@ shape = SubResource("CircleShape2D_feet")
 [node name="Shadow" type="Sprite2D" parent="Visuals"]
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("3")
+
+[node name="BloodPool" type="Node2D" parent="Visuals"]
+position = Vector2(0, -2)
+script = ExtResource("17_blood_pool")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -80)

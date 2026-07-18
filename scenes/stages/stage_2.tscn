@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/stages/harbour_stage.gd" id="1_stage"]
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="2_player"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" path="res://scenes/props/loonie_pickup.tscn" id="15_loonie"]
 [ext_resource type="Script" path="res://scripts/stages/boss_trigger.gd" id="16_boss_trigger"]
 [ext_resource type="PackedScene" path="res://scenes/characters/bosses/marta.tscn" id="17_marta"]
+[ext_resource type="Script" path="res://scripts/stages/chain_parallax.gd" id="18_chains"]
 
 [sub_resource type="RectangleShape2D" id="WaveTriggerShape"]
 size = Vector2(48, 140)
@@ -124,7 +125,7 @@ theme_override_styles/panel = SubResource("SignPanel")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.88, 0.94, 1, 1)
 theme_override_font_sizes/font_size = 20
-text = "OWEN SOUND HARBOUR • PIER 2"
+text = "THE SEWERS OF SHAME"
 horizontal_alignment = 1
 
 [node name="FreightSign" type="PanelContainer" parent="WorldSigns"]
@@ -138,8 +139,11 @@ theme_override_styles/panel = SubResource("SignPanel")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.76, 0.3, 1)
 theme_override_font_sizes/font_size = 24
-text = "BAYSHORE FREIGHT"
+text = "PROCESSING FLOOR"
 horizontal_alignment = 1
+
+[node name="ChainParallax" type="Node2D" parent="."]
+script = ExtResource("18_chains")
 
 [node name="Entities" type="Node2D" parent="."]
 y_sort_enabled = true

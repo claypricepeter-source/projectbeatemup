@@ -1,0 +1,70 @@
+[gd_resource type="SpriteFrames" load_steps=41 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack1.png" id="1_attack1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack2.png" id="2_attack2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack3.png" id="3_attack3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack4.png" id="4_attack4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack5.png" id="5_attack5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack6.png" id="6_attack6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack7.png" id="7_attack7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/attack/attack8.png" id="8_attack8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt1.png" id="9_hurt1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt2.png" id="10_hurt2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt3.png" id="11_hurt3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt4.png" id="12_hurt4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt5.png" id="13_hurt5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt6.png" id="14_hurt6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt7.png" id="15_hurt7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/hurt/hurt8.png" id="16_hurt8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle1.png" id="17_idle1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle2.png" id="18_idle2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle3.png" id="19_idle3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle4.png" id="20_idle4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle5.png" id="21_idle5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle6.png" id="22_idle6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle7.png" id="23_idle7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/idle/idle8.png" id="24_idle8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt1.png" id="25_taunt1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt2.png" id="26_taunt2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt3.png" id="27_taunt3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt4.png" id="28_taunt4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt5.png" id="29_taunt5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt6.png" id="30_taunt6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt7.png" id="31_taunt7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/taunt/taunt8.png" id="32_taunt8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk1.png" id="33_walk1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk2.png" id="34_walk2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk3.png" id="35_walk3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk4.png" id="36_walk4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk5.png" id="37_walk5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk6.png" id="38_walk6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk7.png" id="39_walk7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bosses/ragnaros_mushroom/walk/walk8.png" id="40_walk8"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("1_attack1")}, {"duration": 1.0, "texture": ExtResource("2_attack2")}, {"duration": 1.0, "texture": ExtResource("3_attack3")}, {"duration": 1.0, "texture": ExtResource("4_attack4")}, {"duration": 1.0, "texture": ExtResource("5_attack5")}, {"duration": 1.0, "texture": ExtResource("6_attack6")}, {"duration": 1.0, "texture": ExtResource("7_attack7")}, {"duration": 1.0, "texture": ExtResource("8_attack8")}],
+"loop": false,
+"name": &"attack",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("9_hurt1")}, {"duration": 1.0, "texture": ExtResource("10_hurt2")}, {"duration": 1.0, "texture": ExtResource("11_hurt3")}, {"duration": 1.0, "texture": ExtResource("12_hurt4")}, {"duration": 1.0, "texture": ExtResource("13_hurt5")}, {"duration": 1.0, "texture": ExtResource("14_hurt6")}, {"duration": 1.0, "texture": ExtResource("15_hurt7")}, {"duration": 1.0, "texture": ExtResource("16_hurt8")}],
+"loop": false,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("17_idle1")}, {"duration": 1.0, "texture": ExtResource("18_idle2")}, {"duration": 1.0, "texture": ExtResource("19_idle3")}, {"duration": 1.0, "texture": ExtResource("20_idle4")}, {"duration": 1.0, "texture": ExtResource("21_idle5")}, {"duration": 1.0, "texture": ExtResource("22_idle6")}, {"duration": 1.0, "texture": ExtResource("23_idle7")}, {"duration": 1.0, "texture": ExtResource("24_idle8")}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("25_taunt1")}, {"duration": 1.0, "texture": ExtResource("26_taunt2")}, {"duration": 1.0, "texture": ExtResource("27_taunt3")}, {"duration": 1.0, "texture": ExtResource("28_taunt4")}, {"duration": 1.0, "texture": ExtResource("29_taunt5")}, {"duration": 1.0, "texture": ExtResource("30_taunt6")}, {"duration": 1.0, "texture": ExtResource("31_taunt7")}, {"duration": 1.0, "texture": ExtResource("32_taunt8")}],
+"loop": false,
+"name": &"taunt",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("33_walk1")}, {"duration": 1.0, "texture": ExtResource("34_walk2")}, {"duration": 1.0, "texture": ExtResource("35_walk3")}, {"duration": 1.0, "texture": ExtResource("36_walk4")}, {"duration": 1.0, "texture": ExtResource("37_walk5")}, {"duration": 1.0, "texture": ExtResource("38_walk6")}, {"duration": 1.0, "texture": ExtResource("39_walk7")}, {"duration": 1.0, "texture": ExtResource("40_walk8")}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]

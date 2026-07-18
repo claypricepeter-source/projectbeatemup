@@ -16,13 +16,13 @@ const INTRO_CARDS: Array[Dictionary] = [
 	},
 	{
 		"heading": "STAGE 2",
-		"title": "THE HARBOUR",
-		"body": "A beaten punk gives up the Syndicate's route:\ncontraband moves through the Owen Sound docks.\n\nSean follows the lights down to Pier 2.",
+		"title": "THE SEWERS OF SHAME",
+		"body": "A beaten punk gives up the Syndicate's route:\ncontraband moves through tunnels beneath the waterfront.\n\nSean follows the runoff into the processing floor.",
 	},
 	{
 		"heading": "STAGE 3",
 		"title": "HARRISON PARK TO THE MILL DAM",
-		"body": "Marta names the man behind the Syndicate:\nVictor Bayshore is waiting beyond Harrison Park.\n\nSean follows the river toward the Mill Dam.",
+		"body": "Ragnaros names the man behind the Syndicate:\nVictor Bayshore is waiting beyond Harrison Park.\n\nSean follows the river toward the Mill Dam.",
 	},
 ]
 const CONTINUE_SECONDS := 10.0

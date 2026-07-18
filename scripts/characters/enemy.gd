@@ -46,7 +46,7 @@ func attackers_count() -> int:
 func is_committed_attack() -> bool:
 	if state_machine.current == null:
 		return false
-	return state_machine.current.name in [&"Attack", &"Charge", &"Dash", &"Sweep", &"Counter"]
+	return state_machine.current.name in [&"Attack", &"Charge", &"Dash", &"Sweep", &"Barrage", &"Counter"]
 
 
 ## Gentle steering prevents enemies from occupying the same feet position while

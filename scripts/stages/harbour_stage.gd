@@ -1,96 +1,161 @@
 class_name HarbourStage
 extends Stage
-## Procedural SNES-style waterfront foreground. All shapes stay project-native
-## while the parallax scene supplies dusk sky and distant grain elevators.
+## Stage 2's processing-floor arena, assembled from the user-provided industrial
+## sheet. A doorless room core repeats into one tunnel, with the supplied green
+## rectangles animated across every open channel around the platform.
 
 const STAGE_WIDTH := 5120.0
+const ROOM_TOP := -40.0
+const ROOM_TEXTURE: Texture2D = preload("res://assets/backgrounds/stage_2/industrial_room.png")
+const ACID_TEXTURE: Texture2D = preload("res://assets/backgrounds/stage_2/acid_pool_frames.png")
+const ACID_FRAME_COUNT := 15
+const ACID_FRAME_SIZE := Vector2(862, 33)
+const ACID_FRAME_TIME := 0.11
+const ACID_REAR_TOP := 183.0
+const ACID_REAR_BOTTOM := 217.0
+const ACID_LOWER_TOP := 276.0
+const ACID_LOWER_BOTTOM := 480.0
+const WALL_SIGN_SEED := 2026071702
+const WALL_SIGN_SAFE_X: Array[float] = [137.0, 382.0, 624.0]
+const WALL_SIGN_TEXTURES: Array[Texture2D] = [
+	preload("res://assets/backgrounds/stage_2/wall_signs/tim_hortons_red_sign.png"),
+	preload("res://assets/backgrounds/stage_2/wall_signs/tim_hortons_wordmark.png"),
+	preload("res://assets/backgrounds/stage_2/wall_signs/tim_hortons_oval.png"),
+	preload("res://assets/backgrounds/stage_2/wall_signs/pakistan_flag.png"),
+	preload("res://assets/backgrounds/stage_2/wall_signs/brampton_exit.png"),
+]
+const CURRY_TEXTURE: Texture2D = preload("res://assets/backgrounds/stage_2/wall_signs/curry_powder.png")
+const CURRY_SEED := 2026071731
+const CURRY_COUNT := 12
+const CURRY_MIN_Y := 286.0
+const CURRY_MAX_Y := 346.0
+
+var _acid_frame := 0
+var _acid_elapsed := 0.0
+var _wall_signs: Array[Dictionary] = []
+var _floating_curry: Array[Dictionary] = []
 
 
 func _ready() -> void:
 	super()
+	# Direct F6/debug launches bypass MainFlow's campaign music routing.
+	AudioManager.play_music(&"stage_2")
+	_build_wall_signs()
+	_build_floating_curry()
 	queue_redraw()
 
 
+func _process(delta: float) -> void:
+	_acid_elapsed += delta
+	var advanced := false
+	while _acid_elapsed >= ACID_FRAME_TIME:
+		_acid_elapsed -= ACID_FRAME_TIME
+		_acid_frame = (_acid_frame + 1) % ACID_FRAME_COUNT
+		advanced = true
+	if advanced:
+		queue_redraw()
+
+
 func _draw() -> void:
-	# Georgian Bay and shoreline.
-	draw_rect(Rect2(0, 126, STAGE_WIDTH, 72), Color(0.08, 0.25, 0.36, 1))
-	draw_rect(Rect2(0, 158, STAGE_WIDTH, 40), Color(0.045, 0.18, 0.29, 1))
-	for x in range(0, int(STAGE_WIDTH), 48):
-		var shimmer := 4.0 if int(x / 48) % 3 == 0 else 0.0
-		draw_line(Vector2(float(x), 148.0 + shimmer), Vector2(float(x + 24), 148.0 + shimmer), Color(0.34, 0.58, 0.66, 0.62), 2.0)
-		draw_line(Vector2(float(x + 14), 174.0 - shimmer), Vector2(float(x + 40), 174.0 - shimmer), Color(0.18, 0.42, 0.52, 0.55), 2.0)
+	# The keyed grates and drainage openings reveal this stagnant green-black void.
+	draw_rect(Rect2(0, 0, STAGE_WIDTH, 480), Color(0.045, 0.075, 0.018, 1))
+	_draw_acid_band(ACID_REAR_TOP, ACID_REAR_BOTTOM)
+	_draw_acid_band(ACID_LOWER_TOP, ACID_LOWER_BOTTOM)
 
-	# Dock deck and lower service apron.
-	draw_rect(Rect2(0, 190, STAGE_WIDTH, 290), Color(0.17, 0.23, 0.27, 1))
-	draw_rect(Rect2(0, 190, STAGE_WIDTH, 18), Color(0.42, 0.34, 0.24, 1))
-	draw_line(Vector2(0, 208), Vector2(STAGE_WIDTH, 208), Color(0.07, 0.1, 0.12, 1), 4.0)
-	for x in range(0, int(STAGE_WIDTH), 64):
-		draw_line(Vector2(float(x), 208), Vector2(float(x), 480), Color(0.1, 0.15, 0.18, 0.82), 2.0)
-	for y in range(236, 480, 34):
-		draw_line(Vector2(0, float(y)), Vector2(STAGE_WIDTH, float(y)), Color(0.25, 0.31, 0.33, 0.72), 2.0)
-
-	# Safety stripe along the water edge.
-	for x in range(0, int(STAGE_WIDTH), 48):
-		var stripe_color := Color(0.9, 0.62, 0.08, 1) if int(x / 48) % 2 == 0 else Color(0.08, 0.1, 0.12, 1)
-		draw_rect(Rect2(float(x), 190, 48, 8), stripe_color)
-
-	# Container yards break each combat screen into readable landmarks.
-	_draw_container(Vector2(180, 112), Vector2(196, 78), Color(0.62, 0.16, 0.12, 1))
-	_draw_container(Vector2(390, 128), Vector2(180, 62), Color(0.12, 0.38, 0.5, 1))
-	_draw_container(Vector2(1120, 120), Vector2(220, 70), Color(0.12, 0.42, 0.32, 1))
-	_draw_container(Vector2(1360, 102), Vector2(186, 88), Color(0.68, 0.34, 0.08, 1))
-	_draw_container(Vector2(2120, 122), Vector2(208, 68), Color(0.52, 0.15, 0.2, 1))
-	_draw_container(Vector2(2740, 110), Vector2(214, 80), Color(0.1, 0.34, 0.53, 1))
-	_draw_container(Vector2(3360, 124), Vector2(190, 66), Color(0.58, 0.26, 0.08, 1))
-	_draw_container(Vector2(4140, 104), Vector2(210, 86), Color(0.08, 0.4, 0.36, 1))
-
-	_draw_crane(780.0)
-	_draw_crane(1860.0)
-	_draw_crane(3720.0)
-	_draw_boat(620.0)
-	_draw_boat(2460.0)
-	_draw_boat(4480.0)
-	for lamp_x in [80.0, 940.0, 1740.0, 2580.0, 3440.0, 4300.0, 5030.0]:
-		_draw_lamp(lamp_x)
-
-	# Boss pier is cleaner and brighter, framed by bollards.
-	draw_rect(Rect2(4560, 202, 560, 7), Color(0.84, 0.63, 0.16, 1))
-	for bollard_x in [4580.0, 4720.0, 4860.0, 5000.0]:
-		draw_rect(Rect2(bollard_x - 7, 174, 14, 26), Color(0.08, 0.1, 0.12, 1))
-		draw_circle(Vector2(bollard_x, 174), 8.0, Color(0.72, 0.48, 0.08, 1))
+	# Only the doorless core of the original room is retained. Repeating it at native
+	# resolution creates one continuous tunnel without grey doors at tile boundaries.
+	var tile_width := float(ROOM_TEXTURE.get_width())
+	var tile_x := 0.0
+	while tile_x < STAGE_WIDTH:
+		draw_texture(ROOM_TEXTURE, Vector2(tile_x, ROOM_TOP))
+		tile_x += tile_width
+	for curry: Dictionary in _floating_curry:
+		_draw_floating_curry(curry)
+	_draw_wall_signs()
 
 
-func _draw_container(position: Vector2, size: Vector2, color: Color) -> void:
-	draw_rect(Rect2(position, size), color)
-	draw_rect(Rect2(position + Vector2(5, 5), size - Vector2(10, 10)), color.darkened(0.18), false, 3.0)
-	for rib_x in range(int(position.x + 18), int(position.x + size.x - 8), 24):
-		draw_line(Vector2(float(rib_x), position.y + 8), Vector2(float(rib_x), position.y + size.y - 8), color.lightened(0.14), 3.0)
+func _draw_acid_band(top: float, bottom: float) -> void:
+	var source := Rect2(0, float(_acid_frame) * ACID_FRAME_SIZE.y, ACID_FRAME_SIZE.x, ACID_FRAME_SIZE.y)
+	var acid_x := 0.0
+	while acid_x < STAGE_WIDTH:
+		var destination := Rect2(acid_x, top, ACID_FRAME_SIZE.x, bottom - top)
+		draw_texture_rect_region(ACID_TEXTURE, destination, source)
+		acid_x += ACID_FRAME_SIZE.x
 
 
-func _draw_crane(x: float) -> void:
-	var steel := Color(0.14, 0.2, 0.24, 1)
-	var highlight := Color(0.68, 0.44, 0.08, 1)
-	draw_rect(Rect2(x - 9, 54, 18, 136), steel)
-	draw_line(Vector2(x, 62), Vector2(x + 132, 20), steel, 12.0)
-	draw_line(Vector2(x + 8, 64), Vector2(x + 132, 20), highlight, 3.0)
-	draw_line(Vector2(x + 110, 27), Vector2(x + 110, 126), Color(0.1, 0.12, 0.13, 1), 3.0)
-	draw_rect(Rect2(x + 100, 124, 20, 10), Color(0.68, 0.42, 0.08, 1))
-	draw_line(Vector2(x - 32, 190), Vector2(x, 54), steel, 7.0)
-	draw_line(Vector2(x + 32, 190), Vector2(x, 54), steel, 7.0)
+func _build_wall_signs() -> void:
+	_wall_signs.clear()
+	var random := RandomNumberGenerator.new()
+	random.seed = WALL_SIGN_SEED
+	var tile_width := float(ROOM_TEXTURE.get_width())
+	var tile_x := 0.0
+	var sign_number := 0
+	while tile_x < STAGE_WIDTH - tile_width:
+		var available_slots := [0, 1, 2]
+		if tile_x < 1.0:
+			available_slots.remove_at(0)
+		var signs_in_tile := 2 if random.randf() < 0.58 else 1
+		for _slot_number in signs_in_tile:
+			var available_index := random.randi_range(0, available_slots.size() - 1)
+			var slot_index := int(available_slots[available_index])
+			available_slots.remove_at(available_index)
+			var texture_index := sign_number if sign_number < WALL_SIGN_TEXTURES.size() else random.randi_range(0, WALL_SIGN_TEXTURES.size() - 1)
+			_append_wall_sign(random, texture_index, tile_x + WALL_SIGN_SAFE_X[slot_index])
+			sign_number += 1
+		tile_x += tile_width
 
 
-func _draw_boat(x: float) -> void:
-	var hull := PackedVector2Array([
-		Vector2(x - 72, 160), Vector2(x + 76, 160), Vector2(x + 52, 188), Vector2(x - 48, 188)
-	])
-	draw_polygon(hull, PackedColorArray([Color(0.18, 0.2, 0.22, 1)]))
-	draw_rect(Rect2(x - 28, 136, 56, 24), Color(0.72, 0.75, 0.7, 1))
-	draw_rect(Rect2(x - 20, 141, 16, 10), Color(0.08, 0.25, 0.34, 1))
-	draw_rect(Rect2(x + 5, 141, 16, 10), Color(0.08, 0.25, 0.34, 1))
-	draw_line(Vector2(x, 136), Vector2(x, 103), Color(0.24, 0.28, 0.29, 1), 3.0)
+func _append_wall_sign(random: RandomNumberGenerator, texture_index: int, wall_x: float) -> void:
+	var texture := WALL_SIGN_TEXTURES[texture_index]
+	var scale_options := [0.28, 0.32, 0.36]
+	var sign_scale: float = scale_options[random.randi_range(0, scale_options.size() - 1)]
+	var sign_size := Vector2(
+		roundf(float(texture.get_width()) * sign_scale),
+		roundf(float(texture.get_height()) * sign_scale))
+	var minimum_y := 52.0 + sign_size.y * 0.5
+	var maximum_y := 172.0 - sign_size.y * 0.5
+	var center_y := random.randf_range(minimum_y, maximum_y)
+	_wall_signs.append({
+		"texture": texture,
+		"center": Vector2(wall_x + random.randf_range(-5.0, 5.0), center_y),
+		"size": sign_size,
+		"rotation": random.randf_range(-0.02, 0.02),
+	})
 
 
-func _draw_lamp(x: float) -> void:
-	draw_rect(Rect2(x - 3, 106, 6, 84), Color(0.18, 0.2, 0.2, 1))
-	draw_rect(Rect2(x - 14, 102, 28, 9), Color(0.12, 0.14, 0.15, 1))
-	draw_circle(Vector2(x, 108), 5.0, Color(1.0, 0.76, 0.28, 1))
+func _draw_wall_signs() -> void:
+	for wall_sign: Dictionary in _wall_signs:
+		var texture := wall_sign["texture"] as Texture2D
+		var center: Vector2 = wall_sign["center"]
+		var sign_size: Vector2 = wall_sign["size"]
+		draw_set_transform(center, float(wall_sign["rotation"]))
+		draw_texture_rect(texture, Rect2(-sign_size * 0.5, sign_size), false, Color(1, 1, 1, 0.92))
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
+
+func _build_floating_curry() -> void:
+	_floating_curry.clear()
+	var random := RandomNumberGenerator.new()
+	random.seed = CURRY_SEED
+	var section_width := STAGE_WIDTH / float(CURRY_COUNT)
+	for index in CURRY_COUNT:
+		_floating_curry.append({
+			"x": section_width * (float(index) + 0.5) + random.randf_range(-90.0, 90.0),
+			"y": random.randf_range(CURRY_MIN_Y, CURRY_MAX_Y),
+			"scale": random.randf_range(0.82, 1.05),
+		})
+
+
+func _draw_floating_curry(curry: Dictionary) -> void:
+	var source_size := CURRY_TEXTURE.get_size()
+	var source_half_height := floorf(source_size.y * 0.5)
+	var prop_scale := float(curry["scale"])
+	var draw_size := Vector2(roundf(source_size.x * prop_scale), roundf(source_size.y * prop_scale))
+	var draw_half_height := floorf(draw_size.y * 0.5)
+	var left := float(curry["x"]) - draw_size.x * 0.5
+	var surface_y := float(curry["y"])
+	var top_source := Rect2(0, 0, source_size.x, source_half_height)
+	var lower_source := Rect2(0, source_half_height, source_size.x, source_size.y - source_half_height)
+	draw_texture_rect_region(CURRY_TEXTURE, Rect2(left, surface_y - draw_half_height, draw_size.x, draw_half_height), top_source)
+	draw_texture_rect_region(CURRY_TEXTURE, Rect2(left, surface_y, draw_size.x, draw_size.y - draw_half_height), lower_source, Color(0.48, 0.68, 0.24, 0.58))
+	draw_line(Vector2(left - 5.0, surface_y), Vector2(left + draw_size.x + 5.0, surface_y), Color(0.62, 0.78, 0.1, 0.9), 2.0)

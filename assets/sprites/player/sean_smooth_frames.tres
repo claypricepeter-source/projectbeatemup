@@ -1,0 +1,35 @@
+[gd_resource type="SpriteFrames" load_steps=21 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle1.png" id="1_idle1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle2.png" id="2_idle2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle3.png" id="3_idle3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle4.png" id="4_idle4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle5.png" id="5_idle5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle6.png" id="6_idle6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle7.png" id="7_idle7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle8.png" id="8_idle8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle9.png" id="9_idle9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle10.png" id="10_idle10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo1.png" id="11_combo1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo2.png" id="12_combo2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo3.png" id="13_combo3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo4.png" id="14_combo4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo5.png" id="15_combo5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo6.png" id="16_combo6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo7.png" id="17_combo7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo8.png" id="18_combo8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo9.png" id="19_combo9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo10.png" id="20_combo10"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("11_combo1")}, {"duration": 1.0, "texture": ExtResource("12_combo2")}, {"duration": 1.0, "texture": ExtResource("13_combo3")}, {"duration": 1.0, "texture": ExtResource("14_combo4")}, {"duration": 1.0, "texture": ExtResource("15_combo5")}, {"duration": 1.0, "texture": ExtResource("16_combo6")}, {"duration": 1.0, "texture": ExtResource("17_combo7")}, {"duration": 1.0, "texture": ExtResource("18_combo8")}, {"duration": 1.0, "texture": ExtResource("19_combo9")}, {"duration": 1.0, "texture": ExtResource("20_combo10")}],
+"loop": false,
+"name": &"combo",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("1_idle1")}, {"duration": 1.0, "texture": ExtResource("2_idle2")}, {"duration": 1.0, "texture": ExtResource("3_idle3")}, {"duration": 1.0, "texture": ExtResource("4_idle4")}, {"duration": 1.0, "texture": ExtResource("5_idle5")}, {"duration": 1.0, "texture": ExtResource("6_idle6")}, {"duration": 1.0, "texture": ExtResource("7_idle7")}, {"duration": 1.0, "texture": ExtResource("8_idle8")}, {"duration": 1.0, "texture": ExtResource("9_idle9")}, {"duration": 1.0, "texture": ExtResource("10_idle10")}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]

@@ -1,5 +1,5 @@
 extends FighterState
-## Amber lane marker gives the player time to move in Y before the crate swings.
+## Amber lane marker gives the player time to move in Y before the stinkhorn sweeps.
 
 const TELEGRAPH_TIME := 0.78
 const ACTIVE_TIME := 0.30

@@ -21,6 +21,9 @@ func physics_update(delta: float) -> void:
 	var aligned := absf(diff.y) <= ALIGN_Y
 	var distance_x := absf(diff.x)
 	var slot_available := boss.attackers_count() < Enemy.MAX_ATTACKERS
+	if slot_available and boss.barrage_cooldown <= 0.0 and distance_x <= Marta.BARRAGE_RANGE:
+		machine.transition("Barrage")
+		return
 	if aligned and slot_available and boss.sweep_cooldown <= 0.0 and distance_x <= SWEEP_RANGE:
 		machine.transition("Sweep")
 		return

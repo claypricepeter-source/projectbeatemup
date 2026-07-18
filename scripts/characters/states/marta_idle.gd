@@ -17,4 +17,8 @@ func physics_update(delta: float) -> void:
 	_timer -= delta
 	fighter.apply_movement(delta)
 	if _timer <= 0.0:
-		machine.transition("Approach")
+		var boss := fighter as Marta
+		if boss.taunt_cooldown <= 0.0:
+			machine.transition("Taunt")
+		else:
+			machine.transition("Approach")
