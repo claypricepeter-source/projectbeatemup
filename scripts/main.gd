@@ -27,7 +27,7 @@ const INTRO_CARDS: Array[Dictionary] = [
 ]
 const CONTINUE_SECONDS := 10.0
 
-enum FlowState { TITLE, INTRO, PLAYING, DEATH, CONTINUE, PAUSED, GAME_OVER, STAGE_CLEAR, ENDING }
+enum FlowState { GAME_INTRO, TITLE, INTRO, PLAYING, DEATH, CONTINUE, PAUSED, GAME_OVER, STAGE_CLEAR, ENDING }
 
 @onready var stage_slot: Node2D = $StageSlot
 @onready var title_screen: Control = $MenuUI/TitleScreen
@@ -48,14 +48,24 @@ enum FlowState { TITLE, INTRO, PLAYING, DEATH, CONTINUE, PAUSED, GAME_OVER, STAG
 @onready var flow_title: Label = $FlowUI/Screen/Panel/Margin/VBox/Title
 @onready var flow_body: Label = $FlowUI/Screen/Panel/Margin/VBox/Body
 @onready var flow_prompt: Label = $FlowUI/Screen/Panel/Margin/VBox/Prompt
+@onready var game_intro_screen: Control = $MenuUI/GameIntro
+@onready var game_intro_story: Label = $MenuUI/GameIntro/TextPanel/Margin/VBox/StoryLabel
 
 var stage: Stage
 var player: Player
-var flow_state := FlowState.TITLE
+var flow_state := FlowState.GAME_INTRO
+var _intro_page_index := 0
 var stage_clear_bonus := 0
 var continue_time_left := CONTINUE_SECONDS
 var _respawn_position := Vector2.ZERO
 var _input_lock := 0.0
+
+const GAME_INTRO_PAGES := [
+	"OWEN SOUND — 199X\n\nA quiet lakeside town has fallen under the shadow of the Bayshore Syndicate. Street crime and shakedowns run rampant.",
+	"The local police are compromised or outmatched. The citizens live in fear, locking their doors at sundown.",
+	"But Sean, who knows every brick of these streets, decides enough is enough.",
+	"Cracking his knuckles, he steps out of his front door to punch his town clean, from Second Avenue to the Mill Dam..."
+]
 
 
 func _ready() -> void:
@@ -65,7 +75,7 @@ func _ready() -> void:
 	quit_button.pressed.connect(_quit_game)
 	resume_button.pressed.connect(resume_game)
 	title_button.pressed.connect(show_title)
-	show_title()
+	show_game_intro()
 
 
 func _process(delta: float) -> void:
@@ -87,6 +97,8 @@ func _process(delta: float) -> void:
 		return
 	AudioManager.play_sfx(&"ui_confirm", -8.0)
 	match flow_state:
+		FlowState.GAME_INTRO:
+			_advance_game_intro()
 		FlowState.TITLE, FlowState.PAUSED:
 			_activate_focused_button()
 		FlowState.INTRO:
@@ -99,6 +111,25 @@ func _process(delta: float) -> void:
 			_advance_after_stage_clear()
 		FlowState.ENDING:
 			show_title()
+
+
+func show_game_intro() -> void:
+	flow_state = FlowState.GAME_INTRO
+	_intro_page_index = 0
+	_input_lock = 0.35
+	_hide_all_screens()
+	AudioManager.play_music(&"intro")
+	game_intro_screen.visible = true
+	game_intro_story.text = GAME_INTRO_PAGES[0]
+
+
+func _advance_game_intro() -> void:
+	_intro_page_index += 1
+	if _intro_page_index < GAME_INTRO_PAGES.size():
+		_input_lock = 0.25
+		game_intro_story.text = GAME_INTRO_PAGES[_intro_page_index]
+	else:
+		show_title()
 
 
 func show_title() -> void:
@@ -259,6 +290,8 @@ func _hide_all_screens() -> void:
 	pause_screen.visible = false
 	game_over_screen.visible = false
 	flow_screen.visible = false
+	if is_instance_valid(game_intro_screen):
+		game_intro_screen.visible = false
 
 
 func _clear_stage() -> void:

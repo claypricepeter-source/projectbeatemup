@@ -4,6 +4,7 @@ extends Node
 
 const STAGE_THEME: AudioStream = preload("res://assets/audio/music/stage_1_theme.mp3")
 const STAGE_TWO_THEME: AudioStream = preload("res://assets/audio/music/stage_2_theme.mp3")
+const INTRO_THEME: AudioStream = preload("res://assets/audio/music/intro.mp3")
 const PLAYER_DEATH_SOUND: AudioStream = preload("res://assets/audio/sfx/deathsean.mp3")
 const AFTER_DEATH_SOUND: AudioStream = preload("res://assets/audio/sfx/after_death.mp3")
 const CROSSFADE_SECONDS := 0.65
@@ -47,6 +48,7 @@ var last_sfx_cue: StringName = &""
 func _ready() -> void:
 	_music_cues[&"stage_1"] = {"stream": STAGE_THEME, "volume_db": -16.0, "pitch": 1.0, "generated": false}
 	_music_cues[&"stage_2"] = {"stream": STAGE_TWO_THEME, "volume_db": -16.0, "pitch": 1.0, "generated": false}
+	_music_cues[&"intro"] = {"stream": INTRO_THEME, "volume_db": -12.0, "pitch": 1.0, "generated": false}
 	for cue: StringName in MUSIC_PROFILES:
 		var profile: Dictionary = MUSIC_PROFILES[cue]
 		_music_cues[cue] = {

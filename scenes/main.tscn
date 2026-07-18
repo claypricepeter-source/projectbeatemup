@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/ui/title_screen.tscn" id="2_title"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="4_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/game_over.tscn" id="5_game_over"]
 [ext_resource type="PackedScene" path="res://scenes/ui/mobile_controls.tscn" id="6_mobile"]
+[ext_resource type="Texture2D" path="res://assets/ui/intro_screen.png" id="7_intro_img"]
 
 [sub_resource type="StyleBoxFlat" id="Style_flow_panel"]
 bg_color = Color(0.025, 0.055, 0.09, 0.96)
@@ -38,6 +39,78 @@ visible = false
 
 [node name="GameOver" parent="MenuUI" instance=ExtResource("5_game_over")]
 visible = false
+
+[node name="GameIntro" type="Control" parent="MenuUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="MenuUI/GameIntro"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_intro_img")
+expand_mode = 1
+
+[node name="Dim" type="ColorRect" parent="MenuUI/GameIntro"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="TextPanel" type="PanelContainer" parent="MenuUI/GameIntro"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("Style_flow_panel")
+
+[node name="Margin" type="MarginContainer" parent="MenuUI/GameIntro/TextPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="MenuUI/GameIntro/TextPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="StoryLabel" type="Label" parent="MenuUI/GameIntro/TextPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "OWEN SOUND — 199X"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PromptLabel" type="Label" parent="MenuUI/GameIntro/TextPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.58, 0.18, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 11
+text = "PRESS ATTACK TO SKIP"
+horizontal_alignment = 1
 
 [node name="FlowUI" type="CanvasLayer" parent="."]
 layer = 20

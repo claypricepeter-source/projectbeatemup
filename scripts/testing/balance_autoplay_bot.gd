@@ -38,6 +38,10 @@ func _process(delta: float) -> void:
 	else:
 		_state_time += delta
 	match state:
+		"GAME_INTRO":
+			_release_movement()
+			if _state_time >= 0.4:
+				flow.call("_advance_game_intro")
 		"TITLE":
 			_release_movement()
 			if _state_time >= 0.25:
