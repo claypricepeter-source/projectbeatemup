@@ -12,6 +12,7 @@ extends Fighter
 
 var _next_punch_sound := 0
 var _swing_connected := false
+var _last_hit_sound_frame := -1
 
 const SMOOTH_PLAYER_FRAMES: SpriteFrames = preload(
 	"res://assets/sprites/player/sean_smooth_frames.tres")
@@ -111,6 +112,12 @@ func on_attack_connected(target: Fighter, defeated: bool) -> void:
 		if current_dist_x > 24.0 and current_dist_x < 72.0:
 			var desired_x = target_x - (42.0 * facing)
 			global_position.x = lerpf(global_position.x, desired_x, 0.55)
+
+	# Avoid playing hit sound more than once per frame (e.g. if two enemies hit at the same time)
+	var current_frame := Engine.get_physics_frames()
+	if current_frame == _last_hit_sound_frame:
+		return
+	_last_hit_sound_frame = current_frame
 
 	if defeated:
 		punch_1_player.stop()

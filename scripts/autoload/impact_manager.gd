@@ -12,6 +12,7 @@ var _pause_generation := 0
 var _ko_generation := 0
 var _hit_pause_active := false
 var _ko_active := false
+var _last_knockdown_sound_frame := -1
 
 
 func connected_hit(target: Fighter, knockdown_hit: bool) -> void:
@@ -19,8 +20,13 @@ func connected_hit(target: Fighter, knockdown_hit: bool) -> void:
 		target.flash_hit()
 	_trigger_hit_pause(KNOCKDOWN_HIT_SECONDS if knockdown_hit else NORMAL_HIT_SECONDS)
 	if knockdown_hit:
-		AudioManager.play_sfx(&"knockdown", -3.0)
+		var current_frame := Engine.get_physics_frames()
+		if current_frame != _last_knockdown_sound_frame:
+			_last_knockdown_sound_frame = current_frame
+			AudioManager.play_sfx(&"knockdown", -3.0)
 		get_tree().call_group(&"camera_directors", &"shake", 4.0, 0.18)
+	else:
+		get_tree().call_group(&"camera_directors", &"shake", 2.0, 0.08)
 
 
 func _trigger_hit_pause(duration: float) -> void:
