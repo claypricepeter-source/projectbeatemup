@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=34 format=3]
+[gd_resource type="SpriteFrames" load_steps=60 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle1.png" id="1_idle1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle10.png" id="2_idle10"]
@@ -33,6 +33,32 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/flying_knee/flying_knee1.png" id="31_flying_knee1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/flying_knee/flying_knee2.png" id="32_flying_knee2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/flying_knee/flying_knee3.png" id="33_flying_knee3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/walk/walk1.png" id="34_walk1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/walk/walk2.png" id="35_walk2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/walk/walk3.png" id="36_walk3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/walk/walk4.png" id="37_walk4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/walk/walk5.png" id="38_walk5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/walk/walk6.png" id="39_walk6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/jump/jump1.png" id="40_jump1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/jump/jump2.png" id="41_jump2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/jump/jump3.png" id="42_jump3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/jump/jump4.png" id="43_jump4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/hurt/hurt1.png" id="44_hurt1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/hurt/hurt2.png" id="45_hurt2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/hurt/hurt3.png" id="46_hurt3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/knockdown/knockdown1.png" id="47_knockdown1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/knockdown/knockdown2.png" id="48_knockdown2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/knockdown/knockdown3.png" id="49_knockdown3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/knockdown/knockdown4.png" id="50_knockdown4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/knockdown/knockdown5.png" id="51_knockdown5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/knockdown/knockdown6.png" id="52_knockdown6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/victory/victory1.png" id="53_victory1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/victory/victory2.png" id="54_victory2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/victory/victory3.png" id="55_victory3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/victory/victory4.png" id="56_victory4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/death/death1.png" id="57_death1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/death/death2.png" id="58_death2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/death/death3.png" id="59_death3"]
 
 [resource]
 animations = [{
@@ -44,25 +70,55 @@ animations = [{
 "frames": [{"duration": 1.0, "texture": ExtResource("11_combo1")}, {"duration": 1.0, "texture": ExtResource("12_combo10")}, {"duration": 1.0, "texture": ExtResource("13_combo2")}, {"duration": 1.0, "texture": ExtResource("14_combo3")}, {"duration": 1.0, "texture": ExtResource("15_combo4")}, {"duration": 1.0, "texture": ExtResource("16_combo5")}, {"duration": 1.0, "texture": ExtResource("17_combo6")}, {"duration": 1.0, "texture": ExtResource("18_combo7")}, {"duration": 1.0, "texture": ExtResource("19_combo8")}, {"duration": 1.0, "texture": ExtResource("20_combo9")}],
 "loop": false,
 "name": &"combo",
-"speed": 14.0
+"speed": 12.0
 }, {
 "frames": [{"duration": 1.0, "texture": ExtResource("21_light_punch1")}, {"duration": 1.0, "texture": ExtResource("22_light_punch2")}, {"duration": 1.0, "texture": ExtResource("23_light_punch3")}],
 "loop": false,
 "name": &"light_punch",
-"speed": 14.0
+"speed": 12.0
 }, {
 "frames": [{"duration": 1.0, "texture": ExtResource("24_strong_punch1")}, {"duration": 1.0, "texture": ExtResource("25_strong_punch2")}, {"duration": 1.0, "texture": ExtResource("26_strong_punch3")}],
 "loop": false,
 "name": &"strong_punch",
-"speed": 14.0
+"speed": 12.0
 }, {
 "frames": [{"duration": 1.0, "texture": ExtResource("27_strong_kick1")}, {"duration": 1.0, "texture": ExtResource("28_strong_kick2")}, {"duration": 1.0, "texture": ExtResource("29_strong_kick3")}, {"duration": 1.0, "texture": ExtResource("30_strong_kick4")}],
 "loop": false,
 "name": &"strong_kick",
-"speed": 14.0
+"speed": 12.0
 }, {
 "frames": [{"duration": 1.0, "texture": ExtResource("31_flying_knee1")}, {"duration": 1.0, "texture": ExtResource("32_flying_knee2")}, {"duration": 1.0, "texture": ExtResource("33_flying_knee3")}],
 "loop": false,
 "name": &"flying_knee",
-"speed": 14.0
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("34_walk1")}, {"duration": 1.0, "texture": ExtResource("35_walk2")}, {"duration": 1.0, "texture": ExtResource("36_walk3")}, {"duration": 1.0, "texture": ExtResource("37_walk4")}, {"duration": 1.0, "texture": ExtResource("38_walk5")}, {"duration": 1.0, "texture": ExtResource("39_walk6")}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("40_jump1")}, {"duration": 1.0, "texture": ExtResource("41_jump2")}, {"duration": 1.0, "texture": ExtResource("42_jump3")}, {"duration": 1.0, "texture": ExtResource("43_jump4")}],
+"loop": false,
+"name": &"jump",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("44_hurt1")}, {"duration": 1.0, "texture": ExtResource("45_hurt2")}, {"duration": 1.0, "texture": ExtResource("46_hurt3")}],
+"loop": false,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("47_knockdown1")}, {"duration": 1.0, "texture": ExtResource("48_knockdown2")}, {"duration": 1.0, "texture": ExtResource("49_knockdown3")}, {"duration": 1.0, "texture": ExtResource("50_knockdown4")}, {"duration": 1.0, "texture": ExtResource("51_knockdown5")}, {"duration": 1.0, "texture": ExtResource("52_knockdown6")}],
+"loop": false,
+"name": &"knockdown",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("53_victory1")}, {"duration": 1.0, "texture": ExtResource("54_victory2")}, {"duration": 1.0, "texture": ExtResource("55_victory3")}, {"duration": 1.0, "texture": ExtResource("56_victory4")}],
+"loop": false,
+"name": &"victory",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("57_death1")}, {"duration": 1.0, "texture": ExtResource("58_death2")}, {"duration": 1.0, "texture": ExtResource("59_death3")}],
+"loop": false,
+"name": &"death",
+"speed": 12.0
 }]

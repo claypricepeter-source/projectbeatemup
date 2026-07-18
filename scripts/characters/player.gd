@@ -22,10 +22,6 @@ const CANONICAL_ANIMATION_SOURCES := {
 	&"attack_2": &"strong_punch",
 	&"attack_3": &"strong_kick",
 	&"jump_kick": &"flying_knee",
-	&"hurt": &"get_hit",
-	&"knockdown": &"knocked_down",
-	&"getup": &"knocked_down",
-	&"death": &"knocked_down",
 }
 
 
@@ -37,15 +33,28 @@ func _ready() -> void:
 func _install_canonical_animations() -> void:
 	var source := sprite.sprite_frames
 	var frames := source.duplicate(true) as SpriteFrames
+	
+	# Copy smooth base animations
 	_copy_external_animation(frames, &"idle", SMOOTH_PLAYER_FRAMES, &"idle", true)
+	_copy_external_animation(frames, &"walk", SMOOTH_PLAYER_FRAMES, &"walk", true)
 	_copy_external_animation(frames, &"combo", SMOOTH_PLAYER_FRAMES, &"combo", false)
 	_copy_external_animation(frames, &"light_punch", SMOOTH_PLAYER_FRAMES, &"light_punch", false)
 	_copy_external_animation(frames, &"strong_punch", SMOOTH_PLAYER_FRAMES, &"strong_punch", false)
 	_copy_external_animation(frames, &"strong_kick", SMOOTH_PLAYER_FRAMES, &"strong_kick", false)
 	_copy_external_animation(frames, &"flying_knee", SMOOTH_PLAYER_FRAMES, &"flying_knee", false)
+	_copy_external_animation(frames, &"jump", SMOOTH_PLAYER_FRAMES, &"jump", false)
+	_copy_external_animation(frames, &"hurt", SMOOTH_PLAYER_FRAMES, &"hurt", false)
+	_copy_external_animation(frames, &"knockdown", SMOOTH_PLAYER_FRAMES, &"knockdown", false)
+	_copy_external_animation(frames, &"death", SMOOTH_PLAYER_FRAMES, &"death", false)
+	_copy_external_animation(frames, &"victory", SMOOTH_PLAYER_FRAMES, &"victory", false)
+	
 	for canonical: StringName in CANONICAL_ANIMATION_SOURCES:
 		var source_name: StringName = CANONICAL_ANIMATION_SOURCES[canonical]
-		_copy_animation(frames, canonical, source_name, canonical == &"getup")
+		_copy_animation(frames, canonical, source_name, false)
+		
+	# Generate reversed getup animation from knockdown
+	_copy_animation(frames, &"getup", &"knockdown", true)
+	
 	sprite.sprite_frames = frames
 
 
