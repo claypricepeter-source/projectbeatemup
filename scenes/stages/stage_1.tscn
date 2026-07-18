@@ -40,7 +40,7 @@ region = Rect2(400, 112, 144, 96)
 
 [sub_resource type="AtlasTexture" id="Atlas_street"]
 atlas = ExtResource("2_tiles")
-region = Rect2(0, 224, 160, 160)
+region = Rect2(48, 224, 112, 160)
 
 [sub_resource type="StyleBoxFlat" id="Style_sign_teal"]
 bg_color = Color(0.035, 0.18, 0.2, 0.96)
@@ -217,79 +217,115 @@ scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road02" type="Sprite2D" parent="Street"]
-position = Vector2(320, 192)
+position = Vector2(224, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road03" type="Sprite2D" parent="Street"]
-position = Vector2(640, 192)
+position = Vector2(448, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road04" type="Sprite2D" parent="Street"]
-position = Vector2(960, 192)
+position = Vector2(672, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road05" type="Sprite2D" parent="Street"]
-position = Vector2(1280, 192)
+position = Vector2(896, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road06" type="Sprite2D" parent="Street"]
-position = Vector2(1600, 192)
+position = Vector2(1120, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road07" type="Sprite2D" parent="Street"]
-position = Vector2(1920, 192)
+position = Vector2(1344, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road08" type="Sprite2D" parent="Street"]
-position = Vector2(2240, 192)
+position = Vector2(1568, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road09" type="Sprite2D" parent="Street"]
-position = Vector2(2560, 192)
+position = Vector2(1792, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road10" type="Sprite2D" parent="Street"]
-position = Vector2(2880, 192)
+position = Vector2(2016, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road11" type="Sprite2D" parent="Street"]
-position = Vector2(3200, 192)
+position = Vector2(2240, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road12" type="Sprite2D" parent="Street"]
-position = Vector2(3520, 192)
+position = Vector2(2464, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road13" type="Sprite2D" parent="Street"]
-position = Vector2(3840, 192)
+position = Vector2(2688, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
 
 [node name="Road14" type="Sprite2D" parent="Street"]
-position = Vector2(4160, 192)
+position = Vector2(2912, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road15" type="Sprite2D" parent="Street"]
+position = Vector2(3136, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road16" type="Sprite2D" parent="Street"]
+position = Vector2(3360, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road17" type="Sprite2D" parent="Street"]
+position = Vector2(3584, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road18" type="Sprite2D" parent="Street"]
+position = Vector2(3808, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road19" type="Sprite2D" parent="Street"]
+position = Vector2(4032, 192)
+centered = false
+scale = Vector2(2, 2)
+texture = SubResource("Atlas_street")
+
+[node name="Road20" type="Sprite2D" parent="Street"]
+position = Vector2(4256, 192)
 centered = false
 scale = Vector2(2, 2)
 texture = SubResource("Atlas_street")
