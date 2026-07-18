@@ -38,6 +38,10 @@ func _install_canonical_animations() -> void:
 	var frames := source.duplicate(true) as SpriteFrames
 	_copy_external_animation(frames, &"idle", SMOOTH_PLAYER_FRAMES, &"idle", true)
 	_copy_external_animation(frames, &"combo", SMOOTH_PLAYER_FRAMES, &"combo", false)
+	_copy_external_animation(frames, &"light_punch", SMOOTH_PLAYER_FRAMES, &"light_punch", false)
+	_copy_external_animation(frames, &"strong_punch", SMOOTH_PLAYER_FRAMES, &"strong_punch", false)
+	_copy_external_animation(frames, &"strong_kick", SMOOTH_PLAYER_FRAMES, &"strong_kick", false)
+	_copy_external_animation(frames, &"flying_knee", SMOOTH_PLAYER_FRAMES, &"flying_knee", false)
 	for canonical: StringName in CANONICAL_ANIMATION_SOURCES:
 		var source_name: StringName = CANONICAL_ANIMATION_SOURCES[canonical]
 		_copy_animation(frames, canonical, source_name, canonical == &"getup")
@@ -95,16 +99,27 @@ func attack_just_pressed() -> bool:
 	return Input.is_action_just_pressed(action("attack"))
 
 
-func on_attack_connected(_target: Fighter, defeated: bool) -> void:
+func on_attack_connected(target: Fighter, defeated: bool) -> void:
 	_swing_connected = true
+	
+	# Sticky combat: lock onto/magnetize the player to the enemy's depth (Y) and proximity (X)
+	# directly on hit, mimicking Streets of Rage 2.
+	if is_instance_valid(target) and not target.is_dead:
+		global_position.y = target.global_position.y
+		var target_x = target.global_position.x
+		var current_dist_x = absf(global_position.x - target_x)
+		if current_dist_x > 24.0 and current_dist_x < 72.0:
+			var desired_x = target_x - (42.0 * facing)
+			global_position.x = lerpf(global_position.x, desired_x, 0.55)
+
 	if defeated:
 		punch_1_player.stop()
 		punch_2_player.stop()
 		_restart_sound(punch_3_player)
 		return
-	var player := punch_1_player if _next_punch_sound == 0 else punch_2_player
+	var audio_player := punch_1_player if _next_punch_sound == 0 else punch_2_player
 	_next_punch_sound = 1 - _next_punch_sound
-	_restart_sound(player)
+	_restart_sound(audio_player)
 
 
 func begin_attack_swing() -> void:

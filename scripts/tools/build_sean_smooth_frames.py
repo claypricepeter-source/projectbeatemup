@@ -28,6 +28,9 @@ def _cells_for_rows(first_row: int) -> list[tuple[int, int]]:
 ANIMATIONS = {
     "idle": _cells_for_rows(0),
     "combo": _cells_for_rows(2),
+    "light_punch": _cells_for_rows(2)[:3],
+    "strong_punch": _cells_for_rows(2)[3:6],
+    "strong_kick": _cells_for_rows(2)[6:10],
 }
 
 

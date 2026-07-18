@@ -1,35 +1,68 @@
-[gd_resource type="SpriteFrames" load_steps=21 format=3]
+[gd_resource type="SpriteFrames" load_steps=34 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle1.png" id="1_idle1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle2.png" id="2_idle2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle3.png" id="3_idle3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle4.png" id="4_idle4"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle5.png" id="5_idle5"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle6.png" id="6_idle6"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle7.png" id="7_idle7"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle8.png" id="8_idle8"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle9.png" id="9_idle9"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle10.png" id="10_idle10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle10.png" id="2_idle10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle2.png" id="3_idle2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle3.png" id="4_idle3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle4.png" id="5_idle4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle5.png" id="6_idle5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle6.png" id="7_idle6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle7.png" id="8_idle7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle8.png" id="9_idle8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/idle/idle9.png" id="10_idle9"]
 [ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo1.png" id="11_combo1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo2.png" id="12_combo2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo3.png" id="13_combo3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo4.png" id="14_combo4"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo5.png" id="15_combo5"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo6.png" id="16_combo6"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo7.png" id="17_combo7"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo8.png" id="18_combo8"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo9.png" id="19_combo9"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo10.png" id="20_combo10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo10.png" id="12_combo10"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo2.png" id="13_combo2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo3.png" id="14_combo3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo4.png" id="15_combo4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo5.png" id="16_combo5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo6.png" id="17_combo6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo7.png" id="18_combo7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo8.png" id="19_combo8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/combo/combo9.png" id="20_combo9"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/light_punch/light_punch1.png" id="21_light_punch1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/light_punch/light_punch2.png" id="22_light_punch2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/light_punch/light_punch3.png" id="23_light_punch3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/strong_punch/strong_punch1.png" id="24_strong_punch1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/strong_punch/strong_punch2.png" id="25_strong_punch2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/strong_punch/strong_punch3.png" id="26_strong_punch3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/strong_kick/strong_kick1.png" id="27_strong_kick1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/strong_kick/strong_kick2.png" id="28_strong_kick2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/strong_kick/strong_kick3.png" id="29_strong_kick3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/strong_kick/strong_kick4.png" id="30_strong_kick4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/flying_knee/flying_knee1.png" id="31_flying_knee1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/flying_knee/flying_knee2.png" id="32_flying_knee2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_smooth/flying_knee/flying_knee3.png" id="33_flying_knee3"]
 
 [resource]
 animations = [{
-"frames": [{"duration": 1.0, "texture": ExtResource("11_combo1")}, {"duration": 1.0, "texture": ExtResource("12_combo2")}, {"duration": 1.0, "texture": ExtResource("13_combo3")}, {"duration": 1.0, "texture": ExtResource("14_combo4")}, {"duration": 1.0, "texture": ExtResource("15_combo5")}, {"duration": 1.0, "texture": ExtResource("16_combo6")}, {"duration": 1.0, "texture": ExtResource("17_combo7")}, {"duration": 1.0, "texture": ExtResource("18_combo8")}, {"duration": 1.0, "texture": ExtResource("19_combo9")}, {"duration": 1.0, "texture": ExtResource("20_combo10")}],
+"frames": [{"duration": 1.0, "texture": ExtResource("1_idle1")}, {"duration": 1.0, "texture": ExtResource("2_idle10")}, {"duration": 1.0, "texture": ExtResource("3_idle2")}, {"duration": 1.0, "texture": ExtResource("4_idle3")}, {"duration": 1.0, "texture": ExtResource("5_idle4")}, {"duration": 1.0, "texture": ExtResource("6_idle5")}, {"duration": 1.0, "texture": ExtResource("7_idle6")}, {"duration": 1.0, "texture": ExtResource("8_idle7")}, {"duration": 1.0, "texture": ExtResource("9_idle8")}, {"duration": 1.0, "texture": ExtResource("10_idle9")}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("11_combo1")}, {"duration": 1.0, "texture": ExtResource("12_combo10")}, {"duration": 1.0, "texture": ExtResource("13_combo2")}, {"duration": 1.0, "texture": ExtResource("14_combo3")}, {"duration": 1.0, "texture": ExtResource("15_combo4")}, {"duration": 1.0, "texture": ExtResource("16_combo5")}, {"duration": 1.0, "texture": ExtResource("17_combo6")}, {"duration": 1.0, "texture": ExtResource("18_combo7")}, {"duration": 1.0, "texture": ExtResource("19_combo8")}, {"duration": 1.0, "texture": ExtResource("20_combo9")}],
 "loop": false,
 "name": &"combo",
 "speed": 14.0
 }, {
-"frames": [{"duration": 1.0, "texture": ExtResource("1_idle1")}, {"duration": 1.0, "texture": ExtResource("2_idle2")}, {"duration": 1.0, "texture": ExtResource("3_idle3")}, {"duration": 1.0, "texture": ExtResource("4_idle4")}, {"duration": 1.0, "texture": ExtResource("5_idle5")}, {"duration": 1.0, "texture": ExtResource("6_idle6")}, {"duration": 1.0, "texture": ExtResource("7_idle7")}, {"duration": 1.0, "texture": ExtResource("8_idle8")}, {"duration": 1.0, "texture": ExtResource("9_idle9")}, {"duration": 1.0, "texture": ExtResource("10_idle10")}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
+"frames": [{"duration": 1.0, "texture": ExtResource("21_light_punch1")}, {"duration": 1.0, "texture": ExtResource("22_light_punch2")}, {"duration": 1.0, "texture": ExtResource("23_light_punch3")}],
+"loop": false,
+"name": &"light_punch",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("24_strong_punch1")}, {"duration": 1.0, "texture": ExtResource("25_strong_punch2")}, {"duration": 1.0, "texture": ExtResource("26_strong_punch3")}],
+"loop": false,
+"name": &"strong_punch",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("27_strong_kick1")}, {"duration": 1.0, "texture": ExtResource("28_strong_kick2")}, {"duration": 1.0, "texture": ExtResource("29_strong_kick3")}, {"duration": 1.0, "texture": ExtResource("30_strong_kick4")}],
+"loop": false,
+"name": &"strong_kick",
+"speed": 14.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("31_flying_knee1")}, {"duration": 1.0, "texture": ExtResource("32_flying_knee2")}, {"duration": 1.0, "texture": ExtResource("33_flying_knee3")}],
+"loop": false,
+"name": &"flying_knee",
+"speed": 14.0
 }]
