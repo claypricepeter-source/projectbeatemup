@@ -7,6 +7,7 @@ const STAGE_SCENES: Array[PackedScene] = [
 	preload("res://scenes/stages/stage_1.tscn"),
 	preload("res://scenes/stages/stage_2.tscn"),
 	preload("res://scenes/stages/stage_3.tscn"),
+	preload("res://scenes/stages/stage_4.tscn"),
 ]
 const INTRO_CARDS: Array[Dictionary] = [
 	{
@@ -21,8 +22,13 @@ const INTRO_CARDS: Array[Dictionary] = [
 	},
 	{
 		"heading": "STAGE 3",
-		"title": "HARRISON PARK TO THE MILL DAM",
-		"body": "Ragnaros names the man behind the Syndicate:\nVictor Bayshore is waiting beyond Harrison Park.\n\nSean follows the river toward the Mill Dam.",
+		"title": "THE NIGHTMARISH CANDY FACTORY",
+		"body": "Ragnaros names the front for the Syndicate's operations:\nthe old sweet-processing plant on the edge of town.\n\nSean steps into a fluorescent, sugar-coated nightmare.",
+	},
+	{
+		"heading": "STAGE 4",
+		"title": "THE ELEVATOR TO THE PENTHOUSE",
+		"body": "The Candy Factory is cleared, but Victor has fled upwards.\nSean boards the heavy cargo elevator to hunt him down.\n\nEnemies drop from above as the elevator ascends...",
 	},
 ]
 const CONTINUE_SECONDS := 10.0
@@ -64,7 +70,7 @@ const GAME_INTRO_PAGES := [
 	"OWEN SOUND — 199X\n\nA quiet lakeside town has fallen under the shadow of the Bayshore Syndicate. Street crime and shakedowns run rampant.",
 	"The local police are compromised or outmatched. The citizens live in fear, locking their doors at sundown.",
 	"But Sean, who knows every brick of these streets, decides enough is enough.",
-	"Cracking his knuckles, he steps out of his front door to punch his town clean, from Second Avenue to the Mill Dam..."
+	"Cracking his knuckles, he steps out of his front door to punch his town clean, from Second Avenue to the Syndicate penthouse..."
 ]
 
 
@@ -279,8 +285,8 @@ func show_ending() -> void:
 	_clear_stage()
 	_hide_all_screens()
 	intro_heading.text = "OWEN SOUND — MORNING"
-	intro_title.text = "QUIET WATER"
-	intro_body.text = "Victor drops into the Mill Dam fish ladder.\nBy sunrise, the Bayshore Syndicate is finished.\n\nThe town wakes up quiet again. Sean gets his coffee."
+	intro_title.text = "SWEET SILENCE"
+	intro_body.text = "Victor falls on the penthouse floor as the elevator doors close.\nBy sunrise, the Bayshore Syndicate is finished.\n\nThe town wakes up quiet again. Sean gets his coffee."
 	intro_screen.visible = true
 
 

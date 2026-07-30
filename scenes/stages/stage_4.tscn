@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/stages/elevator_stage.gd" id="1_stage"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/stages/camera_director.gd" id="3_camera"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+
+[node name="Stage4" type="Node2D"]
+script = ExtResource("1_stage")
+walk_min_x = 60.0
+walk_max_x = 580.0
+walk_min_y = 200.0
+walk_max_y = 290.0
+
+[node name="Entities" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Entities" instance=ExtResource("2_player")]
+position = Vector2(320, 240)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(320, 200)
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
+script = ExtResource("3_camera")
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]

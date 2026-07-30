@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/characters/enemy_stats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "JAWBREAKER"
+max_hp = 300
+move_speed = Vector2(90, 60)
+damage = 10
+attack_range = 90.0
+recover_time = 0.8
+retreat_time = 0.4
+points = 3000
+tint = Color(1, 0.45, 0.75, 1)

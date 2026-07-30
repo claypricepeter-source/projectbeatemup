@@ -7,21 +7,20 @@
 
 ---
 
-## 0. HANDOFF STATUS (updated 2026-07-16)
+## 0. HANDOFF STATUS (updated 2026-07-29)
 
 **Where the project stands:** Phases 0–5 are complete and verified in-game (see
-checked boxes + per-phase notes in §8). The full three-stage campaign, complete
-enemy roster, all three bosses, pickups, stage-clear routing and ending card are
-playable. **The next task is the final Phase 6 human feel/continue-target playtest**;
-the repeatable automated balance run is complete, after which Phase 7 release work
-can begin.
+checked boxes + per-phase notes in §8). The campaign has now been extended to four
+stages with a candy-factory detour and elevator finale. The original three-stage
+route was fully verified; the new Stage 3/4 split requires a final human campaign
+playtest after the Pages deployment.
 
 **What runs today:** F5 launches `scenes/main.tscn` at the title screen. Start routes
-through story cards into three consecutive stages: **Second Avenue at Night**
-(four waves + Slick Rick), **The Sewers of Shame** (five waves + Ragnaros), and **Harrison
-Park to the Mill Dam** (five waves + Victor). Stages include camera locks, props,
-pickups, boss bars and stage-clear tallies; the finale adds a narrow footbridge
-fight, Victor's two phases, and the ending card. Losing a life respawns in the
+through story cards into four consecutive stages: **Second Avenue at Night**
+(four waves + Slick Rick), **The Sewers of Shame** (five waves + Ragnaros),
+**The Nightmarish Candy Factory** (five waves + Jawbreaker), and **The Elevator
+to the Penthouse** (four drop-in waves + Victor). Stages include camera locks,
+props, pickups, boss bars and stage-clear tallies. Losing a life respawns in the
 active fight; zero lives routes through Continue and Game Over. High score persists
 in `user://save.cfg`.
 
@@ -55,9 +54,13 @@ continue and clear cards show a contextual NEXT button.
   stage also requests its music cue locally so direct F6/debug launches have audio.
   The untouched sheet is retained under `assets/_source_packs/` and remains
   local-development-only pending provenance/redistribution confirmation.
-- Stage 3 is 5120×480 with a y ∈ [204, 280] plane, split between autumn Harrison
-  Park and the floodlit Mill Dam in `finale_stage.gd`. Wave 4 clamps both sides to
-  the footbridge y ∈ [232, 250] and restores full depth when cleared.
+- Stage 3 is a 5120×480 candy-processing floor with a y ∈ [204, 280] plane.
+  `candy_factory_stage.gd` repeats the supplied factory background beneath
+  candy-cane pillars and an animated hot-pink sugar-sludge channel. Jawbreaker
+  reuses Slick Rick's complete boss interface with a distinct pink palette.
+- Stage 4 is a fixed-width cargo elevator in `elevator_stage.gd`. The shaft scrolls
+  continuously while four resource-authored waves drop onto the platform; reaching
+  the penthouse stops the elevator and spawns Victor for the final battle.
 - Combat rules implemented in `scripts/` match §4.2 **plus** the anti-stunlock rule
   (3rd consecutive hit within 0.7s → knockdown) — see §8 Phase 2 notes for this and
   other gotchas. EventBus parameters must stay untyped; Streets of Fight characters
@@ -70,13 +73,13 @@ continue and clear cards show a contextual NEXT button.
   breakable/pickup base scenes, and `MainFlow`. Boss-wave camera lock intentionally
   remains active while the clear tally is shown.
 - Phase 4's `MainFlow` owns title/intro/pause/continue/clear/game-over/ending routing.
-  `STAGE_SCENES` and `INTRO_CARDS` contain all three stages; `GameState.next_stage()`
+  `STAGE_SCENES` and `INTRO_CARDS` contain all four stages; `GameState.next_stage()`
   advances the shell, while high score is persisted immediately through `ConfigFile`.
 - Phase 5 enemy variants resolve from `EnemyStats.base_variant` plus stat
   multipliers. `WaveData.enemy_stats` is an optional per-spawn override array; use
   it to mix Red Punk/Dock Thug/Park Punk resources into waves without new scenes.
 - `AudioManager` is a persistent two-player music router plus an eight-player SFX
-  pool. Stages 1–2 use supplied MP3s; title, Stage 3, boss, clear, Game Over and
+  pool. Stages 1–2 use supplied MP3s; title, Stages 3–4, boss, clear, Game Over and
   ending use distinct project-native chiptune loops synthesized at runtime. A boss
   stinger and seven small gameplay/UI cues are also synthesized at runtime. The
   supplied `deathsean.mp3` plays at the start of Sean's life-loss KO sequence;
@@ -112,7 +115,7 @@ continue and clear cards show a contextual NEXT button.
 | **Art style** | 16-bit SNES-era pixel art, sourced from free asset packs |
 | **Influences** | Streets of Rage 1 & 2, Final Fight |
 | **Players** | Single-player (architecture is co-op-ready; local co-op is a stretch goal) |
-| **Length** | 3 stages, ~30–40 minutes for a full run |
+| **Length** | 4 stages, ~40–50 minutes for a full run |
 | **Tone** | Gritty-but-lighthearted small-town Canada. Serious brawling, wry local flavour. |
 
 **Elevator pitch:** A crime syndicate is muscling into sleepy Owen Sound, Ontario.
@@ -144,8 +147,9 @@ Real-location flavour to weave into backgrounds and stage names:
 ### Story beats
 1. **Intro card:** Sean watches a shakedown outside his favourite coffee shop. He steps in.
 2. **After Stage 1:** A beaten punk coughs up that shipments come through the harbour.
-3. **After Stage 2:** The dock boss reveals the Syndicate leader is holed up past Harrison Park at the Mill Dam.
-4. **Ending:** Sean drops the boss into the fish ladder. The town wakes up quiet again. Sean gets his coffee.
+3. **After Stage 2:** Ragnaros reveals the Syndicate's candy-factory front.
+4. **After Stage 3:** Jawbreaker reveals Victor escaped upward in the cargo elevator.
+5. **Ending:** Sean defeats Victor at the penthouse. The town wakes up quiet again. Sean gets his coffee.
 
 ---
 
@@ -193,9 +197,10 @@ not new scenes.
 |---|---|---|
 | **"Slick" Rick Delaney** — corrupt downtown fixer in flamboyant magnetic armour | 1 — Downtown | Fast dashes and metal-swipe flurries; periodically calls in 2 Punks. Teaches: prioritize adds vs. boss. |
 | **Ragnaros** — flamboyant firelord wielding a claymore-sized flaming common stinkhorn | 2 — Sewers | Long horizontal reach and a full-lane sweep; periodically braces the stinkhorn like a gun and fires five white liquid shots. Dodging three shots forces a 3.2 s dizzy punish window. Teaches: use the depth axis. |
-| **Victor Bayshore** — syndicate leader, final boss at the Mill Dam | 3 — Mill Dam | Two phases: (1) brawler with combo strings; (2) at 50% HP, enrages — faster, adds a charging grab. Arena hazard: slippery wet edge near the dam (visual only in v1). |
+| **Jawbreaker** — pink candy-factory guardian | 3 — Candy Factory | Magnetic-armour dash/flurry boss with anti-stunlock counter and candy palette. |
+| **Victor Bayshore** — syndicate leader | 4 — Penthouse Elevator | Two phases: (1) brawler with combo strings; (2) at 50% HP, enrages — faster, adds a charging grab. |
 
-Boss HP baseline: 200 / 250 / 350. Bosses cannot be stun-locked: after 3 consecutive
+Boss HP baseline: 200 / 250 / 300 / 350. Bosses cannot be stun-locked: after 3 consecutive
 hits taken, boss gains brief hyper-armor and counterattacks.
 
 ---
@@ -270,12 +275,19 @@ props with pickups, then a boss arena.
 - **Music mood:** Tense bass-heavy groove, industrial percussion.
 - **Teaches:** depth-axis dodging (Biker charges, Ragnaros's sweeps and aimed liquid shots), armor enemies, earned boss punish windows.
 
-### Stage 3 — "Harrison Park to the Mill Dam" (Finale)
-- **Look:** Two visual segments: (a) Harrison Park — autumn trees, the Sydenham River, a footbridge; (b) the Mill Dam — rushing water, fish ladder, floodlights. Parallax: treeline/river → dam structure.
-- **Enemies:** All types + toughest palette swaps. Waves: (3 mixed) → (2 Thugs + Biker) → (2 Bikers + 2 Knife Punks) → footbridge chokepoint fight (narrow Y-band!) → pre-boss gauntlet.
-- **Boss:** Victor Bayshore, two phases, at the dam.
-- **Music mood:** Urgent, climactic; phase-2 tempo shift.
-- **Teaches:** mastery test; the footbridge fight deliberately constrains the depth axis.
+### Stage 3 — "The Nightmarish Candy Factory"
+- **Look:** Fluorescent candy-processing machinery, candy-cane pillars and a hot-pink boiling sugar-sludge channel.
+- **Enemies:** Five mixed waves using the established roster and Stage 3 variants.
+- **Boss:** Jawbreaker, a pink magnetic-armour guardian.
+- **Music mood:** Fast, uncanny industrial chiptune.
+- **Teaches:** sustained mixed-wave pressure before the confined finale.
+
+### Stage 4 — "The Elevator to the Penthouse" (Finale)
+- **Look:** A fixed cargo-elevator platform rising through a scrolling industrial shaft.
+- **Enemies:** Four mixed waves drop onto the elevator from overhead.
+- **Boss:** Victor Bayshore, two phases, after the elevator reaches the penthouse.
+- **Music mood:** Urgent ascent, shifting to the final boss cue.
+- **Teaches:** survival and crowd control in a confined arena.
 
 ---
 
@@ -548,13 +560,14 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 >   Game Over/clear routing back to title, and restarted the project to confirm the
 >   exact saved high score was reloaded. All tested screens were screenshot-checked.
 
-### Phase 5 — Stages 2 & 3
+### Phase 5 — Stages 2–4
 - [x] **Thug** and **Biker** enemies (armor + charge behaviours); palette-swap resources.
 - [x] `stage_2.tscn` sewer: art, waves, **Boss 2 (Ragnaros)** with stinkhorn sweep and dodge-to-dizzy liquid barrage.
-- [x] `stage_3.tscn` park→dam: art (two segments), footbridge narrow-band fight, waves.
-- [x] **Boss 3 (Victor Bayshore)** two-phase AI; ending text card.
+- [x] `stage_3.tscn` candy factory: repeating art, sugar-sludge effects, five waves and **Boss 3 (Jawbreaker)**.
+- [x] `stage_4.tscn` elevator finale: scrolling shaft, four drop-in waves and **Boss 4 (Victor Bayshore)**.
 - [x] Poutine pickup; anti-stunlock boss armor rule (§3.3).
-- [x] **DoD:** full 3-stage campaign playable start-to-finish.
+- [x] **DoD:** original 3-stage campaign playable start-to-finish.
+- [ ] **Four-stage extension DoD:** run Candy Factory → Elevator → Victor → ending without runtime errors.
 
 > **Phase 5 progress notes:**
 > - Thug is a 60 HP / 12 damage / 300 point heavy with a held haymaker telegraph.
@@ -615,13 +628,17 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 >   loaded it through `MainFlow`, defeated Ragnaros to reach `STAGE 2 CLEAR` with the
 >   exact HP×10 bonus, and advanced into the Stage 3 card. Boss defeat awarded 2500
 >   points, hid the boss bar, and retained the arena camera lock during the tally.
-> - `stage_3.tscn` is a 5120×480 project-native composition with two distinct visual
->   segments: autumn Harrison Park and the Sydenham River lead across a timber
->   footbridge into the concrete, rushing-water, fish-ladder and floodlight Mill Dam
->   arena. Five `WaveData` resources produced the exact 3/3/4/3/4 lineups. Wave 4
->   constrained Sean and every enemy to y ∈ [232, 250], then restored y ∈ [204, 280]
->   and unlocked the camera atomically on clear.
-> - Victor Bayshore is a 350 HP / 4000 point final boss. Phase 1 uses an 8+8+12
+> - `stage_3.tscn` now keeps the existing 5120×480 five-wave structure but renders
+>   it as the Nightmarish Candy Factory through `candy_factory_stage.gd`: a repeated
+>   factory backdrop, candy-cane pillars and animated hot-pink boiling sugar sludge.
+>   Its boss gate spawns the 300 HP / 3000 point Jawbreaker, which inherits the
+>   complete Slick Rick boss contract so the shared dash/flurry/counter states remain
+>   type-safe while its resource and sprite tint create the candy variant.
+> - `stage_4.tscn` is a fixed 640×360 elevator arena. Four `WaveData` resources drive
+>   3/3/3/4 enemy lineups that enter through the shared knockdown state and then have
+>   their air height/velocity overridden to fall from above. The scrolling shaft stops
+>   after the fourth wave and Victor crashes onto the platform.
+> - Victor Bayshore remains a 350 HP / 4000 point final boss. Phase 1 uses an 8+8+12
 >   three-hit string; crossing 50% HP enters an invulnerable enrage, boosts movement
 >   by 30%, changes the string to 10+10+14, and enables a 410 px/s charging grab for
 >   18 + knockdown. A missed charge leaves a verified 1.0 s punish window. Three
@@ -631,13 +648,11 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 > - The rare poutine drops from the pre-boss crate and fully heals. Runtime validation
 >   broke the configured crate, observed one `poutine` pickup, healed Sean from 7 to
 >   100, and displayed `POUTINE  FULL HEAL` on the HUD.
-> - Finale verification defeated Victor through the normal Death state, awarded 4000
+> - The earlier three-stage finale verification defeated Victor through the normal Death state, awarded 4000
 >   points plus an exact 73 HP × 10 bonus for a 4730 total, showed `STAGE 3 CLEAR`,
 >   advanced to the `QUIET WATER` ending, removed the stage, and returned to title
->   with an actual Z press. A separate single-run routing probe traversed the three
->   intro cards, Stage1 → Stage2 → Stage3, all three clear states, and the ending.
->   The final run had no current-run errors and a clean game log; park, bridge, dam,
->   Victor and ending visuals were screenshot-checked.
+>   with an actual Z press. That verification predates the Candy Factory/Elevator
+>   split; the four-stage extension DoD above remains the required final playtest.
 
 ### Phase 6 — Audio & polish
 - [x] Music per stage + title + boss stinger (free packs, credited); `AudioManager` crossfades.

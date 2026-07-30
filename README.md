@@ -4,19 +4,20 @@ Project Beatemup is a single-player, 2D side-scrolling brawler inspired by
 *Streets of Rage* and *Final Fight*. It is built with Godot 4.7 and set in Owen
 Sound, Ontario, where Sean takes on the Bayshore Syndicate one street at a time.
 
-The current playable build contains the complete Stage 1 vertical slice,
-**Second Avenue at Night**: four enemy waves, breakable props and pickups, the
-Knife Punk enemy, and a boss fight against "Slick" Rick Delaney. It also includes
-lives, continues, Game Over, and a stage-clear score tally.
+The current playable build contains a four-stage campaign: **Second Avenue at
+Night**, **The Sewers of Shame**, **The Nightmarish Candy Factory**, and **The
+Elevator to the Penthouse**. It includes the complete enemy roster, bosses,
+breakable props, pickups, lives, continues, stage-clear tallies, Game Over, and
+the ending sequence.
 
-**Play in a browser:** https://ariesyous.github.io/projectbeatemup/
+**Play in a browser:** https://claypricepeter-source.github.io/projectbeatemup/
 
 ## Running the game
 
 1. Open `project.godot` in Godot 4.7.
 2. Press **F5** or select **Run Project**.
 
-The game starts directly in Stage 1.
+The game starts at the title screen and routes through the complete campaign.
 
 The browser build requires WebGL 2.0. Click the game once if it does not
 immediately receive keyboard input.
@@ -38,11 +39,9 @@ depth as well as horizontally.
 
 Walk to the right to advance. Entering a combat area locks the camera until its
 wave is defeated; when **GO ->** appears, continue toward the right. Break trash
-cans and crates for Coffee and Cash pickups. Defeat Slick Rick at the end of the
-street to clear the stage.
+cans and crates for Coffee and Cash pickups.
 
-`Esc` is reserved for the pause action, but the pause menu is not implemented in
-the current build.
+Press `Esc` to open or resume the pause menu.
 
 ## Project information
 

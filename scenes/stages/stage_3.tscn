@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3]
 
-[ext_resource type="Script" path="res://scripts/stages/finale_stage.gd" id="1_stage"]
+[ext_resource type="Script" path="res://scripts/stages/candy_factory_stage.gd" id="1_stage"]
 [ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/stages/camera_director.gd" id="3_camera"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" path="res://scenes/props/coffee_pickup.tscn" id="14_coffee"]
 [ext_resource type="PackedScene" path="res://scenes/props/cash_pickup.tscn" id="15_cash"]
 [ext_resource type="Script" path="res://scripts/stages/boss_trigger.gd" id="16_boss_trigger"]
-[ext_resource type="PackedScene" path="res://scenes/characters/bosses/victor.tscn" id="17_victor"]
+[ext_resource type="PackedScene" path="res://scenes/characters/bosses/jawbreaker.tscn" id="17_victor"]
 
 [sub_resource type="RectangleShape2D" id="WaveTriggerShape"]
 size = Vector2(48, 140)
@@ -83,7 +83,7 @@ theme_override_styles/panel = SubResource("ParkSign")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.88, 0.94, 0.76, 1)
 theme_override_font_sizes/font_size = 22
-text = "HARRISON PARK"
+text = "SWEET SYNDICATE PROCESSING"
 horizontal_alignment = 1
 
 [node name="Bridge" type="Label" parent="WorldSigns"]
@@ -93,7 +93,7 @@ offset_right = 3160.0
 offset_bottom = 202.0
 theme_override_colors/font_color = Color(0.92, 0.72, 0.32, 1)
 theme_override_font_sizes/font_size = 18
-text = "SYDENHAM FOOTBRIDGE"
+text = "BOILING SUGAR VAT"
 horizontal_alignment = 1
 
 [node name="Dam" type="PanelContainer" parent="WorldSigns"]
@@ -107,7 +107,7 @@ theme_override_styles/panel = SubResource("ParkSign")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.92, 1, 1)
 theme_override_font_sizes/font_size = 24
-text = "MILL DAM • FISH LADDER"
+text = "PACKAGING DEPT • MAIN BOILER"
 horizontal_alignment = 1
 
 [node name="Entities" type="Node2D" parent="."]
