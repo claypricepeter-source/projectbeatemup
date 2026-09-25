@@ -4,12 +4,17 @@ extends Node
 const SAVE_PATH := "user://save.cfg"
 const SAVE_SECTION := "scores"
 const HIGH_SCORE_KEY := "high_score"
+## Extra life every EXTEND_EVERY points (SoR2-style score extends).
+const EXTEND_EVERY := 50000
+const MAX_LIVES := 9
 
 var score := 0
 var high_score := 0
 var lives := 3
 var continues := 3
 var current_stage_index := 0
+var next_extend := EXTEND_EVERY
+var _last_save_ms := -100000
 
 
 func _ready() -> void:
@@ -22,6 +27,7 @@ func reset_run() -> void:
 	lives = 3
 	continues = 3
 	current_stage_index = 0
+	next_extend = EXTEND_EVERY
 	EventBus.score_changed.emit(score)
 	EventBus.lives_changed.emit(lives, continues)
 
@@ -31,7 +37,13 @@ func add_score(amount: int) -> void:
 	var previous_high_score := high_score
 	high_score = maxi(high_score, score)
 	EventBus.score_changed.emit(score)
-	if high_score > previous_high_score:
+	while score >= next_extend:
+		next_extend += EXTEND_EVERY
+		lives = mini(lives + 1, MAX_LIVES)
+		EventBus.lives_changed.emit(lives, continues)
+		EventBus.extra_life.emit()
+	# Per-hit scoring raises the score constantly; throttle save-file writes.
+	if high_score > previous_high_score and Time.get_ticks_msec() - _last_save_ms > 5000:
 		commit_high_score()
 
 
@@ -58,6 +70,7 @@ func next_stage() -> int:
 func commit_high_score() -> void:
 	if score > high_score:
 		high_score = score
+	_last_save_ms = Time.get_ticks_msec()
 	var save := ConfigFile.new()
 	save.set_value(SAVE_SECTION, HIGH_SCORE_KEY, high_score)
 	var error := save.save(SAVE_PATH)

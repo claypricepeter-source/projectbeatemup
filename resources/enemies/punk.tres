@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 display_name = "PUNK"
-max_hp = 25
+max_hp = 48
 move_speed = Vector2(80, 60)
-damage = 5
+damage = 8
 attack_range = 60.0
 recover_time = 0.5
 retreat_time = 0.6

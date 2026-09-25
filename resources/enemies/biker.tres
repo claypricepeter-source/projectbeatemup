@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 display_name = "BIKER"
-max_hp = 35
+max_hp = 64
 move_speed = Vector2(104, 76)
-damage = 10
+damage = 12
 attack_range = 190.0
 recover_time = 0.45
 retreat_time = 0.0

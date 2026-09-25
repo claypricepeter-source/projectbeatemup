@@ -3,10 +3,15 @@ extends Fighter
 ## AI-controlled fighter driven by an EnemyStats resource.
 
 const MAX_ATTACKERS := 2
+## SoR2 enemies surround the player: when a side is taken, others flank.
+const FLANK_RADIUS := 150.0
 
 @export var stats: EnemyStats
 @export var separation_radius := 44.0
 @export var separation_strength := 85.0
+
+## Weapon this enemy carries; dropped when it is knocked off its feet (SoR2).
+var carried_weapon: StringName = &""
 
 
 func _ready() -> void:
@@ -15,6 +20,7 @@ func _ready() -> void:
 		max_hp = stats.max_hp
 		move_speed = stats.move_speed
 		sprite.self_modulate = stats.tint
+		carried_weapon = stats.weapon
 	super()
 
 
@@ -49,11 +55,36 @@ func is_committed_attack() -> bool:
 	return state_machine.current.name in [&"Attack", &"Charge", &"Dash", &"Sweep", &"Barrage", &"Counter"]
 
 
+## Which side of [param target] this enemy should attack from (-1 left, 1 right).
+## SoR2 AI: if another enemy already works the near side, flank the far side.
+func preferred_side(target: Fighter) -> float:
+	var my_side := signf(global_position.x - target.global_position.x)
+	if my_side == 0.0:
+		my_side = 1.0
+	var near_side_taken := false
+	var far_side_taken := false
+	for node in get_tree().get_nodes_in_group("enemies"):
+		var other := node as Enemy
+		if other == null or other == self or other.is_dead:
+			continue
+		var offset := other.global_position.x - target.global_position.x
+		if absf(offset) > FLANK_RADIUS:
+			continue
+		var closer := absf(offset) < absf(global_position.x - target.global_position.x)
+		if signf(offset) == my_side and closer:
+			near_side_taken = true
+		elif signf(offset) == -my_side:
+			far_side_taken = true
+	if near_side_taken and not far_side_taken:
+		return -my_side
+	return my_side
+
+
 ## Gentle steering prevents enemies from occupying the same feet position while
 ## preserving deliberate formation and the two-attacker courtesy rule.
 func apply_movement(delta: float) -> void:
 	var intended_velocity := velocity
-	if not is_dead:
+	if not is_dead and current_state_name() != &"Grabbed" and current_state_name() != &"Thrown":
 		velocity += _separation_velocity()
 		velocity = velocity.limit_length(maxf(intended_velocity.length(), maxf(move_speed.x * 1.8, 220.0)))
 	super(delta)
@@ -79,6 +110,14 @@ func _separation_velocity() -> Vector2:
 			distance = diff.length()
 		push += diff.normalized() * (1.0 - distance / separation_radius)
 	return push.limit_length(1.0) * separation_strength
+
+
+func on_knocked_off_feet() -> void:
+	if carried_weapon == &"":
+		return
+	var kind := carried_weapon
+	carried_weapon = &""
+	WeaponPickup.spawn.call_deferred(get_parent(), kind, Weapons.MAX_DROPS, global_position)
 
 
 func finish_death() -> void:

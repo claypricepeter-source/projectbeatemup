@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 display_name = "RAGNAROS"
-max_hp = 250
+max_hp = 400
 move_speed = Vector2(72, 54)
-damage = 14
+damage = 16
 attack_range = 148.0
 recover_time = 0.9
 retreat_time = 0.45

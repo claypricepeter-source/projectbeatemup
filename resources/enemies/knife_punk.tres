@@ -4,10 +4,11 @@
 
 [resource]
 script = ExtResource("1")
+weapon = &"knife"
 display_name = "KNIFE PUNK"
-max_hp = 20
+max_hp = 40
 move_speed = Vector2(96, 68)
-damage = 8
+damage = 12
 attack_range = 112.0
 recover_time = 0.75
 retreat_time = 0.55

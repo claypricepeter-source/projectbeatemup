@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 display_name = "THUG"
-max_hp = 60
+max_hp = 96
 move_speed = Vector2(58, 46)
-damage = 12
+damage = 16
 attack_range = 68.0
 recover_time = 0.95
 retreat_time = 0.45

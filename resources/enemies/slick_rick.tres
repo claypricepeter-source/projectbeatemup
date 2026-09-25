@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 display_name = "SLICK RICK"
-max_hp = 200
+max_hp = 320
 move_speed = Vector2(112, 72)
-damage = 10
+damage = 12
 attack_range = 78.0
 recover_time = 0.85
 retreat_time = 0.4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/characters/player.gd" id="1"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/player/clay_character_godot/clay_character/godot/clay_sprite_frames.tres" id="2"]
@@ -17,6 +17,13 @@
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/punch2.mp3" id="15_punch_2"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/punch3.mp3" id="16_punch_3"]
 [ext_resource type="Script" path="res://scripts/effects/blood_pool.gd" id="17_blood_pool"]
+[ext_resource type="Script" path="res://scripts/characters/states/player_back_attack.gd" id="30_player_back_attack"]
+[ext_resource type="Script" path="res://scripts/characters/states/player_blitz.gd" id="31_player_blitz"]
+[ext_resource type="Script" path="res://scripts/characters/states/player_double_kick.gd" id="32_player_double_kick"]
+[ext_resource type="Script" path="res://scripts/characters/states/player_special_defensive.gd" id="33_player_special_defensive"]
+[ext_resource type="Script" path="res://scripts/characters/states/player_special_offensive.gd" id="34_player_special_offensive"]
+[ext_resource type="Script" path="res://scripts/characters/states/player_grab.gd" id="35_player_grab"]
+[ext_resource type="Script" path="res://scripts/characters/states/player_pickup.gd" id="36_player_pickup"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feet"]
 radius = 10.0
@@ -32,6 +39,7 @@ motion_mode = 1
 collision_layer = 1
 collision_mask = 0
 script = ExtResource("1")
+max_hp = 104
 death_lie_time = 5.0
 death_fade_time = 0.35
 
@@ -112,3 +120,24 @@ script = ExtResource("10")
 
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource("11")
+
+[node name="BackAttack" type="Node" parent="StateMachine"]
+script = ExtResource("30_player_back_attack")
+
+[node name="Blitz" type="Node" parent="StateMachine"]
+script = ExtResource("31_player_blitz")
+
+[node name="DoubleKick" type="Node" parent="StateMachine"]
+script = ExtResource("32_player_double_kick")
+
+[node name="SpecialDefensive" type="Node" parent="StateMachine"]
+script = ExtResource("33_player_special_defensive")
+
+[node name="SpecialOffensive" type="Node" parent="StateMachine"]
+script = ExtResource("34_player_special_offensive")
+
+[node name="Grab" type="Node" parent="StateMachine"]
+script = ExtResource("35_player_grab")
+
+[node name="Pickup" type="Node" parent="StateMachine"]
+script = ExtResource("36_player_pickup")

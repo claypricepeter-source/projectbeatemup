@@ -1,10 +1,11 @@
 extends FighterState
-## Shared knockdown: knocked back and airborne, lies on the ground (rotated
-## sprite — the free pack has no dedicated knockdown frames), gets up, and
-## returns to Idle. Invulnerable throughout; Player adds i-frames after.
+## Shared knockdown: knocked back and airborne, bounces once on landing (SoR2),
+## lies on the ground (rotated sprite when the pack has no knockdown frames),
+## gets up, and returns to Idle. Invulnerable throughout; Player adds i-frames.
 
 const KNOCKBACK_X := 120.0
 const POP_VELOCITY := 140.0
+const BOUNCE_RATIO := 0.35
 const DOWN_TIME := 0.7
 const GETUP_TIME := 0.35
 
@@ -12,14 +13,22 @@ enum Phase { AIRBORNE, DOWN, GETUP }
 
 var _phase := Phase.AIRBORNE
 var _timer := 0.0
+var _bounced := false
 
 
 func enter() -> void:
 	fighter.hitbox.deactivate()
 	fighter.invulnerable = true
+	fighter.on_knocked_off_feet()
 	fighter.play(&"hurt")
-	fighter.velocity = Vector2(-fighter.facing * KNOCKBACK_X, 0)
-	fighter.air_velocity = POP_VELOCITY
+	fighter.velocity = Vector2(-fighter.facing * KNOCKBACK_X * fighter.knockdown_push_scale, 0)
+	fighter.air_velocity = POP_VELOCITY * fighter.knockdown_pop_scale
+	# A zero pop (landing from a throw) skips straight to the bounce.
+	_bounced = fighter.knockdown_pop_scale <= 0.0
+	if _bounced:
+		fighter.air_velocity = POP_VELOCITY * BOUNCE_RATIO
+	fighter.knockdown_pop_scale = 1.0
+	fighter.knockdown_push_scale = 1.0
 	_phase = Phase.AIRBORNE
 
 
@@ -33,13 +42,16 @@ func physics_update(delta: float) -> void:
 			var landed := fighter.update_air(delta)
 			fighter.apply_movement(delta)
 			if landed:
+				if not _bounced:
+					_bounced = true
+					fighter.air_velocity = POP_VELOCITY * BOUNCE_RATIO
+					fighter.velocity *= 0.5
+					_lie_down()
+					return
 				_phase = Phase.DOWN
 				_timer = DOWN_TIME
 				fighter.velocity = Vector2.ZERO
-				if fighter.sprite.sprite_frames.has_animation(&"knockdown"):
-					fighter.play(&"knockdown")
-				else:
-					fighter.sprite.rotation_degrees = -90.0 * fighter.facing
+				_lie_down()
 		Phase.DOWN:
 			_timer -= delta
 			if _timer <= 0.0:
@@ -52,3 +64,11 @@ func physics_update(delta: float) -> void:
 			if _timer <= 0.0:
 				fighter.end_knockdown()
 				machine.transition("Idle")
+
+
+func _lie_down() -> void:
+	if fighter.sprite.sprite_frames.has_animation(&"knockdown"):
+		if fighter.sprite.animation != &"knockdown":
+			fighter.play(&"knockdown")
+	else:
+		fighter.sprite.rotation_degrees = -90.0 * fighter.facing

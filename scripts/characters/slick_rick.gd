@@ -3,6 +3,10 @@ extends Enemy
 ## Stage 1 boss: knife flurries up close, lane dashes at range, and recurring
 ## two-Punk reinforcements. A third quick hit triggers an armored counter.
 
+## SoR2 bosses shrug off long strings: the 4th quick hit triggers a counter.
+const BOSS_COUNTER_HITS := 4
+const BOSS_CHAIN_MS := 1000
+
 const PUNK_SCENE := preload("res://scenes/characters/enemies/punk.tscn")
 const SUMMON_INTERVAL := 11.0
 const ANIMATION_ALIASES := {
@@ -28,6 +32,7 @@ var _summon_timer := 6.0
 
 func _ready() -> void:
 	super()
+	grab_escape_time = 0.8
 	EventBus.boss_health_changed.emit(1.0)
 
 
@@ -116,15 +121,17 @@ func _draw() -> void:
 	draw_rect(attack_rect, attack_color, false, 2.0)
 
 
+func can_be_grabbed() -> bool:
+	return not hyper_armor and super()
+
+
 func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> bool:
 	if is_dead or invulnerable:
 		return false
 	hp = maxi(hp - damage, 0)
-	var dir := attacker.global_position.x - global_position.x
-	if dir != 0.0:
-		set_facing(int(signf(dir)))
+	_face_attacker(attacker)
 	var now := Time.get_ticks_msec()
-	_boss_chain_hits = _boss_chain_hits + 1 if now - _boss_last_hit_ms < 700 else 1
+	_boss_chain_hits = _boss_chain_hits + 1 if now - _boss_last_hit_ms < BOSS_CHAIN_MS else 1
 	_boss_last_hit_ms = now
 	EventBus.fighter_damaged.emit(self)
 	EventBus.boss_health_changed.emit(float(hp) / float(max_hp))
@@ -133,7 +140,7 @@ func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> bool:
 		return true
 	if hyper_armor:
 		return true
-	if _boss_chain_hits >= 3:
+	if _boss_chain_hits >= BOSS_COUNTER_HITS:
 		_boss_chain_hits = 0
 		_make_counter_room()
 		hyper_armor = true

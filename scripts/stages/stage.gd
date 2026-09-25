@@ -8,7 +8,13 @@ extends Node2D
 @export var walk_max_y := 320.0
 
 
+var round_timer: RoundTimer
+
+
 func _ready() -> void:
+	round_timer = RoundTimer.new()
+	round_timer.name = "RoundTimer"
+	add_child(round_timer)
 	for p in get_tree().get_nodes_in_group("fighters"):
 		var fighter := p as Fighter
 		if fighter:

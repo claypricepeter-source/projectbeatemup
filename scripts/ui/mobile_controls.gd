@@ -10,6 +10,7 @@ const MOVE_UP := &"move_up_p1"
 const MOVE_DOWN := &"move_down_p1"
 const ATTACK := &"attack_p1"
 const JUMP := &"jump_p1"
+const SPECIAL := &"special_p1"
 const PAUSE := &"pause"
 const BASE_SIZE := Vector2(640.0, 360.0)
 
@@ -82,6 +83,7 @@ func _draw() -> void:
 		_draw_button(knob_position, 22.0 * scale_factor, Color(0.1, 0.35, 0.48, 0.72), Color(0.78, 0.96, 1.0, 0.9))
 		_draw_labeled_button(_attack_center(), 42.0 * scale_factor, "ATTACK", 12, Color(0.48, 0.12, 0.08, 0.62), Color(1.0, 0.66, 0.25, 0.95))
 		_draw_labeled_button(_jump_center(), 32.0 * scale_factor, "JUMP", 11, Color(0.06, 0.28, 0.18, 0.62), Color(0.48, 1.0, 0.68, 0.95))
+		_draw_labeled_button(_special_center(), 28.0 * scale_factor, "SPECIAL", 9, Color(0.3, 0.08, 0.38, 0.62), Color(0.95, 0.6, 1.0, 0.95))
 		_draw_labeled_button(_pause_center(), 20.0 * scale_factor, "II", 13, Color(0.03, 0.07, 0.12, 0.68), Color(0.84, 0.94, 1.0, 0.9))
 	else:
 		_draw_labeled_button(_attack_center(), 42.0 * scale_factor, "NEXT", 12, Color(0.48, 0.12, 0.08, 0.68), Color(1.0, 0.66, 0.25, 0.95))
@@ -117,6 +119,9 @@ func _handle_touch_pressed(index: int, touch_position: Vector2) -> void:
 		return
 	if touch_position.distance_to(_jump_center()) <= 42.0 * scale_factor:
 		_press_action(index, JUMP)
+		return
+	if touch_position.distance_to(_special_center()) <= 36.0 * scale_factor:
+		_press_action(index, SPECIAL)
 		return
 	var viewport_size := get_viewport_rect().size
 	if touch_position.x <= viewport_size.x * 0.43 and touch_position.y >= viewport_size.y * 0.38:
@@ -247,6 +252,12 @@ func _jump_center() -> Vector2:
 	return Vector2(viewport_size.x - 158.0 * scale_factor, viewport_size.y - 42.0 * scale_factor)
 
 
+func _special_center() -> Vector2:
+	var viewport_size := get_viewport_rect().size
+	var scale_factor := _control_scale()
+	return Vector2(viewport_size.x - 88.0 * scale_factor, viewport_size.y - 150.0 * scale_factor)
+
+
 func _pause_center() -> Vector2:
 	var viewport_size := get_viewport_rect().size
 	var scale_factor := _control_scale()
@@ -263,6 +274,7 @@ func get_debug_state() -> Dictionary:
 		"stick_center": _stick_center(),
 		"attack_center": _attack_center(),
 		"jump_center": _jump_center(),
+		"special_center": _special_center(),
 		"pause_center": _pause_center(),
 		"move_vector": _move_vector,
 		"move_touch": _move_touch,

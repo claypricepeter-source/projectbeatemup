@@ -4,6 +4,10 @@ extends Enemy
 ## A five-shot liquid barrage rewards three lane dodges with a dizzy punish window.
 ## Three quick hits outside that window trigger a brief armored spin counter.
 
+## SoR2 bosses shrug off long strings: the 4th quick hit triggers a counter.
+const BOSS_COUNTER_HITS := 4
+const BOSS_CHAIN_MS := 1000
+
 const SWEEP_COOLDOWN := 6.5
 const BARRAGE_COOLDOWN := 8.5
 const TAUNT_COOLDOWN := 9.0
@@ -34,6 +38,7 @@ var _boss_last_hit_ms := 0
 
 func _ready() -> void:
 	super()
+	grab_escape_time = 0.8
 	sweep_hitbox.source = self
 	set_lane_warning(false, false)
 	EventBus.boss_health_changed.emit(1.0)
@@ -98,13 +103,15 @@ func set_lane_warning(enabled: bool, active: bool) -> void:
 	sweep_crate.color = Color(0.8, 0.24, 0.08, 1.0) if active else Color(0.55, 0.32, 0.12, 0.9)
 
 
+func can_be_grabbed() -> bool:
+	return not hyper_armor and super()
+
+
 func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> bool:
 	if is_dead or invulnerable:
 		return false
 	hp = maxi(hp - damage, 0)
-	var direction := attacker.global_position.x - global_position.x
-	if direction != 0.0:
-		set_facing(int(signf(direction)))
+	_face_attacker(attacker)
 	var is_dizzy := state_machine.current != null and state_machine.current.name == &"Dizzy"
 	if is_dizzy:
 		EventBus.fighter_damaged.emit(self)
@@ -115,7 +122,7 @@ func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> bool:
 			flash_hit()
 		return true
 	var now := Time.get_ticks_msec()
-	_boss_chain_hits = _boss_chain_hits + 1 if now - _boss_last_hit_ms < 700 else 1
+	_boss_chain_hits = _boss_chain_hits + 1 if now - _boss_last_hit_ms < BOSS_CHAIN_MS else 1
 	_boss_last_hit_ms = now
 	EventBus.fighter_damaged.emit(self)
 	EventBus.boss_health_changed.emit(float(hp) / float(max_hp))
@@ -124,7 +131,7 @@ func take_hit(damage: int, knockdown_hit: bool, attacker: Fighter) -> bool:
 		return true
 	if hyper_armor:
 		return true
-	if _boss_chain_hits >= 3:
+	if _boss_chain_hits >= BOSS_COUNTER_HITS:
 		_boss_chain_hits = 0
 		hyper_armor = true
 		state_machine.transition("Counter")

@@ -259,13 +259,18 @@ func _on_stage_cleared() -> void:
 		return
 	flow_state = FlowState.STAGE_CLEAR
 	AudioManager.play_music(&"clear")
-	stage_clear_bonus = player.hp * 10
+	# SoR2-style tally: remaining round time plus remaining health.
+	var time_left := stage.round_timer.time_left if is_instance_valid(stage) and stage.round_timer else 0
+	var time_bonus := time_left * 100
+	var health_bonus := player.hp * 10
+	stage_clear_bonus = time_bonus + health_bonus
 	GameState.add_score(stage_clear_bonus)
 	GameState.commit_high_score()
 	_input_lock = 0.35
 	_set_stage_paused(true)
 	flow_title.text = "STAGE %d CLEAR" % (GameState.current_stage_index + 1)
-	flow_body.text = "HEALTH %d x 10\nBONUS %06d\nTOTAL %06d" % [player.hp, stage_clear_bonus, GameState.score]
+	flow_body.text = "TIME BONUS  %d x 100 = %d\nHEALTH BONUS  %d x 10 = %d\nTOTAL %06d" % [
+		time_left, time_bonus, player.hp, health_bonus, GameState.score]
 	flow_prompt.text = "PRESS ATTACK TO CONTINUE"
 	flow_screen.visible = true
 

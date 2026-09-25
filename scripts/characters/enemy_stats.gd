@@ -12,6 +12,8 @@ extends Resource
 @export var retreat_time := 0.6
 @export var points := 100
 @export var tint := Color.WHITE
+## Weapon carried and dropped on knockdown (&"knife" / &"pipe"; SoR2).
+@export var weapon: StringName = &""
 
 @export_group("Palette Variant")
 @export var base_variant: EnemyStats

@@ -10,7 +10,7 @@ collision_layer = 64
 collision_mask = 2
 script = ExtResource("1")
 kind = &"cash_100"
-score_amount = 100
+score_amount = 5000
 
 [node name="Visuals" type="Node2D" parent="."]
 

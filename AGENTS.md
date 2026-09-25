@@ -7,7 +7,7 @@
 
 ---
 
-## 0. HANDOFF STATUS (updated 2026-07-29)
+## 0. HANDOFF STATUS (updated 2026-09-24)
 
 **Where the project stands:** Phases 0–5 are complete and verified in-game (see
 checked boxes + per-phase notes in §8). The campaign has now been extended to four
@@ -24,11 +24,16 @@ props, pickups, boss bars and stage-clear tallies. Losing a life respawns in the
 active fight; zero lives routes through Continue and Game Over. High score persists
 in `user://save.cfg`.
 
-**Controls:** Arrows/WASD move, Z/J attack (mash = 3-hit combo; finisher knocks
-down), X/K jump (attack airborne = jump kick), Esc opens/resumes the pause menu.
-Gamepad: D-pad/left stick, X/Square attack, A/Cross jump, Start pause.
-Touch/Web: responsive left virtual stick, ATTACK, JUMP and pause buttons; story,
-continue and clear cards show a contextual NEXT button.
+**Streets of Rage 2 remake (2026-09-24):** combat, grappling, weapons, HUD,
+timer and scoring were rebuilt to match SoR2 as closely as possible using
+Axel's move data from the SoR2 move FAQ (full spec in §4.2). World, story, art
+and stages are unchanged; no SoR2 assets, names or music are used.
+
+**Controls:** Arrows/WASD move, Z/J attack (B), X/K jump (C), C/L special (A),
+Esc pause. Gamepad: D-pad/left stick, X/Square attack, A/Cross jump,
+Y/Triangle special, Start pause. Touch/Web: virtual stick plus ATTACK, JUMP,
+SPECIAL and pause buttons; story/continue/clear cards show a NEXT button.
+The full move list is in README.md and §4.2.
 
 **Key facts a new agent needs (details in the sections referenced):**
 - Working via the **godot-ai MCP plugin** on Godot **4.7-stable** (§9 Tooling). After
@@ -61,9 +66,10 @@ continue and clear cards show a contextual NEXT button.
 - Stage 4 is a fixed-width cargo elevator in `elevator_stage.gd`. The shaft scrolls
   continuously while four resource-authored waves drop onto the platform; reaching
   the penthouse stops the elevator and spawns Victor for the final battle.
-- Combat rules implemented in `scripts/` match §4.2 **plus** the anti-stunlock rule
-  (3rd consecutive hit within 0.7s → knockdown) — see §8 Phase 2 notes for this and
-  other gotchas. EventBus parameters must stay untyped; Streets of Fight characters
+- Combat rules implemented in `scripts/` match the SoR2 spec in §4.2. The
+  anti-stunlock rule (3rd consecutive hit within 0.7s → knockdown) now protects
+  **only the player** (`Fighter.anti_stunlock`); enemies take the full five-hit
+  string, and bosses counter on the 4th quick hit (`BOSS_COUNTER_HITS`). EventBus parameters must stay untyped; Streets of Fight characters
   rotate the `hurt` frame for knockdown, while the new boss uses dedicated KO art.
   Standard Punk/Red Punk instances now use the project-generated Sikh punk atlas
   (black turban, beard, purple-gold jacket); Knife Punk, Thug and boss art remain
@@ -84,6 +90,11 @@ continue and clear cards show a contextual NEXT button.
   stinger and seven small gameplay/UI cues are also synthesized at runtime. The
   supplied `deathsean.mp3` plays at the start of Sean's life-loss KO sequence;
   supplied `after_death.mp3` begins when the expanding brown pool appears.
+- Automated runtime tests live in `tests/` (excluded from the Web export):
+  `sor2_moves_test.tscn` (43 checks covering every move, grab, throw, special,
+  weapon, pickup, flanking and the timer), `campaign_smoke_test.tscn` (injects
+  the autoplay bot into MainFlow for a full four-stage run) and
+  `visual_capture.tscn` (windowed screenshots). See §9 for commands.
 - `scripts/testing/balance_autoplay_bot.gd` is a test-only runtime-injected campaign
   driver; no shipping scene references it. It walks the full route, fights through
   normal hitboxes/AI, accepts continues and records stage HP/lives/score so balance
@@ -164,15 +175,17 @@ Real-location flavour to weave into backgrounds and stage names:
 | **Personality** | Calm, dry, protective of his town. |
 
 **Stats (baseline — tune in `resources/`):**
-- Max HP: 100
+- Max HP: 104 (the SoR2 life bar; coffee restores 32, specials cost 8)
 - Walk speed: 120 px/s (X), 80 px/s (Y-depth)
-- Jump: ~0.6 s airtime
-- Combo damage: punch 1 = 6, punch 2 = 6, punch 3 (finisher) = 12 + knockdown
-- Jump kick: 10 + knockdown
+- Jump: ~0.66 s airtime, arc fixed at takeoff
+- Full SoR2 move set and damage table: §4.2
 
 **Required animations** (names are canonical — use these exact animation names in `SpriteFrames`):
 `idle`, `walk`, `attack_1`, `attack_2`, `attack_3`, `jump`, `jump_kick`, `hurt`,
-`knockdown`, `getup`, `death`, `victory`
+`knockdown`, `getup`, `death`, `victory`. The SoR2 states additionally use the
+Clay set's `light_punch`, `strong_punch`, `light_kick`, `strong_kick`,
+`flying_knee`, `run`, `power_forearm`, `burning_uppercut`, `spinning_backfist`,
+`crouch_block` and `throw` (timed to each move with `Fighter.play_timed`).
 
 ### 3.2 Enemy roster (4 base types + palette swaps)
 
@@ -212,47 +225,97 @@ Walk right → invisible trigger locks the camera and spawns an enemy wave →
 defeat everyone in the wave → "GO →" indicator flashes → camera unlocks →
 repeat → boss arena → boss fight → stage clear score tally → next stage.
 
-### 4.2 Combat spec (v1 — simple core)
+### 4.2 Combat spec — Streets of Rage 2 (Axel's values, SoR2 move FAQ)
 
-**Player moveset:**
-- **Attack (single button):** pressing repeatedly chains a 3-hit combo
-  (`attack_1` → `attack_2` → `attack_3`). Chain window: next press must land within
-  0.4 s after a hit connects, else combo resets. Hit 3 causes knockdown.
-- **Jump:** vertical hop; no horizontal air control change (moves with pre-jump velocity).
-- **Jump kick:** attack while airborne. Knocks down on hit.
-- **Movement:** 8-directional on the ground plane (X = along street, Y = depth).
+Buttons map to the SoR2 pad: **A = SPECIAL** (`special_p1`), **B = ATTACK**
+(`attack_p1`), **C = JUMP** (`jump_p1`). All damage is out of a 104 HP bar.
+
+**Ground (`player_attack.gd`, `player_double_kick.gd`, `player_blitz.gd`, `player_back_attack.gd`):**
+
+| Move | Input | Damage |
+|---|---|---|
+| Combo | B repeatedly | jab 6 → jab 6 → straight 8 → low sidekick 10 → high sidekick 14 KD |
+| Double sidekick | hold B ≥0.4 s, release | 16 + 20 KD |
+| Blitz (Grand Upper) | →, →, B (taps within 0.3 s, B within 0.45 s) | 24 + 4 + 20 KD, dashes forward |
+| Back attack | hold B, press C | elbow 8 + backfist 12 KD, behind; armed = throw weapon (8) |
+
+- The combo only advances on a connected hit; a whiff restarts at the jab
+  (memory lasts 0.55 s). The low sidekick knocks down on its own; a press in the
+  last 3 frames (0.05 s) of the straight chains both kicks instead (the SoR2
+  two-frame trick, slightly widened). The blitz, back attack and specials can
+  cancel the combo.
+
+**Specials (`player_special_*.gd`):** SPECIAL alone = defensive spin, fully
+invulnerable, hits both sides for 16 KD, costs 8 HP **only if it hits**.
+Toward + SPECIAL = advancing eight-hit flurry (6+8+8+10+6+8+8+20 KD), not
+invulnerable, **always** costs 8 HP. Specials can never KO the player (min 1 HP).
+
+**Air (`player_jump.gd`):** one attack per jump. Straight up + B = knee 10 then
+kick 20 KD; diagonal + B = jumping sidekick 8 KD (active until landing);
+Down + B = knee press 12, no KD.
+
+**Grapple (`player_grab.gd`, shared `grabbed.gd`/`thrown.gd`):** walking into
+an enemy (toward it, or up/down onto it, within 42 px and ±8 px depth) holds it
+if it is in Idle/Move/Approach/Recover/Hurt/Taunt/Dizzy and not armored. From
+the front: toward+B knee 8, knee 8, double knee 8+10 KD; B headbutt 22 KD;
+away+B back throw 24 KD; C vault to its back (a second vault lets go). From
+behind: B body slam 28 KD. Thrown bodies hit their own team for 16 KD; the
+victim's damage lands on impact. The player is invulnerable during throws,
+vaults and pickups; grabbing drops any held weapon. Idle holds are broken after
+`grab_escape_time` (1.6 s enemies, 0.8 s bosses; each knee extends it). A
+thrown player holding Up + C lands on their feet (SoR2 "Land"). `Grabbed` and
+`Thrown` are installed on every fighter at runtime by `Fighter._ready`.
+
+**Weapons (`scripts/combat/weapons.gd`, `weapon_pickup.gd`, `thrown_weapon.gd`):**
+knife 16 (no KD), pipe 24 KD, drawn procedurally (no weapon art). Picked up
+with B. Dropped when grabbing, being knocked down/thrown, or picking up another
+weapon; each weapon vanishes after its third drop. Knife Punk (and Park Punk)
+carry knives and Dock Thugs carry pipes (`EnemyStats.weapon`); they drop them
+when knocked off their feet.
 
 **Hit rules:**
-- Attacks connect only if attacker and target overlap in X (hitbox) **and** are within
-  a **Y-depth band of ±12 px**.
-- Confirmed player hits alternate `punch1` / `punch2` SFX. A hit that reduces an
-  enemy to 0 HP plays `punch3` instead; misses and rejected invulnerable hits are silent.
-- **Hitstun:** non-knockdown hits freeze the victim in `hurt` for 0.3 s and interrupt
-  their action (except armored hits, see Thug/bosses).
-- **Knockdown:** victim falls, is invulnerable while down and during `getup`
-  (total ~1.2 s). Enemies can be juggled *into* knockdown but not while down.
-- **Hit-pause:** on every connected hit, freeze both parties 2–3 frames (game feel — Phase 6).
-- **Player invincibility:** 1.0 s of i-frames (sprite flicker) after getting up from a knockdown.
+- Attacks connect only on X overlap **and** within a ±12 px Y-depth band
+  (Hitbox `depth_band`); jump attacks use ground depth.
+- Hitboxes re-scan overlaps every active physics frame, so back-to-back hit
+  windows always register. `Hitbox.Reach.BOTH` covers both sides.
+- Hitstun: 0.4 s for enemies (long enough to chain the full string), 0.3 s for
+  the player. Knockdowns pop, bounce once, lie 0.7 s and get up invulnerable;
+  the player gets ~1 s of i-frames after rising.
+- Anti-stunlock (3rd hit within 0.7 s → KD) applies to the player only.
+  Thug ignores flinches while his haymaker is committed. Bosses counter on the
+  4th hit within 1.0 s and cannot be grabbed while armored.
+- Hit-pause, flashes and shake: unchanged (§8 Phase 6). The old sticky
+  depth-snap on player hits was removed (SoR2 has no such snap).
 
-**Enemy AI states** (shared FSM, per-enemy tuning): `SPAWN → APPROACH → ATTACK → RECOVER → (RETREAT | CIRCLE) → APPROACH …` plus reactive `HURT`, `KNOCKDOWN`, `DEATH`.
-Global rule: **max 2 enemies in ATTACK state simultaneously** (classic brawler courtesy
-rule); others CIRCLE at a standoff radius.
+**Enemy AI:** shared FSM as before plus SoR2 habits in `enemy_approach.gd`:
+enemies flank to the player's free side (`Enemy.preferred_side`) and hesitate
+0.12–0.45 s in range before swinging. Max two attackers at once (courtesy rule).
 
-**Pickups** (dropped from breakable props: trash cans, crates, hydro boxes):
-- **Coffee** ("Timbo's" cup): +25 HP
-- **Poutine:** full heal (rare)
-- **Cash / loonie stack:** +500 / +100 points
+**Pickups:** pressed with B, never auto-collected. Coffee = SoR2 apple (+32),
+poutine = chicken (full heal), cash stack 1,000, loonie stack 5,000.
 
-**Lives & continues:** 3 lives per credit, 3 continues. Death → lose life, respawn in
-place with full HP and 2 s of i-frames. Out of continues → Game Over screen → high score.
+**Timer, lives and scoring (`round_timer.gd`, `game_state.gd`, `main.gd`):**
+the HUD timer counts down from 99 (one count per 1.5 s) and refills on each wave
+clear and respawn; 0 = TIME OVER, costing a life. Every connected hit scores
+damage × 10, throws score their damage × 10, kills keep their resource points.
+Extra life every 50,000 points. Stage clear tally = time left × 100 + HP × 10.
+3 lives per credit, 3 continues. High-score saves are throttled to one write
+per 5 s during play (and always on clear, game over and title).
 
-**Scoring:** per-enemy points (Punk 100, Knife Punk 150, Biker 200, Thug 300,
-bosses 2000+), pickups, stage-clear bonus = remaining HP × 10. High score persisted
-to `user://save.cfg`.
+**HUD (`hud.gd`, drawn in code):** SoR2 layout — portrait (cropped from the
+fighter's own idle frame), score, name, `=lives` and a yellow bar with a red
+drain ghost; below it the last-hit enemy (or the boss) with portrait, name and a
+bar in 104 HP layers (extra layers stack colours and show `xN`). Big timer top
+centre, flashing GO arrow, TIME OVER / 1 UP banners.
 
-### 4.3 Explicitly deferred (stretch — do NOT build in v1)
-Grabs/throws, weapon pickups, special/desperation moves, run/dash, local co-op,
-extra playable characters, difficulty settings.
+**Enemy stats (104 HP scale):** Punk 48/8, Knife Punk 40/12, Biker 64/12,
+Thug 96/16, Slick Rick 320, Ragnaros 400, Jawbreaker 440, Victor 520 (HP/damage
+in `resources/enemies/`; variants keep their multipliers).
+
+### 4.3 Explicitly deferred (stretch)
+Local co-op, extra playable characters, difficulty settings, enemies that grab
+and throw the player (SoR2 Signal; the thrown/"Land" side is already built),
+enemies picking weapons up, grenades/swords/kunai.
 
 ---
 
@@ -408,12 +471,12 @@ active frames, via `AnimationPlayer` method track or frame callback).
 
 ### 7.7 Input map (co-op-ready convention)
 All gameplay actions are **suffixed with player index** from day one: `move_left_p1`,
-`move_right_p1`, `move_up_p1`, `move_down_p1`, `attack_p1`, `jump_p1`, plus global
-`pause`. Player scenes take an exported `player_index: int`; input reads
+`move_right_p1`, `move_up_p1`, `move_down_p1`, `attack_p1`, `jump_p1`,
+`special_p1`, plus global `pause`. Player scenes take an exported `player_index: int`; input reads
 `"%s_p%d" % [action, player_index]`. Adding P2 later = new bindings + spawn, no rework.
 
-Default bindings: Arrows/WASD + `Z`/`J` attack + `X`/`K` jump; gamepad D-pad/stick +
-face buttons. Camera and HUD are written against "list of players" (length 1 for now).
+Default bindings: Arrows/WASD + `Z`/`J` attack + `X`/`K` jump + `C`/`L` special;
+gamepad D-pad/stick + face buttons (special = Y/Triangle). Camera and HUD are written against "list of players" (length 1 for now).
 
 ### 7.8 Camera & waves
 - `camera_director.gd`: follows average player X (co-op-ready), clamped to stage
@@ -567,7 +630,10 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 - [x] `stage_4.tscn` elevator finale: scrolling shaft, four drop-in waves and **Boss 4 (Victor Bayshore)**.
 - [x] Poutine pickup; anti-stunlock boss armor rule (§3.3).
 - [x] **DoD:** original 3-stage campaign playable start-to-finish.
-- [ ] **Four-stage extension DoD:** run Candy Factory → Elevator → Victor → ending without runtime errors.
+- [x] **Four-stage extension DoD:** run Candy Factory → Elevator → Victor → ending without runtime errors.
+  **Verified 2026-09-24 by `tests/campaign_smoke_test.tscn`: the autoplay bot
+  cleared all four stages through the ending in 2 of 3 SoR2-build runs (the
+  third ran out of continues in Stage 2), with no script errors in the final runs.**
 
 > **Phase 5 progress notes:**
 > - Thug is a 60 HP / 12 damage / 300 point heavy with a held haymaker telegraph.
@@ -716,12 +782,24 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 - [ ] Playtest export build outside the editor; fix export-only issues.
 - [ ] **DoD:** distributable zip that runs on a clean Windows machine.
 
+### Phase 8 — Streets of Rage 2 remake (2026-09-24)
+- [x] SoR2 ground combo (advance-on-hit, double-kick timing), hold-release double sidekick, blitz, back attack.
+- [x] Defensive/offensive specials with SoR2 HP costs; third input action `special_p1` + touch button.
+- [x] Grapple: grab by walking in, knees, headbutt, back throw (bodies hit enemies), vault, body slam, Land.
+- [x] Weapons: knife/pipe pickups, three-drop lifetime, weapon throw, enemy-carried weapons.
+- [x] SoR2 jump attacks (vertical, diagonal, knee press); knockdown bounce; enemy flanking + hesitation.
+- [x] 104 HP scale, rescaled enemy/boss stats, press-to-pick-up items, per-hit scoring, 50k extends.
+- [x] SoR2 HUD, 99 round timer with TIME OVER, time bonus in the clear tally.
+- [x] **DoD:** `tests/sor2_moves_test.tscn` 43/43; full campaign cleared by the autoplay bot;
+  windowed screenshots reviewed (HUD, combo, grab, throw, special, weapons).
+- [ ] Human playtest of feel/timing in the browser build (not yet done).
+
 ### Stretch phases (post-v1, in rough priority order)
 - [ ] **S1 — Local co-op:** P2 bindings, second player spawn, camera avg of players, shared lives pool.
-- [ ] **S2 — Grabs & throws:** grab on walk-into-enemy, forward/back throw, throw damage to other enemies on landing.
-- [ ] **S3 — Weapons:** pipe/knife/hockey-stick pickups with durability.
-- [ ] **S4 — Special move:** health-cost crowd-clearer (classic SoR special).
-- [ ] **S5 — Run/dash + dash attack.**
+- [x] **S2 — Grabs & throws:** done in Phase 8.
+- [x] **S3 — Weapons:** knife/pipe done in Phase 8 (hockey stick not added).
+- [x] **S4 — Special move:** done in Phase 8 (both SoR2 specials).
+- [x] **S5 — Run/dash + dash attack:** SoR2 blitz done in Phase 8 (no free run, as for Axel).
 - [ ] **S6 — Second playable character; difficulty settings; arcade score attack mode.**
 
 ---
@@ -732,6 +810,17 @@ face buttons. Camera and HUD are written against "list of players" (length 1 for
 - **Godot editor MCP (`godot-ai`) is available** and preferred for: creating/editing scenes and nodes, setting project settings, input map, running the game (`project_run`), reading logs (`logs_read`), and screenshots for visual verification.
 - Plain file edits are fine for `.gd` scripts, `.tres` resources, and docs; after external file edits, let the editor rescan before running.
 - **After any gameplay change, actually run the game** (test scene or stage) and verify behaviour — via MCP run + logs/screenshot, or ask the user to play. Don't mark roadmap items done on "it compiles."
+
+### Headless testing (no editor needed)
+Godot 4.7-stable's console binary can import and run the tests directly:
+```
+godot --headless --path . --editor --quit                      # import / parse
+godot --headless --path . res://tests/sor2_moves_test.tscn     # exit code = failed checks
+godot --headless --fixed-fps 60 --path . res://tests/campaign_smoke_test.tscn
+godot --path . res://tests/visual_capture.tscn -- <output_dir> # windowed screenshots
+```
+Warnings are treated as errors (e.g. Variant inference), so a parse failure on
+import usually means a missing type annotation.
 
 ### Code style
 - **Typed GDScript** everywhere (`var speed: float = 120.0`, typed function signatures).

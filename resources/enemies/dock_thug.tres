@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1")
+weapon = &"pipe"
 display_name = "DOCK THUG"
 tint = Color(0.42, 0.66, 0.9, 1)
 base_variant = ExtResource("2")

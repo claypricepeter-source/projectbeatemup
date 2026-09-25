@@ -1,6 +1,8 @@
 class_name Pickup
 extends Area2D
-## Auto-collected ground pickup. Visuals bob above the logical ground position.
+## Ground item collected by pressing ATTACK over it (SoR2). Visuals bob above
+## the logical ground position. Food heals (coffee = SoR2 apple, 32 of 104 HP;
+## poutine = SoR2 chicken, full), cash adds score.
 
 @export var kind: StringName = &"coffee"
 @export var heal_amount := 0
@@ -12,18 +14,12 @@ var _bob_time := 0.0
 @onready var visuals: Node2D = $Visuals
 
 
-func _ready() -> void:
-	area_entered.connect(_on_area_entered)
-
-
 func _process(delta: float) -> void:
 	_bob_time += delta
 	visuals.position.y = -6.0 + sin(_bob_time * 5.0) * 2.0
 
 
-func _on_area_entered(area: Area2D) -> void:
-	var hurtbox := area as Hurtbox
-	var player := hurtbox.fighter as Player if hurtbox else null
+func collect(player: Player) -> void:
 	if player == null or collected:
 		return
 	collected = true

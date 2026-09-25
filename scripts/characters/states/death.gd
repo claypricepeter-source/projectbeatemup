@@ -14,10 +14,14 @@ func enter() -> void:
 	fighter.is_dead = true
 	fighter.invulnerable = true
 	fighter.hitbox.deactivate()
+	fighter.on_knocked_off_feet()
 	fighter.on_death_started()
 	fighter.play(&"death" if fighter.sprite.sprite_frames.has_animation(&"death") else &"hurt")
-	fighter.velocity = Vector2(-fighter.facing * KNOCKBACK_X, 0)
-	fighter.air_velocity = POP_VELOCITY
+	fighter.sprite.speed_scale = 1.0
+	fighter.velocity = Vector2(-fighter.facing * KNOCKBACK_X * fighter.knockdown_push_scale, 0)
+	fighter.air_velocity = POP_VELOCITY * maxf(fighter.knockdown_pop_scale, 0.25)
+	fighter.knockdown_pop_scale = 1.0
+	fighter.knockdown_push_scale = 1.0
 	_phase = Phase.AIRBORNE
 
 

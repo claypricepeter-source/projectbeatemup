@@ -1,5 +1,6 @@
 extends FighterState
-## Shared hitstun state (player and enemies): 0.3s interrupt, then back to Idle.
+## Shared hitstun state (player and enemies): a short interrupt, then Idle.
+## Duration comes from Fighter.hitstun_time so SoR2 combos can chain on enemies.
 
 var _timer := 0.0
 
@@ -8,7 +9,8 @@ func enter() -> void:
 	fighter.hitbox.deactivate()
 	fighter.velocity = Vector2.ZERO
 	fighter.play(&"hurt")
-	_timer = 0.3
+	fighter.sprite.frame = 0
+	_timer = fighter.hitstun_time
 
 
 func physics_update(delta: float) -> void:
