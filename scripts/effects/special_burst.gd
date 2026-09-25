@@ -9,7 +9,7 @@ var _age := 0.0
 
 static func spawn(at: Fighter) -> void:
 	var burst := SpecialBurst.new()
-	burst.position = Vector2(0.0, -70.0)
+	burst.position = Vector2(0.0, -54.0)
 	at.get_node("Visuals").add_child(burst)
 
 
@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	var t := _age / DURATION
-	var radius := lerpf(20.0, 92.0, t)
+	var radius := lerpf(16.0, 76.0, t)
 	var alpha := 1.0 - t
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, 0.6))
 	draw_arc(Vector2.ZERO, radius, 0.0, TAU, 40, Color(1.0, 0.55, 0.1, alpha), 6.0)

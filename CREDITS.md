@@ -42,13 +42,13 @@ add the entry here the moment a pack is imported.
   remain in `assets/sprites/player/clay_character_godot/clay_character/`.
 - Frames use 256×192 canvases with a supplied feet anchor at (128, 176). Sean renders
   at native 1× scale with the sprite node offset 80 px above the gameplay origin.
-- Gameplay's canonical animations are mapped to the supplied moves at runtime:
-  `attack_1`/`attack_2`/`attack_3` use light punch/strong punch/strong kick,
-  `jump_kick` uses flying knee, and the dedicated hit/knockdown artwork supplies
-  `hurt`, `knockdown`, `getup`, and `death`.
-- Sean's active idle and ground combo are replaced at runtime by the generated
-  ten-frame refinement in `assets/sprites/player/sean_smooth/`; all other supplied
-  Clay animations remain available unchanged.
+- Since 2026-09-24 Sean uses one derived sheet, `assets/sprites/player/sean_sor2/`,
+  built by `scripts/tools/build_sean_sor2_frames.py` from the Clay frames and the
+  generated `sean_smooth/` refinement (both source folders stay untouched). The
+  tool scales both sets to one 113 px standing height, snaps feet to (128, 176),
+  strips cut-out debris, baked label text and leftover sheet backdrop, and maps
+  everything to one shared 64-colour palette. It is derived art only, so it
+  carries the same provenance/redistribution caveat as the Clay pack above.
 
 ### Notes on Magneto Pride Boss
 - Used for Slick Rick's current visuals and as the recoloured/aura-backed base for

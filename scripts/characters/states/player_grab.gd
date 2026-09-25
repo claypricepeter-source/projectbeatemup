@@ -64,9 +64,7 @@ func _target_is_held() -> bool:
 
 
 func _hold_pose() -> void:
-	fighter.play(&"throw")
-	fighter.sprite.pause()
-	fighter.sprite.frame = 0
+	fighter.play(&"grab_hold")
 
 
 func physics_update(delta: float) -> void:

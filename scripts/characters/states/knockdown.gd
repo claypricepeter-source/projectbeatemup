@@ -20,7 +20,7 @@ func enter() -> void:
 	fighter.hitbox.deactivate()
 	fighter.invulnerable = true
 	fighter.on_knocked_off_feet()
-	fighter.play(&"hurt")
+	fighter.play(&"knockdown_air" if fighter.sprite.sprite_frames.has_animation(&"knockdown_air") else &"hurt")
 	fighter.velocity = Vector2(-fighter.facing * KNOCKBACK_X * fighter.knockdown_push_scale, 0)
 	fighter.air_velocity = POP_VELOCITY * fighter.knockdown_pop_scale
 	# A zero pop (landing from a throw) skips straight to the bounce.

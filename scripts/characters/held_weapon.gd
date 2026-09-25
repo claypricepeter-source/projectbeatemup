@@ -17,7 +17,7 @@ func show_weapon(weapon_kind: StringName) -> void:
 func set_pose(new_facing: int, new_swing: float) -> void:
 	facing = new_facing
 	swing = new_swing
-	position = Vector2(22.0 * facing, -86.0)
+	position = Vector2(18.0 * facing, -66.0)
 	queue_redraw()
 
 

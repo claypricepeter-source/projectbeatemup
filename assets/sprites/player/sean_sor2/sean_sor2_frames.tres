@@ -1,0 +1,592 @@
+[gd_resource type="SpriteFrames" load_steps=88 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_00.png" id="1_idle_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_01.png" id="2_idle_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_02.png" id="3_idle_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_03.png" id="4_idle_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_04.png" id="5_idle_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_05.png" id="6_idle_05"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_06.png" id="7_idle_06"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_07.png" id="8_idle_07"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_08.png" id="9_idle_08"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/idle/idle_09.png" id="10_idle_09"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/walk/walk_00.png" id="11_walk_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/walk/walk_01.png" id="12_walk_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/walk/walk_02.png" id="13_walk_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/walk/walk_03.png" id="14_walk_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/walk/walk_04.png" id="15_walk_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/walk/walk_05.png" id="16_walk_05"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/light_punch/light_punch_00.png" id="17_light_punch_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/light_punch/light_punch_01.png" id="18_light_punch_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/light_punch/light_punch_02.png" id="19_light_punch_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/strong_punch/strong_punch_00.png" id="20_strong_punch_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/strong_punch/strong_punch_01.png" id="21_strong_punch_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/strong_punch/strong_punch_02.png" id="22_strong_punch_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/strong_kick/strong_kick_00.png" id="23_strong_kick_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/strong_kick/strong_kick_01.png" id="24_strong_kick_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/strong_kick/strong_kick_02.png" id="25_strong_kick_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/strong_kick/strong_kick_03.png" id="26_strong_kick_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/light_kick/light_kick_00.png" id="27_light_kick_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/light_kick/light_kick_01.png" id="28_light_kick_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/light_kick/light_kick_02.png" id="29_light_kick_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/flying_knee/flying_knee_00.png" id="30_flying_knee_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/flying_knee/flying_knee_01.png" id="31_flying_knee_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/flying_knee/flying_knee_02.png" id="32_flying_knee_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/jump/jump_00.png" id="33_jump_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/jump/jump_01.png" id="34_jump_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/jump/jump_02.png" id="35_jump_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/jump/jump_03.png" id="36_jump_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/hurt/hurt_00.png" id="37_hurt_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/hurt/hurt_01.png" id="38_hurt_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/hurt/hurt_02.png" id="39_hurt_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/knockdown_air/knockdown_air_00.png" id="40_knockdown_air_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/knockdown_air/knockdown_air_01.png" id="41_knockdown_air_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/knockdown/knockdown_00.png" id="42_knockdown_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/knockdown/knockdown_01.png" id="43_knockdown_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/getup/getup_00.png" id="44_getup_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/getup/getup_01.png" id="45_getup_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/getup/getup_02.png" id="46_getup_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/death/death_00.png" id="47_death_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/death/death_01.png" id="48_death_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/death/death_02.png" id="49_death_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/death/death_03.png" id="50_death_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/victory/victory_00.png" id="51_victory_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/victory/victory_01.png" id="52_victory_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/victory/victory_02.png" id="53_victory_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/victory/victory_03.png" id="54_victory_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_00.png" id="55_run_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_01.png" id="56_run_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_02.png" id="57_run_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_03.png" id="58_run_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_04.png" id="59_run_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_05.png" id="60_run_05"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_06.png" id="61_run_06"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_07.png" id="62_run_07"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/run/run_08.png" id="63_run_08"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/power_forearm/power_forearm_00.png" id="64_power_forearm_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/power_forearm/power_forearm_01.png" id="65_power_forearm_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/power_forearm/power_forearm_02.png" id="66_power_forearm_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/burning_uppercut/burning_uppercut_00.png" id="67_burning_uppercut_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/burning_uppercut/burning_uppercut_01.png" id="68_burning_uppercut_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/burning_uppercut/burning_uppercut_02.png" id="69_burning_uppercut_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/burning_uppercut/burning_uppercut_03.png" id="70_burning_uppercut_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/spinning_backfist/spinning_backfist_00.png" id="71_spinning_backfist_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/spinning_backfist/spinning_backfist_01.png" id="72_spinning_backfist_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/spinning_backfist/spinning_backfist_02.png" id="73_spinning_backfist_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_00.png" id="74_crouch_block_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_01.png" id="75_crouch_block_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_02.png" id="76_crouch_block_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_03.png" id="77_crouch_block_03"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_04.png" id="78_crouch_block_04"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_05.png" id="79_crouch_block_05"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_06.png" id="80_crouch_block_06"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_07.png" id="81_crouch_block_07"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/crouch_block/crouch_block_08.png" id="82_crouch_block_08"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/grab_hold/grab_hold_00.png" id="83_grab_hold_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/throw/throw_00.png" id="84_throw_00"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/throw/throw_01.png" id="85_throw_01"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/throw/throw_02.png" id="86_throw_02"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/sean_sor2/throw/throw_03.png" id="87_throw_03"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_light_punch_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("18_light_punch_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("19_light_punch_02")
+}],
+"loop": false,
+"name": &"attack_1",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_strong_punch_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("21_strong_punch_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("22_strong_punch_02")
+}],
+"loop": false,
+"name": &"attack_2",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_strong_kick_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("24_strong_kick_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("25_strong_kick_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("26_strong_kick_03")
+}],
+"loop": false,
+"name": &"attack_3",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("67_burning_uppercut_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("68_burning_uppercut_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("69_burning_uppercut_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("70_burning_uppercut_03")
+}],
+"loop": false,
+"name": &"burning_uppercut",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("74_crouch_block_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("75_crouch_block_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("76_crouch_block_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("77_crouch_block_03")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("78_crouch_block_04")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("79_crouch_block_05")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("80_crouch_block_06")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("81_crouch_block_07")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("82_crouch_block_08")
+}],
+"loop": false,
+"name": &"crouch_block",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_death_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("48_death_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("49_death_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("50_death_03")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_flying_knee_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("31_flying_knee_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("32_flying_knee_02")
+}],
+"loop": false,
+"name": &"flying_knee",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_getup_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("45_getup_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("46_getup_02")
+}],
+"loop": false,
+"name": &"getup",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("83_grab_hold_00")
+}],
+"loop": true,
+"name": &"grab_hold",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_hurt_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("38_hurt_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("39_hurt_02")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("2_idle_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("3_idle_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("4_idle_03")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("5_idle_04")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("6_idle_05")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("7_idle_06")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("8_idle_07")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("9_idle_08")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("10_idle_09")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_jump_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("34_jump_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("35_jump_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("36_jump_03")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_flying_knee_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("31_flying_knee_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("32_flying_knee_02")
+}],
+"loop": false,
+"name": &"jump_kick",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("42_knockdown_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("43_knockdown_01")
+}],
+"loop": false,
+"name": &"knockdown",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_knockdown_air_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("41_knockdown_air_01")
+}],
+"loop": false,
+"name": &"knockdown_air",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_light_kick_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("28_light_kick_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("29_light_kick_02")
+}],
+"loop": false,
+"name": &"light_kick",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_light_punch_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("18_light_punch_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("19_light_punch_02")
+}],
+"loop": false,
+"name": &"light_punch",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("64_power_forearm_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("65_power_forearm_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("66_power_forearm_02")
+}],
+"loop": false,
+"name": &"power_forearm",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_run_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("56_run_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("57_run_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("58_run_03")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("59_run_04")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("60_run_05")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("61_run_06")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("62_run_07")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("63_run_08")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("71_spinning_backfist_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("72_spinning_backfist_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("73_spinning_backfist_02")
+}],
+"loop": false,
+"name": &"spinning_backfist",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_strong_kick_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("24_strong_kick_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("25_strong_kick_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("26_strong_kick_03")
+}],
+"loop": false,
+"name": &"strong_kick",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_strong_punch_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("21_strong_punch_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("22_strong_punch_02")
+}],
+"loop": false,
+"name": &"strong_punch",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("84_throw_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("85_throw_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("86_throw_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("87_throw_03")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("51_victory_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("52_victory_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("53_victory_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("54_victory_03")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_walk_00")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("12_walk_01")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("13_walk_02")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("14_walk_03")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("15_walk_04")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("16_walk_05")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]

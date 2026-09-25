@@ -43,19 +43,10 @@ var _last_tap_ms := -10000
 var _blitz_dir := 0
 var _blitz_until_ms := 0
 
-const SMOOTH_PLAYER_FRAMES: SpriteFrames = preload(
-	"res://assets/sprites/player/sean_smooth_frames.tres")
-
-const CANONICAL_ANIMATION_SOURCES := {
-	&"attack_1": &"light_punch",
-	&"attack_2": &"strong_punch",
-	&"attack_3": &"strong_kick",
-	&"jump_kick": &"flying_knee",
-}
-
 
 func _ready() -> void:
-	_install_canonical_animations()
+	# Sprite frames: assets/sprites/player/sean_sor2 (built by
+	# scripts/tools/build_sean_sor2_frames.py), one consistent scale and anchor.
 	held_weapon = HeldWeapon.new()
 	held_weapon.name = "HeldWeapon"
 	held_weapon.visible = false
@@ -65,67 +56,6 @@ func _ready() -> void:
 	anti_stunlock = true
 	hitstun_time = 0.3
 	grab_escape_time = 0.9
-
-
-func _install_canonical_animations() -> void:
-	var source := sprite.sprite_frames
-	var frames := source.duplicate(true) as SpriteFrames
-
-	# Copy smooth base animations
-	_copy_external_animation(frames, &"idle", SMOOTH_PLAYER_FRAMES, &"idle", true)
-	_copy_external_animation(frames, &"walk", SMOOTH_PLAYER_FRAMES, &"walk", true)
-	_copy_external_animation(frames, &"combo", SMOOTH_PLAYER_FRAMES, &"combo", false)
-	_copy_external_animation(frames, &"light_punch", SMOOTH_PLAYER_FRAMES, &"light_punch", false)
-	_copy_external_animation(frames, &"strong_punch", SMOOTH_PLAYER_FRAMES, &"strong_punch", false)
-	_copy_external_animation(frames, &"strong_kick", SMOOTH_PLAYER_FRAMES, &"strong_kick", false)
-	_copy_external_animation(frames, &"flying_knee", SMOOTH_PLAYER_FRAMES, &"flying_knee", false)
-	_copy_external_animation(frames, &"jump", SMOOTH_PLAYER_FRAMES, &"jump", false)
-	_copy_external_animation(frames, &"hurt", SMOOTH_PLAYER_FRAMES, &"hurt", false)
-	_copy_external_animation(frames, &"knockdown", SMOOTH_PLAYER_FRAMES, &"knockdown", false)
-	_copy_external_animation(frames, &"death", SMOOTH_PLAYER_FRAMES, &"death", false)
-	_copy_external_animation(frames, &"victory", SMOOTH_PLAYER_FRAMES, &"victory", false)
-
-	for canonical: StringName in CANONICAL_ANIMATION_SOURCES:
-		var source_name: StringName = CANONICAL_ANIMATION_SOURCES[canonical]
-		_copy_animation(frames, canonical, source_name, false)
-
-	# Generate reversed getup animation from knockdown
-	_copy_animation(frames, &"getup", &"knockdown", true)
-
-	sprite.sprite_frames = frames
-
-
-func _copy_animation(frames: SpriteFrames, target: StringName, source: StringName, reverse: bool) -> void:
-	if frames.has_animation(target):
-		frames.remove_animation(target)
-	frames.add_animation(target)
-	frames.set_animation_speed(target, frames.get_animation_speed(source))
-	frames.set_animation_loop(target, false)
-	var count := frames.get_frame_count(source)
-	for index in count:
-		var source_index := count - index - 1 if reverse else index
-		frames.add_frame(
-			target,
-			frames.get_frame_texture(source, source_index),
-		frames.get_frame_duration(source, source_index))
-
-
-func _copy_external_animation(
-		frames: SpriteFrames,
-		target: StringName,
-		source_frames: SpriteFrames,
-		source: StringName,
-		loop: bool) -> void:
-	if frames.has_animation(target):
-		frames.remove_animation(target)
-	frames.add_animation(target)
-	frames.set_animation_speed(target, source_frames.get_animation_speed(source))
-	frames.set_animation_loop(target, loop)
-	for index in source_frames.get_frame_count(source):
-		frames.add_frame(
-			target,
-			source_frames.get_frame_texture(source, index),
-			source_frames.get_frame_duration(source, index))
 
 
 func _physics_process(delta: float) -> void:

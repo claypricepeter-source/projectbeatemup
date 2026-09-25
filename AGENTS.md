@@ -41,9 +41,15 @@ The full move list is in README.md and §4.2.
   then run + verify with `project_run` / `game_eval` / `editor_screenshot`.
   `game_eval` code must be straight-line (no indented blocks) or it may fail to parse.
 - Enemies and Stage 1 art come from the **Streets of Fight** pack (§6.2,
-  CREDITS.md) and render at **2× scale**. Sean now uses the user-provided
-  `clay_character_godot` set at native 1×: 256×192 canvases, supplied feet anchor
-  (128, 176), and dedicated combat/KO art (§8 Phase 1 notes).
+  CREDITS.md) and render at **2× scale**. Sean uses one derived sheet,
+  `assets/sprites/player/sean_sor2/sean_sor2_frames.tres`, rebuilt on 2026-09-24 by
+  `scripts/tools/build_sean_sor2_frames.py` from the Clay pack and the generated
+  `sean_smooth` frames: one 113 px standing height (close to the enemies, as in
+  SoR2), 256×192 canvases with feet at (128, 176), a shared 64-colour palette, and
+  debris/label/backdrop removal. Previously the two sets differed ~40% in size, so
+  Sean shrank mid-move. Includes real `knockdown_air`/`knockdown`/`getup`, `death`
+  and a clean `grab_hold`/`throw`. Edit the tool's ANIMATIONS table and re-run it
+  rather than hand-editing the output; never edit the source folders.
 - Stage 1 is 4480×480 (seven 640 px screens), composed from
   `assets/_source_packs/streets-of-fight/Stage Layers/tileset.png`; its walkable
   band is y ∈ [204, 264], with the camera fixed at y=200. Source art remains at 2×.
